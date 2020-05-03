@@ -1,0 +1,34 @@
+<content:page>
+	<content:heading>Source</content:heading>
+	
+	<main>
+		<?r
+		base = controller[:base]
+		index = base.index
+		
+		index.trie.traverse do |path, node, descend|
+			?><ul><?r
+			if symbols = node.values
+				symbol = base.best(symbols)
+				
+				if documentation = symbol.documentation or symbol.container?
+					?><li>
+						<a href="#{base.link_for(symbol)}"><code class="language-#{symbol.language.name}">#{symbol.long_form}</code></a>
+						
+						<?r if documentation ?>
+							#{base.format(documentation.description.first, symbol)}
+						<?r end ?>
+						
+						<?r if symbol.container?
+							descend.call
+						end ?>
+					</li><?r
+				end
+			else
+				descend.call
+			end
+			?></ul><?r
+		end
+		?>
+	</main>
+</content:page>

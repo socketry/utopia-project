@@ -1,0 +1,8 @@
+<figure class="photo">
+	<a href="#{attributes[:src].large}" title="#{attributes[:alt]}">
+		<img src="#{attributes[:src].small}" alt="#{attributes[:alt]}"/>
+	</a>
+	<?r if caption = attributes[:alt].caption ?>
+		<figcaption>#{caption}</figcaption>
+	<?r end ?>
+</figure>
