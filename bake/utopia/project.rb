@@ -10,10 +10,13 @@ end
 
 # Serve the project locally.
 def serve
-	system("bundle", "exec", "falcon", "serve")
+	config_path = File.expand_path("../../template/config.ru", __dir__)
+	preload_path = File.expand_path("../../template/preload.rb", __dir__)
+	
+	system("falcon", "serve", "--config", config_path, "--preload", preload_path)
 end
 
-def static(output_path: "static")
+def static(output_path: "docs")
 	require 'rackula/command'
 	
 	public_path = File.expand_path("../../public", __dir__)

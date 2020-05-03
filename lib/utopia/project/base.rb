@@ -38,7 +38,7 @@ module Utopia
 				instance = self.new
 				
 				source_files = Dir.glob(
-					File.expand_path("../lib/**/*.rb", instance.root)
+					File.expand_path("lib/**/*.rb", instance.root)
 				)
 				
 				instance.update(source_files)
