@@ -75,7 +75,7 @@ body {
 	margin: 0 auto;
 }
 
-h1, h2, h3, h4, h5, h6, p, ul, dl, ol {
+header, h1, h2, h3, h4, h5, h6, p, ul, dl, ol {
 	margin: 1rem;
 }
 

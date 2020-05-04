@@ -1,9 +1,31 @@
 <content:page>
-	<content:heading>#{self[:title] || "Project"}</content:heading>
-	
-	<?r if document = self[:document] ?>
-	#{MarkupString.raw document.to_html}
-	<?r else ?>
-	<p>This project does not have a README.md file.</p>
-	<?r end ?>
+	<?r
+	if document = self[:document]
+		children = document.root.children
+		
+		if children.first.type == :header
+			header = children.shift
+			title = header.children.first
+			case title.type
+			when :text
+				?><content:heading>#{title.value}</content:heading><?r
+			when :img
+				self.document.attributes[:title] ||= title.attr["alt"]
+				?><header><img src="#{title.attr["src"]}" /></header><?r
+			else
+				?><content:heading>Project</content:heading><?r
+			end
+		else
+			?><content:heading>Project</content:heading><?r
+		end
+		
+		?>#{MarkupString.raw document.to_html}<?r
+	else
+		?>
+		<content:heading>Project</content:heading>
+		
+		<p>This project does not have a README.md file.</p>
+		<?r
+	end
+	?>
 </content:page>
