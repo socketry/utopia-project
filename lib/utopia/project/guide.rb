@@ -27,7 +27,7 @@ require 'kramdown'
 
 module Utopia
 	module Project
-		class Example
+		class Guide
 			# Initialize the example with the given root path.
 			# @param base [Base] The base instance for the project.
 			# @param root [String] The file-system path to the root of the example.
@@ -96,7 +96,7 @@ module Utopia
 			end
 			
 			def href
-				"/examples/#{self.name}/index"
+				"/guides/#{self.name}/index"
 			end
 			
 			def documentation

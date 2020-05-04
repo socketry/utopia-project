@@ -28,7 +28,7 @@ require 'thread/local'
 
 require 'kramdown'
 
-require_relative 'example'
+require_relative 'guide'
 
 module Utopia
 	module Project
@@ -146,17 +146,20 @@ module Utopia
 				end
 			end
 			
-			def examples
-				return to_enum(:examples) unless block_given?
+			def guides
+				guides_root = File.expand_path("guides", @root)
 				
-				examples_root = File.expand_path("examples", @root)
+				# There are no guides if there is no directory:
+				return unless File.directory?(guides_root)
 				
-				Dir.each_child(examples_root) do |entry|
-					example_path = File.join(examples_root, entry)
+				return to_enum(:guides) unless block_given?
+				
+				Dir.each_child(guides_root) do |entry|
+					guide_path = File.join(guides_root, entry)
 					
-					next unless File.directory?(example_path)
+					next unless File.directory?(guide_path)
 					
-					yield Example.new(self, example_path)
+					yield Guide.new(self, guide_path)
 				end
 			end
 		end

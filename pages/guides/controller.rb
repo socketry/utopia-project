@@ -10,8 +10,8 @@ on '**/*/index' do |request, path|
 	
 	name = path.components[-2]
 	
-	@example = @base.examples.find do |example|
-		example.name == name
+	@guide = @base.guides.find do |guide|
+		guide.name == name
 	end
 	
 	path.components = ["show"]

@@ -1,0 +1,17 @@
+<content:page>
+	<?r
+		base = self[:base]
+	?>
+	<content:heading>Guides</content:heading>
+	
+	<main>
+		<ul>
+		<?r
+		base = controller[:base]
+		
+		base.guides do |guides|
+			?><li><a href="#{guide.name}/">#{guide.title}</a></li><?r
+		end
+		?></ul>
+	</main>
+</content:page>

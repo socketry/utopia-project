@@ -1,19 +1,17 @@
 <h2>Usage</h2>
 
-<p>Please browse the <a href="source/">source code index</a> or refer to the examples below.</p>
-
-<h3>Examples</h3>
+<p>Please browse the <a href="source/">source code index</a> or refer to the guides below.</p>
 
 <?r
 	base = self[:base]
 	
-	base.examples do |example|
+	base.guides do |guide|
 ?>
-	<h4><a href="#{example.href}">#{example.title}</a></h4>
+	<h3><a href="#{guide.href}">#{guide.title}</a></h3>
 	
-	<?r if description = example.documentation&.description ?>
-		#{base.format(description.first, language: example.documentation.language)}
-	<?r elsif description = example.description ?>
+	<?r if description = guide.documentation&.description ?>
+		#{base.format(description.first, language: guide.documentation.language)}
+	<?r elsif description = guide.description ?>
 		#{MarkupString.raw Kramdown::Document.new(description, syntax_highlighter: nil).to_html}
 	<?r else ?>
 		<p>No description.</p>
