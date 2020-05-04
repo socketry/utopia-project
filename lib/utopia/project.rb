@@ -25,7 +25,6 @@ require "utopia/project/version"
 require 'variant'
 
 require 'utopia/localization'
-require 'utopia/gallery'
 
 require_relative 'project/base'
 
@@ -89,7 +88,7 @@ module Utopia
 			cache_root = File.expand_path("_gallery", root)
 			
 			builder.use Utopia::Content, root: PAGES_ROOT, namespaces: {
-				'gallery' => Utopia::Gallery::Tags.new
+				# 'gallery' => Utopia::Gallery::Tags.new
 			}
 			
 			builder.run lambda { |env| [404, {}, []] }

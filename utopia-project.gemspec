@@ -17,13 +17,10 @@ Gem::Specification.new do |spec|
 	spec.require_paths = ["lib"]
 	
 	spec.add_dependency "utopia", "~> 2.14"
-	spec.add_dependency "utopia-gallery"
+	# spec.add_dependency "utopia-gallery"
 	
 	spec.add_dependency "kramdown"
-	spec.add_dependency "kramdown-parser-gfm"
-	
 	spec.add_dependency "decode"
-	
 	spec.add_dependency "rackula"
 	spec.add_dependency "falcon"
 	spec.add_dependency "thread-local"
