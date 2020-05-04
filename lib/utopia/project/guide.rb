@@ -27,6 +27,7 @@ require 'kramdown'
 
 module Utopia
 	module Project
+		# Provides structured access to a directory which contains documentation and source code to explain a specific process.
 		class Guide
 			# Initialize the example with the given root path.
 			# @param base [Base] The base instance for the project.

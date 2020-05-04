@@ -32,7 +32,7 @@ require_relative 'guide'
 
 module Utopia
 	module Project
-		# The base symbol table and project index.
+		# Provides structured access to a project directory which contains source code and guides.
 		class Base
 			extend Thread::Local
 			

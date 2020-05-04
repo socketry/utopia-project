@@ -7,7 +7,7 @@
 		index = base.index
 		
 		index.trie.traverse do |path, node, descend|
-			?><ul><?r
+			?><ul class="index"><?r
 			if symbols = node.values
 				symbol = base.best(symbols)
 				
