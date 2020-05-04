@@ -1,5 +1,21 @@
 <h2>Usage</h2>
 
-<ul>
-	<li><a href="source/">Source Code Index</a></li>
-</ul>
+<p>Please browse the <a href="source/">source code index</a> or refer to the examples below.</p>
+
+<h3>Examples</h3>
+
+<?r
+	base = self[:base]
+	
+	base.examples do |example|
+?>
+	<h4><a href="#{example.href}">#{example.title}</a></h4>
+	
+	<?r if description = example.documentation&.description ?>
+		#{base.format(description.first, language: example.documentation.language)}
+	<?r else ?>
+		<p>No description.</p>
+	<?r end ?>
+<?r
+	end
+?>

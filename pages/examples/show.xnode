@@ -1,0 +1,20 @@
+<content:page>
+	<?r
+		base = self[:base]
+		example = self[:example]
+	?>
+	<content:heading>#{example.title}</content:heading>
+	
+	<main><?r
+		example.sources.each do |source|
+			?><h2><code>#{File.basename source.path}</code></h2><?r
+			source.segments.each do |segment|
+				if documentation = segment.documentation
+					?>#{base.format(documentation.description, language: source.language)}<?r
+				end
+				
+				?><pre><code class="language-#{source.language.name}">#{segment.code}</code></pre><?r
+			end
+		end
+	?></main>
+</content:page>

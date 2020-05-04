@@ -28,6 +28,8 @@ require 'thread/local'
 
 require 'kramdown'
 
+require_relative 'example'
+
 module Utopia
 	module Project
 		# The base symbol table and project index.
@@ -100,19 +102,31 @@ module Utopia
 				
 				if language
 					text = text&.gsub(/{(.*?)}/) do |match|
-						reference = language.reference($1)
-						
-						if symbol = @index.lookup(reference, relative_to: symbol)&.first
-							"<a href=\"#{link_for(symbol)}\"><code class=\"language-#{symbol.language.name}\">#{symbol.short_form}</code></a>"
-						else
-							"`#{$1}`"
-						end
+						linkify($1, symbol, language: language)
 					end
 				end
 				
 				return Trenni::MarkupString.raw(
 					Kramdown::Document.new(text, syntax_highlighter: nil).to_html
 				)
+			end
+			
+			def linkify(text, symbol = nil, language: symbol&.language)
+				reference = language.reference(text)
+				
+				Trenni::Builder.fragment do |builder|
+					if definition = @index.lookup(reference, relative_to: symbol)&.first
+						builder.inline('a', href: link_for(definition)) do
+							builder.inline('code', class: "language-#{definition.language.name}") do
+								builder.text definition.short_form
+							end
+						end
+					else
+						builder.inline('code', class: "language-#{symbol.language.name}") do
+							builder.text text
+						end
+					end
+				end
 			end
 			
 			# Compute an HTML id for the given symbol.
@@ -129,6 +143,20 @@ module Utopia
 				else
 					name = path.pop
 					return Trenni::Reference.new(@source_path + path + "index", fragment: id_for(symbol))
+				end
+			end
+			
+			def examples
+				return to_enum(:examples) unless block_given?
+				
+				examples_root = File.expand_path("examples", @root)
+				
+				Dir.each_child(examples_root) do |entry|
+					example_path = File.join(examples_root, entry)
+					
+					next unless File.directory?(example_path)
+					
+					yield Example.new(self, example_path)
 				end
 			end
 		end

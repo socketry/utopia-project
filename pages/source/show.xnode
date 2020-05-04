@@ -38,7 +38,7 @@
 					?><h3 id="#{base.id_for(symbol)}"><code class="language-#{symbol.language.name}">#{symbol.long_form}</code></h3><?r
 					
 					if documentation = symbol.documentation
-						?>#{base.format(documentation.description.to_a.join("\n"), symbol)}<?r
+						?>#{base.format(documentation.description, symbol)}<?r
 					end
 					
 					parameters = documentation.parameters.to_a
@@ -47,8 +47,10 @@
 					?><dl><?r
 						parameters.each do |parameter|
 						?>
-							<dt><code class="syntax">#{parameter[:name]}</code> &mdash; <code class="language-#{symbol.language.name}">#{parameters[:type]}</code></dt>
-							<dd>#{base.format(documentation.description, symbol)}</dd>
+							<dt><code class="syntax">#{parameter[:name]}</code> &mdash; #{base.linkify(parameter[:type], symbol)}</dt>
+							<?r if details = parameter[:details] ?>
+								<dd>#{base.format(parameter[:details], symbol)}</dd>
+							<?r end ?>
 						<?r
 						end
 					?></dl><?r
