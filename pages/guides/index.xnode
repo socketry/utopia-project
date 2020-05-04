@@ -9,7 +9,7 @@
 		<?r
 		base = controller[:base]
 		
-		base.guides do |guides|
+		base.guides do |guide|
 			?><li><a href="#{guide.name}/">#{guide.title}</a></li><?r
 		end
 		?></ul>
