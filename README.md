@@ -10,6 +10,14 @@ My goal is to provide task-centric documentation, and to continually improve the
 
 With that in mind, this web application provides such a model and will evolve over time to suit my requirements and the needs of my users.
 
+## Installation
+
+Execute the following in your project:
+
+~~~ bash
+bundle add utopia-project
+~~~
+
 ## Usage
 
 Please see the <a href="https://socketry.github.io/utopia-project/">project documentation</a> or run it locally using `bake utopia:project:serve`.
