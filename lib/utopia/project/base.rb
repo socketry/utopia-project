@@ -96,8 +96,11 @@ module Utopia
 			end
 			
 			def format(text, symbol = nil, language: symbol&.language)
-				if text.is_a?(Enumerable)
+				case text
+				when Enumerable
 					text = text.to_a.join("\n")
+				when nil
+					return nil
 				end
 				
 				if language
