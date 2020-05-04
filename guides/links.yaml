@@ -1,0 +1,6 @@
+getting-started:
+  order: 1
+documentation-formatting:
+  order: 2
+github-pages-integration:
+  order: 3

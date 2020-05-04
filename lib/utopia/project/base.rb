@@ -21,6 +21,8 @@
 # THE SOFTWARE.
 
 require 'utopia/path'
+require 'utopia/content/links'
+
 require 'trenni/reference'
 require 'decode'
 
@@ -56,6 +58,8 @@ module Utopia
 				@source_path = Utopia::Path["/source"]
 				
 				@index = Decode::Index.new
+				
+				@links = Utopia::Content::Links.new(@root)
 			end
 			
 			# The file-system path to the root of the project.
@@ -150,15 +154,10 @@ module Utopia
 			end
 			
 			def guides
-				guides_root = File.expand_path("guides", @root)
-				
-				# There are no guides if there is no directory:
-				return unless File.directory?(guides_root)
-				
 				return to_enum(:guides) unless block_given?
 				
-				Dir.each_child(guides_root) do |entry|
-					guide_path = File.join(guides_root, entry)
+				@links.index("/guides").each do |link|
+					guide_path = File.join(@root, link.path)
 					
 					next unless File.directory?(guide_path)
 					
