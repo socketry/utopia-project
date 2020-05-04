@@ -62,8 +62,8 @@ module Utopia
 				builder.use Rack::ShowExceptions unless UTOPIA.testing?
 			end
 			
-			public_root = File.expand_path("public", root)
-			builder.use Utopia::Static, root: public_root
+			# We serve static files from the project root:
+			builder.use Utopia::Static, root: root
 			
 			builder.use Utopia::Static, root: PUBLIC_ROOT
 			
