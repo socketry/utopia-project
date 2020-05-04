@@ -62,6 +62,15 @@ module Utopia
 			# The source code index which is used for generating pages.
 			attr :index
 			
+			# Return the absolute path for the given file name, if it exists in the project.
+			# @param file_name [String] The relative path to the project file, e.g. `README.md`.
+			def path_for(file_name)
+				full_path = File.expand_path(file_name, @root)
+				if File.exist?(full_path)
+					return full_path
+				end
+			end
+			
 			# Update the index with the specified paths.
 			# @param paths [Array(String)] The paths to load and parse.
 			def update(paths)
@@ -108,7 +117,7 @@ module Utopia
 			
 			# Compute an HTML id for the given symbol.
 			def id_for(symbol)
-				symbol.qualified_name.gsub(/[^\w]/, '')
+				symbol.qualified_name
 			end
 			
 			# Compute an HTML link to the given symbol.

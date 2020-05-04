@@ -1,3 +1,9 @@
 <content:page>
-	<content:heading>Project</content:heading>
+	<content:heading>#{self[:title] || "Project"}</content:heading>
+	
+	<?r if document = self[:document] ?>
+	#{MarkupString.raw document.to_html}
+	<?r else ?>
+	<p>This project does not have a README.md file.</p>
+	<?r end ?>
 </content:page>

@@ -1,33 +1,23 @@
 <nav><?r
-	root = controller[:root]
-	content_links = controller[:links]
-	page_path = Utopia::Path[attributes[:path]]
+	page_path = first.node.uri_path
 	
 	Utopia::Path[page_path.dirname].descend do |path|
-		index_path = path + "index"
+		unless path.last
+			path = path + "index"
+		end
 		
-		if link = content_links.for(index_path, localization.current_locale)
-			if link.href?
-				?> &rsaquo; <a href="#{link.path}">#{link.title}</a><?r
-			else
-				?> &rsaquo; <span>#{link.title}</span><?r
-			end
-		elsif	link = links(path.dirname, name: path.last, locale: localization.current_locale, display: nil).first
-			?> &rsaquo; <span>#{link.title}</span><?r
+		if link = links(path.dirname, name: path.last, locale: localization.current_locale, indices: true).first
+			?> &rsaquo; #{link.to_href}<?r
 		else
 			?> &rsaquo; <span>#{path.last}</span><?r
 		end
 	end
 	
 	if localization.localized?
-		?> (<?r
+		?> &bull; (<?r
 		localization.all_locales.each.with_index do |locale, index|
 			?>#{index.zero? ? '' : ' '}<a href="#{localization.localized_path(page_path, locale)}">#{locale}</a><?r
 		end
 		?>)<?r
-	end
-	
-	if Variant.for(:wiki) != :static
-	?> &bull; <a href="edit">Edit Page</a><?r
 	end
 ?></nav>
