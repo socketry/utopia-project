@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+			<title>::Utopia::Project</title>
+		
+		<meta charset="UTF-8"/>
+		
+		<link rel="icon" type="image/png" href="../../../_static/icon.png"/>
+		<link rel="stylesheet" href="../../../_static/site.css" type="text/css" media="screen"/>
+		
+		<script src="../../../_components/jquery/jquery.min.js"></script>
+		<script src="../../../_components/jquery-syntax/jquery.syntax.min.js"></script>
+		
+		<script type="text/javascript">
+		//<![CDATA[
+			jQuery(function($) {
+				$.syntax();
+			});
+		//]]>
+		</script>
+	</head>
+
+	<body class="">
+		
+	<nav> › <a class="link" href="../../../index.html">Project</a> › <a class="link" href="../../index.html">Source</a></nav>
+
+<h1><code class="language-ruby">::Utopia::Project</code></h1>
+	
+	<main>
+				
+		<h2>Nested</h2>
+		
+		<ul>
+			<li><a href="Base/index.html"><code class="language-ruby">::Utopia::Project::Base</code></a></li>
+			<li><a href="Example/index.html"><code class="language-ruby">::Utopia::Project::Example</code></a></li>
+		</ul>
+		
+		<h2>Definitions</h2>
+		
+		<h3 id="::Utopia::Project::SITE_ROOT"><code class="language-ruby">SITE_ROOT = File.expand_path(&quot;../..&quot;, __dir__)</code></h3><p>The root directory of the web application files.</p>
+<h3 id="::Utopia::Project::PAGES_ROOT"><code class="language-ruby">PAGES_ROOT = File.expand_path(&quot;pages&quot;, SITE_ROOT)</code></h3><p>The root directory for the utopia middleware.</p>
+<h3 id="::Utopia::Project::PUBLIC_ROOT"><code class="language-ruby">PUBLIC_ROOT = File.expand_path(&quot;public&quot;, SITE_ROOT)</code></h3><p>The root directory for static assets.</p>
+<h3 id="::Utopia::Project.call"><code class="language-ruby">def self.call(builder, root = Dir.pwd, locales: nil)</code></h3><p>Appends a project application to the rack builder.</p>
+
+<pre><code class="language-ruby"># In your `config.ru` file:
+
+require 'utopia/setup'
+UTOPIA ||= Utopia.setup
+
+require 'utopia/project'
+Utopia::Project.call(self)
+</code></pre>
+<dl>							<dt><code class="syntax">locales</code> — <code class="language-ruby">Array(String)</code></dt>
+								<dd><p>an array of locales to support, e.g. <code>['en', 'ja']</code>.</p>
+</dd>
+						</dl>	</main>
+
+	</body>
+</html>

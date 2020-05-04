@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+			<title>::Utopia::Project::Base</title>
+		
+		<meta charset="UTF-8"/>
+		
+		<link rel="icon" type="image/png" href="../../../../_static/icon.png"/>
+		<link rel="stylesheet" href="../../../../_static/site.css" type="text/css" media="screen"/>
+		
+		<script src="../../../../_components/jquery/jquery.min.js"></script>
+		<script src="../../../../_components/jquery-syntax/jquery.syntax.min.js"></script>
+		
+		<script type="text/javascript">
+		//<![CDATA[
+			jQuery(function($) {
+				$.syntax();
+			});
+		//]]>
+		</script>
+	</head>
+
+	<body class="">
+		
+	<nav> › <a class="link" href="../../../../index.html">Project</a> › <a class="link" href="../../../index.html">Source</a></nav>
+
+<h1><code class="language-ruby">::Utopia::Project::Base</code></h1>
+	
+	<main>
+		<p>The base symbol table and project index.</p>
+		
+		
+		<h2>Definitions</h2>
+		
+		<h3 id="::Utopia::Project::Base:initialize"><code class="language-ruby">def initialize(root = Dir.pwd)</code></h3><p>Initialize the project with the given root path.</p>
+<dl>							<dt><code class="syntax">root</code> — <code class="language-ruby">String</code></dt>
+								<dd><p>The file-system path to the root of the project.</p>
+</dd>
+						</dl><h3 id="::Utopia::Project::Base:root"><code class="language-ruby">attr :root</code></h3><p>The file-system path to the root of the project.</p>
+<h3 id="::Utopia::Project::Base:index"><code class="language-ruby">attr :index</code></h3><p>The source code index which is used for generating pages.</p>
+<h3 id="::Utopia::Project::Base:path_for"><code class="language-ruby">def path_for(file_name)</code></h3><p>Return the absolute path for the given file name, if it exists in the project.</p>
+<dl>							<dt><code class="syntax">file_name</code> — <code class="language-ruby">String</code></dt>
+								<dd><p>The relative path to the project file, e.g. <code>README.md</code>.</p>
+</dd>
+						</dl><h3 id="::Utopia::Project::Base:update"><code class="language-ruby">def update(paths)</code></h3><p>Update the index with the specified paths.</p>
+<dl>							<dt><code class="syntax">paths</code> — <code class="language-ruby">Array(String)</code></dt>
+								<dd><p>The paths to load and parse.</p>
+</dd>
+						</dl><h3 id="::Utopia::Project::Base:id_for"><code class="language-ruby">def id_for(symbol)</code></h3><p>Compute a unique string which can be used as <code>id</code> attribute in the HTML output.</p>
+<h3 id="::Utopia::Project::Base:link_for"><code class="language-ruby">def link_for(symbol)</code></h3><p>Compute a link href to the given symbol for use within the HTML output.</p>
+	</main>
+
+	</body>
+</html>
