@@ -129,12 +129,12 @@ module Utopia
 				end
 			end
 			
-			# Compute an HTML id for the given symbol.
+			# Compute a unique string which can be used as `id` attribute in the HTML output.
 			def id_for(symbol)
 				symbol.qualified_name
 			end
 			
-			# Compute an HTML link to the given symbol.
+			# Compute a link href to the given symbol for use within the HTML output.
 			def link_for(symbol)
 				path = symbol.lexical_path.map{|entry| entry.to_s}
 				

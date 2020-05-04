@@ -13,6 +13,8 @@
 	
 	<?r if description = example.documentation&.description ?>
 		#{base.format(description.first, language: example.documentation.language)}
+	<?r elsif description = example.description ?>
+		#{MarkupString.raw Kramdown::Document.new(description, syntax_highlighter: nil).to_html}
 	<?r else ?>
 		<p>No description.</p>
 	<?r end ?>

@@ -6,6 +6,10 @@
 	<content:heading>#{example.title}</content:heading>
 	
 	<main><?r
+		if document = example.document
+			?>#{MarkupString.raw document.to_html}<?r
+		end
+		
 		example.sources.each do |source|
 			?><h2><code>#{File.basename source.path}</code></h2><?r
 			source.segments.each do |segment|

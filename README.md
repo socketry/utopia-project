@@ -2,7 +2,13 @@
 
 A simple Ruby project documentation website.
 
+## Usage
+
+Please see the <a href="https://socketry.github.io/utopia-project">project documentation</a> or run it locally using `bake utopia:project:serve`.
+
 ## Contributing
+
+We welcome contributions to this project.
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)

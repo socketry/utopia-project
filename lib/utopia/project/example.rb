@@ -36,6 +36,49 @@ module Utopia
 				@root = root
 				
 				@documentation = nil
+				
+				@document = nil
+				@title = nil
+				@description = nil
+				
+				self.document
+			end
+			
+			# The description from the first paragraph in the README.
+			# @attr [String | Nil]
+			attr :description
+			
+			README = "README.md"
+			
+			def readme_path
+				File.expand_path(README, @root)
+			end
+			
+			def readme?
+				File.exist?(readme_path)
+			end
+			
+			def document
+				if self.readme?
+					@document ||= Kramdown::Document.new(File.read(self.readme_path), syntax_highlighter: nil).tap do |document|
+						root = document.root
+						if element = root.children.first
+							if element.type == :header
+								@title = element.children.first.value
+								
+								# Remove the title:
+								root.children.shift
+								
+								# Remove any blank lines:
+								root.children.shift while root.children.first&.type == :blank
+								
+								# Read the description:
+								root.children.first.options[:encoding] = root.options[:encoding]
+								@description = Kramdown::Converter::Kramdown.convert(root.children.first).first
+							end
+						end
+					end
+				end
 			end
 			
 			# The base instance of the project this example is loaded from.
@@ -49,7 +92,7 @@ module Utopia
 			end
 			
 			def title
-				Trenni::Strings.to_title(self.name)
+				@title || Trenni::Strings.to_title(self.name)
 			end
 			
 			def href
