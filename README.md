@@ -4,7 +4,7 @@ A simple Ruby project documentation website.
 
 ## Usage
 
-Please see the <a href="https://socketry.github.io/utopia-project">project documentation</a> or run it locally using `bake utopia:project:serve`.
+Please see the <a href="https://socketry.github.io/utopia-project/">project documentation</a> or run it locally using `bake utopia:project:serve`.
 
 ## Contributing
 
