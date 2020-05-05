@@ -80,7 +80,7 @@ header, h1, h2, h3, h4, h5, h6, p, ul, dl, ol {
 }
 
 header img {
-	max-height: 25vh;
+	max-height: 50vh;
 }
 
 nav {
