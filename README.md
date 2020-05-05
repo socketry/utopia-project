@@ -10,14 +10,6 @@ My goal is to provide task-centric documentation, and to continually improve the
 
 With that in mind, this web application provides such a model and will evolve over time to suit my requirements and the needs of my users.
 
-## Installation
-
-Execute the following in your project:
-
-~~~ bash
-bundle add utopia-project
-~~~
-
 ## Usage
 
 Please see the <a href="https://socketry.github.io/utopia-project/">project documentation</a> or run it locally using `bake utopia:project:serve`.
@@ -34,7 +26,7 @@ We welcome contributions to this project.
 
 ## See Also
 
-- [Utopia](https://github.com/socketry/utopia) — The website framework which powers this documentation application.
+- [Utopia](https://github.com/socketry/utopia) — The website framework which powers this web application.
 - [Decode](https://github.com/ioquatix/decode) — The source code parser and cross-referencing library.
 
 ## License

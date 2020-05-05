@@ -79,6 +79,10 @@ header, h1, h2, h3, h4, h5, h6, p, ul, dl, ol {
 	margin: 1rem;
 }
 
+header img {
+	max-height: 25vh;
+}
+
 nav {
 	margin: 1rem;
 	font-size: 0.8rem;
@@ -141,4 +145,29 @@ footer {
 	
 	margin: 1rem;
 	margin-top: 5rem;
+}
+
+section.collapsible input[type=checkbox]  {
+	display: none;
+}
+
+section.collapsible pre {
+	display: none;
+}
+
+section.collapsible input[type=checkbox]:checked ~ pre {
+	display: block;
+}
+
+section.collapsible > label {
+	cursor: pointer;
+}
+
+section.collapsible input[type=checkbox] ~ label > *:last-child:after {
+	content: '▸';
+	padding: 0 0.5rem;
+}
+
+section.collapsible input[type=checkbox]:checked ~ label > *:last-child:after {
+	content: '▾';
 }
