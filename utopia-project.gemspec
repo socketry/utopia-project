@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 	# spec.add_dependency "utopia-gallery"
 	
 	spec.add_dependency "kramdown"
-	spec.add_dependency "decode"
+	spec.add_dependency "decode", "~> 0.9"
 	spec.add_dependency "rackula"
 	spec.add_dependency "falcon"
 	spec.add_dependency "thread-local"
