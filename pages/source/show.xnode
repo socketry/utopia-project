@@ -44,7 +44,7 @@
 					parameters = documentation.parameters.to_a
 					
 					if parameters.any?
-					?><dl><?r
+					?><h4>Parameters</h4><dl><?r
 						parameters.each do |parameter|
 						?>
 							<dt><code class="syntax">#{parameter[:name]}</code> &mdash; #{base.linkify(parameter[:type], symbol)}</dt>
@@ -54,6 +54,17 @@
 						<?r
 						end
 					?></dl><?r
+					end
+					
+					if symbol.multiline?
+						collapsible_id = base.id_for(symbol, :implementation)
+					?><section class="collapsible">
+							<input type="checkbox" id="#{collapsible_id}"/>
+							<label for="#{collapsible_id}">
+								<h4>Implementation</h4>
+							</label>
+							<pre><code class="language-#{symbol.language.name}">#{symbol.text}</code></pre>
+						</section><?r
 					end
 				end
 			end

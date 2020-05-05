@@ -137,8 +137,12 @@ module Utopia
 			end
 			
 			# Compute a unique string which can be used as `id` attribute in the HTML output.
-			def id_for(symbol)
-				symbol.qualified_name
+			def id_for(symbol, suffix = nil)
+				if suffix
+					"#{symbol.qualified_name}-#{suffix}"
+				else
+					symbol.qualified_name
+				end
 			end
 			
 			# Compute a link href to the given symbol for use within the HTML output.
