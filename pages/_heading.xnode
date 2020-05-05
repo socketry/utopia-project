@@ -1,3 +1,2 @@
-<content:navigation />
 <?r document.attributes[:title] ||= content ?>
 <h1><utopia:content/></h1>
