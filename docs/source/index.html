@@ -5,6 +5,7 @@
 			<title>Source</title>
 		
 		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		
 		<link rel="icon" type="image/png" href="../_static/icon.png"/>
 		<link rel="stylesheet" href="../_static/site.css" type="text/css" media="screen"/>
@@ -29,117 +30,117 @@
 	<h1>Source</h1>
 	
 	<main>
-		<ul class="index"><ul class="index"><li>
+		<ul class="index"><li>
 						<a href="Utopia/index.html"><code class="language-ruby">module Utopia</code></a>
 						
 						
-<ul class="index"><li>
+						<ul class="index"><li>
 						<a href="Utopia/Project/index.html"><code class="language-ruby">module Project</code></a>
 						
 						
-<ul class="index"><li>
+						<ul class="index"><li>
 						<a href="Utopia/Project/index.html#%3A%3AUtopia%3A%3AProject%3A%3ASITE_ROOT"><code class="language-ruby">SITE_ROOT = File.expand_path(&quot;../..&quot;, __dir__)</code></a>
 						
 							<p>The root directory of the web application files.</p>
 
 						
-					</li></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/index.html#%3A%3AUtopia%3A%3AProject%3A%3APAGES_ROOT"><code class="language-ruby">PAGES_ROOT = File.expand_path(&quot;pages&quot;, SITE_ROOT)</code></a>
 						
 							<p>The root directory for the utopia middleware.</p>
 
 						
-					</li></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/index.html#%3A%3AUtopia%3A%3AProject%3A%3APUBLIC_ROOT"><code class="language-ruby">PUBLIC_ROOT = File.expand_path(&quot;public&quot;, SITE_ROOT)</code></a>
 						
 							<p>The root directory for static assets.</p>
 
 						
-					</li></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/index.html#%3A%3AUtopia%3A%3AProject.call"><code class="language-ruby">def self.call(builder, root = Dir.pwd, locales: nil)</code></a>
 						
 							<p>Appends a project application to the rack builder.</p>
 
 						
-					</li></ul><ul class="index"></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/Guide/index.html"><code class="language-ruby">class Guide</code></a>
 						
 							<p>Provides structured access to a directory which contains documentation and source code to explain a specific process.</p>
 
 						
-<ul class="index"><li>
+						<ul class="index"><li>
 						<a href="Utopia/Project/Guide/index.html#%3A%3AUtopia%3A%3AProject%3A%3AGuide%3Ainitialize"><code class="language-ruby">def initialize(base, root)</code></a>
 						
 							<p>Initialize the example with the given root path.</p>
 
 						
-					</li></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/Guide/index.html#%3A%3AUtopia%3A%3AProject%3A%3AGuide%3Adescription"><code class="language-ruby">attr :description</code></a>
 						
 							<p>The description from the first paragraph in the README.</p>
 
 						
-					</li></ul><ul class="index"></ul><ul class="index"></ul><ul class="index"></ul><ul class="index"></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/Guide/index.html#%3A%3AUtopia%3A%3AProject%3A%3AGuide%3Abase"><code class="language-ruby">attr :base</code></a>
 						
 							<p>The base instance of the project this example is loaded from.</p>
 
 						
-					</li></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/Guide/index.html#%3A%3AUtopia%3A%3AProject%3A%3AGuide%3Aroot"><code class="language-ruby">attr :root</code></a>
 						
 							<p>The file-system path to the root of the project.</p>
 
 						
-					</li></ul><ul class="index"></ul><ul class="index"></ul><ul class="index"></ul><ul class="index"></ul><ul class="index"></ul><ul class="index"></ul><ul class="index"></ul>					</li></ul><ul class="index"><li>
+											</li></ul>					</li><li>
 						<a href="Utopia/Project/Base/index.html"><code class="language-ruby">class Base</code></a>
 						
 							<p>Provides structured access to a project directory which contains source code and guides.</p>
 
 						
-<ul class="index"></ul><ul class="index"><li>
+						<ul class="index"><li>
 						<a href="Utopia/Project/Base/index.html#%3A%3AUtopia%3A%3AProject%3A%3ABase%3Ainitialize"><code class="language-ruby">def initialize(root = Dir.pwd)</code></a>
 						
 							<p>Initialize the project with the given root path.</p>
 
 						
-					</li></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/Base/index.html#%3A%3AUtopia%3A%3AProject%3A%3ABase%3Aroot"><code class="language-ruby">attr :root</code></a>
 						
 							<p>The file-system path to the root of the project.</p>
 
 						
-					</li></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/Base/index.html#%3A%3AUtopia%3A%3AProject%3A%3ABase%3Aindex"><code class="language-ruby">attr :index</code></a>
 						
 							<p>The source code index which is used for generating pages.</p>
 
 						
-					</li></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/Base/index.html#%3A%3AUtopia%3A%3AProject%3A%3ABase%3Apath_for"><code class="language-ruby">def path_for(file_name)</code></a>
 						
 							<p>Return the absolute path for the given file name, if it exists in the project.</p>
 
 						
-					</li></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/Base/index.html#%3A%3AUtopia%3A%3AProject%3A%3ABase%3Aupdate"><code class="language-ruby">def update(paths)</code></a>
 						
 							<p>Update the index with the specified paths.</p>
 
 						
-					</li></ul><ul class="index"></ul><ul class="index"></ul><ul class="index"></ul><ul class="index"></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/Base/index.html#%3A%3AUtopia%3A%3AProject%3A%3ABase%3Aid_for"><code class="language-ruby">def id_for(symbol, suffix = nil)</code></a>
 						
 							<p>Compute a unique string which can be used as <code>id</code> attribute in the HTML output.</p>
 
 						
-					</li></ul><ul class="index"><li>
+											</li><li>
 						<a href="Utopia/Project/Base/index.html#%3A%3AUtopia%3A%3AProject%3A%3ABase%3Alink_for"><code class="language-ruby">def link_for(symbol)</code></a>
 						
 							<p>Compute a link href to the given symbol for use within the HTML output.</p>
 
 						
-					</li></ul><ul class="index"></ul>					</li></ul>					</li></ul>					</li></ul></ul>	</main>
+											</li></ul>					</li></ul>					</li></ul>					</li></ul>	</main>
 
 		
 		<footer>Documentation generated by <a href="https://github.com/socketry/utopia-project">Utopia::Project</a>.</footer>

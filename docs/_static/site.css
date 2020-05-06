@@ -81,7 +81,11 @@ header, h1, h2, h3, h4, h5, h6, p, pre, ul, dl, ol {
 	margin: 1rem;
 }
 
-main > pre, main > ul, main > dl, main > ol {
+h1 span {
+	display: inline-block;
+}
+
+main > pre {
 	padding: 1rem 2rem;
 }
 
@@ -96,19 +100,17 @@ nav {
 }
 
 li {
-	margin: 0.8rem;
+	margin: 0.5rem 0;
 }
 
 ul.index {
 	padding: 0;
-	padding-left: 0.5rem;
-	margin: 0.5rem;
-	margin-bottom: 1rem;
 	list-style: none;
 }
 
-li > ul, li > ol {
+li ul, li ol {
 	margin: 0;
+	margin-left: 0.5rem;
 }
 
 h1 {
@@ -146,7 +148,7 @@ pre {
 
 footer {
 	text-align: right;
-	font-size: 0.65rem;
+	font-size: 0.8rem;
 	
 	margin: 1rem;
 	margin-top: 5rem;
