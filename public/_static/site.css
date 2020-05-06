@@ -60,6 +60,11 @@ html {
 	}
 }
 
+html {
+	color: var(--main-color);
+	background-color: var(--main-background-color);
+}
+
 body {
 	margin: 0 0;
 	padding: 0;
@@ -67,16 +72,17 @@ body {
 	/* Force the element to contain margins */
 	display: flow-root;
 	min-height: 100vh;
-	
-	color: var(--main-color);
-	background-color: var(--main-background-color);
-	
+		
 	max-width: 48rem;
 	margin: 0 auto;
 }
 
-header, h1, h2, h3, h4, h5, h6, p, ul, dl, ol {
+header, h1, h2, h3, h4, h5, h6, p, pre, ul, dl, ol {
 	margin: 1rem;
+}
+
+main > pre, main > ul, main > dl, main > ol {
+	padding: 1rem 2rem;
 }
 
 header img {
@@ -136,7 +142,6 @@ a:hover {
 
 pre {
 	overflow: auto;
-	padding: 1rem 2rem;
 }
 
 footer {
@@ -147,27 +152,30 @@ footer {
 	margin-top: 5rem;
 }
 
-section.collapsible input[type=checkbox]  {
-	display: none;
+details {
+	margin: 1rem;
+	border: 1px solid #aaa;
+	border-radius: 0.5rem;
+	
+	padding: .5em .5em 0;
 }
 
-section.collapsible pre {
-	display: none;
+summary > * {
+	margin: 0;
+	display: inline-block;
 }
 
-section.collapsible input[type=checkbox]:checked ~ pre {
-	display: block;
+summary {
+	font-weight: bold;
+	margin: -.5rem -.5rem 0;
+	padding: .5rem;
 }
 
-section.collapsible > label {
-	cursor: pointer;
+details[open] {
+	/* padding: .5rem; */
 }
 
-section.collapsible input[type=checkbox] ~ label > *:last-child:after {
-	content: '▸';
-	padding: 0 0.5rem;
-}
-
-section.collapsible input[type=checkbox]:checked ~ label > *:last-child:after {
-	content: '▾';
+details[open] summary {
+	border-bottom: 1px solid #aaa;
+	/* margin-bottom: .5rem; */
 }

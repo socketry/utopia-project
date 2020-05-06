@@ -19,12 +19,12 @@
 			?><content:heading>Project</content:heading><?r
 		end
 		
-		?>#{MarkupString.raw document.to_html}<?r
+		?><main>#{MarkupString.raw document.to_html}</main><?r
 	else
 		?>
 		<content:heading>Project</content:heading>
 		
-		<p>This project does not have a README.md file.</p>
+		<main><p>This project does not have a README.md file.</p></main>
 		<?r
 	end
 	?>
