@@ -85,10 +85,6 @@ h1 span {
 	display: inline-block;
 }
 
-main > pre {
-	padding: 1rem 2rem;
-}
-
 header img {
 	max-height: 50vh;
 }
