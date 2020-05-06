@@ -35,14 +35,14 @@
 		<h2>Definitions</h2>
 		
 		<h3 id="::Utopia::Project::Base:initialize"><code class="language-ruby">def initialize(root = Dir.pwd)</code></h3><p>Initialize the project with the given root path.</p>
-<h4>Parameters</h4><dl>							<dt><code class="syntax">root</code> — <code class="language-ruby">String</code></dt>
-								<dd><p>The file-system path to the root of the project.</p>
+<details open>
+							<summary><h4>Parameters</h4></summary>
+							<dl>								<dt><code class="syntax">root</code> — <code class="language-ruby">String</code></dt>
+									<dd><p>The file-system path to the root of the project.</p>
 </dd>
-						</dl><section class="collapsible">
-							<input type="checkbox" id="::Utopia::Project::Base:initialize-implementation"/>
-							<label for="::Utopia::Project::Base:initialize-implementation">
-								<h4>Implementation</h4>
-							</label>
+							</dl>
+						</details><details>
+							<summary><h4>Implementation</h4></summary>
 							<pre><code class="language-ruby">def initialize(root = Dir.pwd)
 	@root = root
 	
@@ -52,41 +52,38 @@
 	
 	@links = Utopia::Content::Links.new(@root)
 end</code></pre>
-						</section><h3 id="::Utopia::Project::Base:root"><code class="language-ruby">attr :root</code></h3><p>The file-system path to the root of the project.</p>
+						</details><h3 id="::Utopia::Project::Base:root"><code class="language-ruby">attr :root</code></h3><p>The file-system path to the root of the project.</p>
 <h3 id="::Utopia::Project::Base:index"><code class="language-ruby">attr :index</code></h3><p>The source code index which is used for generating pages.</p>
 <h3 id="::Utopia::Project::Base:path_for"><code class="language-ruby">def path_for(file_name)</code></h3><p>Return the absolute path for the given file name, if it exists in the project.</p>
-<h4>Parameters</h4><dl>							<dt><code class="syntax">file_name</code> — <code class="language-ruby">String</code></dt>
-								<dd><p>The relative path to the project file, e.g. <code>README.md</code>.</p>
+<details open>
+							<summary><h4>Parameters</h4></summary>
+							<dl>								<dt><code class="syntax">file_name</code> — <code class="language-ruby">String</code></dt>
+									<dd><p>The relative path to the project file, e.g. <code>README.md</code>.</p>
 </dd>
-						</dl><section class="collapsible">
-							<input type="checkbox" id="::Utopia::Project::Base:path_for-implementation"/>
-							<label for="::Utopia::Project::Base:path_for-implementation">
-								<h4>Implementation</h4>
-							</label>
+							</dl>
+						</details><details>
+							<summary><h4>Implementation</h4></summary>
 							<pre><code class="language-ruby">def path_for(file_name)
 	full_path = File.expand_path(file_name, @root)
 	if File.exist?(full_path)
 		return full_path
 	end
 end</code></pre>
-						</section><h3 id="::Utopia::Project::Base:update"><code class="language-ruby">def update(paths)</code></h3><p>Update the index with the specified paths.</p>
-<h4>Parameters</h4><dl>							<dt><code class="syntax">paths</code> — <code class="language-ruby">Array(String)</code></dt>
-								<dd><p>The paths to load and parse.</p>
+						</details><h3 id="::Utopia::Project::Base:update"><code class="language-ruby">def update(paths)</code></h3><p>Update the index with the specified paths.</p>
+<details open>
+							<summary><h4>Parameters</h4></summary>
+							<dl>								<dt><code class="syntax">paths</code> — <code class="language-ruby">Array(String)</code></dt>
+									<dd><p>The paths to load and parse.</p>
 </dd>
-						</dl><section class="collapsible">
-							<input type="checkbox" id="::Utopia::Project::Base:update-implementation"/>
-							<label for="::Utopia::Project::Base:update-implementation">
-								<h4>Implementation</h4>
-							</label>
+							</dl>
+						</details><details>
+							<summary><h4>Implementation</h4></summary>
 							<pre><code class="language-ruby">def update(paths)
 	@index.update(paths)
 end</code></pre>
-						</section><h3 id="::Utopia::Project::Base:id_for"><code class="language-ruby">def id_for(symbol, suffix = nil)</code></h3><p>Compute a unique string which can be used as <code>id</code> attribute in the HTML output.</p>
-<section class="collapsible">
-							<input type="checkbox" id="::Utopia::Project::Base:id_for-implementation"/>
-							<label for="::Utopia::Project::Base:id_for-implementation">
-								<h4>Implementation</h4>
-							</label>
+						</details><h3 id="::Utopia::Project::Base:id_for"><code class="language-ruby">def id_for(symbol, suffix = nil)</code></h3><p>Compute a unique string which can be used as <code>id</code> attribute in the HTML output.</p>
+<details>
+							<summary><h4>Implementation</h4></summary>
 							<pre><code class="language-ruby">def id_for(symbol, suffix = nil)
 	if suffix
 		&quot;#{symbol.qualified_name}-#{suffix}&quot;
@@ -94,12 +91,9 @@ end</code></pre>
 		symbol.qualified_name
 	end
 end</code></pre>
-						</section><h3 id="::Utopia::Project::Base:link_for"><code class="language-ruby">def link_for(symbol)</code></h3><p>Compute a link href to the given symbol for use within the HTML output.</p>
-<section class="collapsible">
-							<input type="checkbox" id="::Utopia::Project::Base:link_for-implementation"/>
-							<label for="::Utopia::Project::Base:link_for-implementation">
-								<h4>Implementation</h4>
-							</label>
+						</details><h3 id="::Utopia::Project::Base:link_for"><code class="language-ruby">def link_for(symbol)</code></h3><p>Compute a link href to the given symbol for use within the HTML output.</p>
+<details>
+							<summary><h4>Implementation</h4></summary>
 							<pre><code class="language-ruby">def link_for(symbol)
 	path = symbol.lexical_path.map{|entry| entry.to_s}
 	
@@ -110,7 +104,7 @@ end</code></pre>
 		return Trenni::Reference.new(@source_path + path + &quot;index&quot;, fragment: id_for(symbol))
 	end
 end</code></pre>
-						</section>	</main>
+						</details>	</main>
 
 		
 		<footer>Documentation generated by <a href="https://github.com/socketry/utopia-project">Utopia::Project</a>.</footer>

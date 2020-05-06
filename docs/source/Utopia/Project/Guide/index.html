@@ -35,17 +35,17 @@
 		<h2>Definitions</h2>
 		
 		<h3 id="::Utopia::Project::Guide:initialize"><code class="language-ruby">def initialize(base, root)</code></h3><p>Initialize the example with the given root path.</p>
-<h4>Parameters</h4><dl>							<dt><code class="syntax">base</code> — <a href="../Base/index.html"><code class="language-ruby">class Base</code></a></dt>
-								<dd><p>The base instance for the project.</p>
+<details open>
+							<summary><h4>Parameters</h4></summary>
+							<dl>								<dt><code class="syntax">base</code> — <a href="../Base/index.html"><code class="language-ruby">class Base</code></a></dt>
+									<dd><p>The base instance for the project.</p>
 </dd>
-													<dt><code class="syntax">root</code> — <code class="language-ruby">String</code></dt>
-								<dd><p>The file-system path to the root of the example.</p>
+															<dt><code class="syntax">root</code> — <code class="language-ruby">String</code></dt>
+									<dd><p>The file-system path to the root of the example.</p>
 </dd>
-						</dl><section class="collapsible">
-							<input type="checkbox" id="::Utopia::Project::Guide:initialize-implementation"/>
-							<label for="::Utopia::Project::Guide:initialize-implementation">
-								<h4>Implementation</h4>
-							</label>
+							</dl>
+						</details><details>
+							<summary><h4>Implementation</h4></summary>
 							<pre><code class="language-ruby">def initialize(base, root)
 	@base = base
 	@root = root
@@ -58,7 +58,7 @@
 	
 	self.document
 end</code></pre>
-						</section><h3 id="::Utopia::Project::Guide:description"><code class="language-ruby">attr :description</code></h3><p>The description from the first paragraph in the README.</p>
+						</details><h3 id="::Utopia::Project::Guide:description"><code class="language-ruby">attr :description</code></h3><p>The description from the first paragraph in the README.</p>
 <h3 id="::Utopia::Project::Guide:base"><code class="language-ruby">attr :base</code></h3><p>The base instance of the project this example is loaded from.</p>
 <h3 id="::Utopia::Project::Guide:root"><code class="language-ruby">attr :root</code></h3><p>The file-system path to the root of the project.</p>
 	</main>
