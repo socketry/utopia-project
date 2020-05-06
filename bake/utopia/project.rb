@@ -8,14 +8,30 @@ def create
 	end
 end
 
-# Serve the project locally.
-def serve
+# Serve the project using a web server.
+# Binds to `https://localhost:9292` by default.
+#
+# @param port [Integer] The port to bind to.
+# @param bind [String] The URL to bind to, e.g. `http://localhost:80`.
+def serve(port: nil, bind: nil)
 	config_path = File.expand_path("../../template/config.ru", __dir__)
 	preload_path = File.expand_path("../../template/preload.rb", __dir__)
 	
-	system("falcon", "serve", "--config", config_path, "--preload", preload_path)
+	options = []
+	
+	if bind
+		options << "--bind" << bind
+	end
+	
+	if port
+		opttions << "--port" << port
+	end
+	
+	system("falcon", "serve", "--config", config_path, "--preload", preload_path, *options)
 end
 
+# Generate a static copy of the site.
+# @param output_path [String] The output path for the static site.
 def static(output_path: "docs")
 	require 'rackula/command'
 	
