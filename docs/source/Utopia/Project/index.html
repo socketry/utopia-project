@@ -44,18 +44,12 @@
 <h3 id="::Utopia::Project::PAGES_ROOT"><code class="language-ruby">PAGES_ROOT = File.expand_path(&quot;pages&quot;, SITE_ROOT)</code></h3><p>The root directory for the utopia middleware.</p>
 <h3 id="::Utopia::Project::PUBLIC_ROOT"><code class="language-ruby">PUBLIC_ROOT = File.expand_path(&quot;public&quot;, SITE_ROOT)</code></h3><p>The root directory for static assets.</p>
 <h3 id="::Utopia::Project.call"><code class="language-ruby">def self.call(builder, root = Dir.pwd, locales: nil)</code></h3><p>Appends a project application to the rack builder.</p>
-
-<pre><code class="language-ruby"># In your `config.ru` file:
-
-require 'utopia/setup'
-UTOPIA ||= Utopia.setup
-
-require 'utopia/project'
-Utopia::Project.call(self)
-</code></pre>
 <details open>
 							<summary><h4>Parameters</h4></summary>
-							<dl>								<dt><code class="syntax">locales</code> — <code class="language-ruby">Array(String)</code></dt>
+							<dl>								<dt><code class="syntax">root</code> — <code class="language-ruby">String</code></dt>
+									<dd><p>The file-system root path of the project/gem.</p>
+</dd>
+															<dt><code class="syntax">locales</code> — <code class="language-ruby">Array(String)</code></dt>
 									<dd><p>an array of locales to support, e.g. <code>['en', 'ja']</code>.</p>
 </dd>
 							</dl>
