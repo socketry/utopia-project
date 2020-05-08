@@ -107,29 +107,37 @@ module Utopia
 					return nil
 				end
 				
-				if language
-					text = text&.gsub(/{(.*?)}/) do |match|
-						linkify($1, symbol, language: language)
-					end
+				if document = self.document(text, symbol, language: language)
+					return Trenni::MarkupString.raw(
+						document.to_html
+					)
+				end
+			end
+			
+			def document(text, symbol = nil, language: symbol&.language)
+				text = text&.gsub(/{(.*?)}/) do |match|
+					linkify($1, symbol, language: language)
 				end
 				
-				return Trenni::MarkupString.raw(
-					Kramdown::Document.new(text, syntax_highlighter: nil).to_html
-				)
+				return Kramdown::Document.new(text, syntax_highlighter: nil)
 			end
 			
 			def linkify(text, symbol = nil, language: symbol&.language)
-				reference = language.reference(text)
+				reference = @index.languages.parse_reference(text, default_language: language)
 				
 				Trenni::Builder.fragment do |builder|
-					if definition = @index.lookup(reference, relative_to: symbol)&.first
+					if reference and definition = @index.lookup(reference, relative_to: symbol)&.first
 						builder.inline('a', href: link_for(definition)) do
 							builder.inline('code', class: "language-#{definition.language.name}") do
 								builder.text definition.short_form
 							end
 						end
+					elsif reference
+						builder.inline('code', class: "language-#{reference.language.name}") do
+							builder.text text
+						end
 					else
-						builder.inline('code', class: "language-#{symbol.language.name}") do
+						builder.inline('code') do
 							builder.text text
 						end
 					end

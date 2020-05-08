@@ -59,9 +59,15 @@ module Utopia
 				File.exist?(readme_path)
 			end
 			
+			def readme_document
+				content = File.read(self.readme_path)
+				
+				return @base.document(content)
+			end
+			
 			def document
 				if self.readme?
-					@document ||= Kramdown::Document.new(File.read(self.readme_path), syntax_highlighter: nil).tap do |document|
+					@document ||= self.readme_document.tap do |document|
 						root = document.root
 						if element = root.children.first
 							if element.type == :header
@@ -112,7 +118,7 @@ module Utopia
 				return to_enum(:sources) unless block_given?
 				
 				files.each do |path|
-					if source = Decode::Source.for?(path)
+					if source = @base.index.languages.source_for(path)
 						yield source
 					end
 				end
