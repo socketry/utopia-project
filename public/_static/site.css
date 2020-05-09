@@ -96,7 +96,7 @@ nav {
 	color: #aaa;
 }
 
-li {
+li, dt, dd {
 	margin: 0.5rem 0;
 }
 
