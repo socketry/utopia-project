@@ -172,6 +172,7 @@ summary {
 	font-weight: bold;
 	margin: -.5rem -.5rem 0;
 	padding: .5rem;
+	cursor: pointer;
 }
 
 details[open] {
