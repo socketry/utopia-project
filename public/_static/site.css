@@ -3,34 +3,30 @@ html {
 	font-family: "PT Sans", Verdana, Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	
+	/* Fix odd text-size in `display: flex` elements on Safari iOS */
 	text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
-	-moz-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
-}
-
-pre {
-	tab-size: 2;
 }
 
 @media (min-width: 40em) {
 	html {
 		font-size: 18px;
-	}
-	
-	pre {
-		tab-size: 4;
+		--tab-size: 4;
 	}
 }
 
 @media (min-width: 80em) {
 	html {
 		font-size: 20px;
+		--tab-size: 4;
 	}
-	
-	pre {
-		tab-size: 4;
-	}
+}
+
+pre {
+	/* -moz-tab-size is still required by Firefox */
+	--tab-size: 2;
+	tab-size: var(--tab-size);
+	-moz-tab-size: var(--tab-size);
 }
 
 html {
@@ -71,7 +67,7 @@ html {
 }
 
 body {
-	margin: 0 0;
+	margin: 0;
 	padding: 0;
 	
 	/* Force the element to contain margins */
