@@ -63,13 +63,16 @@ module Utopia
 			end
 			
 			# The file-system path to the root of the project.
+			# @attr [String]
 			attr :root
 			
 			# The source code index which is used for generating pages.
+			# @attr [Decode::Index]
 			attr :index
 			
 			# Return the absolute path for the given file name, if it exists in the project.
 			# @param file_name [String] The relative path to the project file, e.g. `README.md`.
+			# @return [String] The file-system path.
 			def path_for(file_name)
 				full_path = File.expand_path(file_name, @root)
 				if File.exist?(full_path)
@@ -83,23 +86,30 @@ module Utopia
 				@index.update(paths)
 			end
 			
-			def best(symbols)
-				symbols.each do |symbol|
-					if symbol.documentation
-						return symbol
+			# Given an array of defintions, return the best definition for the purposes of generating documentation.
+			# @return [Decode::Definition | Nil]
+			def best(definitions)
+				definitions.each do |definition|
+					if definition.documentation
+						return definition
 					end
 				end
 				
-				return symbols.first
+				return definitions.first
 			end
 			
+			# Given a lexical path, find the best definition for that path.
+			# @return [Tuple(Decode::Trie::Node, Decode::Definition)]
 			def lookup(path)
 				if node = @index.trie.lookup(path.map(&:to_sym))
 					return node, best(node.values)
 				end
 			end
 			
-			def format(text, symbol = nil, language: symbol&.language)
+			# Format the given text in the context of the given definition and language.
+			# See {document} for details.
+			# @return [Trenni::MarkupString]
+			def format(text, definition = nil, language: definition&.language)
 				case text
 				when Enumerable
 					text = text.to_a.join("\n")
@@ -107,26 +117,35 @@ module Utopia
 					return nil
 				end
 				
-				if document = self.document(text, symbol, language: language)
+				if document = self.document(text, definition, language: language)
 					return Trenni::MarkupString.raw(
 						document.to_html
 					)
 				end
 			end
 			
-			def document(text, symbol = nil, language: symbol&.language)
-				text = text&.gsub(/{(.*?)}/) do |match|
-					linkify($1, symbol, language: language)
+			# Convert the given markdown text into HTML.
+			#
+			# - Updates source code references (`{language identifier}`) into links.
+			# - Uses {Kramdown} to convert the text into HTML.
+			#
+			# @return [Kramdown::Document]
+			def document(text, definition = nil, language: definition&.language)
+				text = text&.gsub(/(?<!`){(.*?)}/) do |match|
+					linkify($1, definition, language: language)
 				end
 				
 				return Kramdown::Document.new(text, syntax_highlighter: nil)
 			end
 			
-			def linkify(text, symbol = nil, language: symbol&.language)
+			# Replace source code references in the given text with HTML anchors.
+			#
+			# @return [Trenni::Builder]
+			def linkify(text, definition = nil, language: definition&.language)
 				reference = @index.languages.parse_reference(text, default_language: language)
 				
 				Trenni::Builder.fragment do |builder|
-					if reference and definition = @index.lookup(reference, relative_to: symbol)&.first
+					if reference and definition = @index.lookup(reference, relative_to: definition)&.first
 						builder.inline('a', href: link_for(definition)) do
 							builder.inline('code', class: "language-#{definition.language.name}") do
 								builder.text definition.short_form
@@ -145,26 +164,32 @@ module Utopia
 			end
 			
 			# Compute a unique string which can be used as `id` attribute in the HTML output.
-			def id_for(symbol, suffix = nil)
+			# @return [String]
+			def id_for(definition, suffix = nil)
 				if suffix
-					"#{symbol.qualified_name}-#{suffix}"
+					"#{definition.qualified_name}-#{suffix}"
 				else
-					symbol.qualified_name
+					definition.qualified_name
 				end
 			end
 			
-			# Compute a link href to the given symbol for use within the HTML output.
-			def link_for(symbol)
-				path = symbol.lexical_path.map{|entry| entry.to_s}
+			# Compute a link href to the given definition for use within the HTML output.
+			# @return [Trenni::Reference]
+			def link_for(definition)
+				path = definition.lexical_path.map{|entry| entry.to_s}
 				
-				if symbol.container?
+				if definition.container?
 					return Trenni::Reference.new(@source_path + path + "index")
 				else
 					name = path.pop
-					return Trenni::Reference.new(@source_path + path + "index", fragment: id_for(symbol))
+					return Trenni::Reference.new(@source_path + path + "index", fragment: id_for(definition))
 				end
 			end
 			
+			# Enumerate over all available guides in order.
+			# @block {|guide| ... }
+			# @yield guide [Guide]
+			# @return [Enumerator(Guide)]
 			def guides
 				return to_enum(:guides) unless block_given?
 				

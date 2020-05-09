@@ -51,20 +51,20 @@ module Utopia
 			
 			README = "README.md"
 			
+			# The path to the README file for the guide.
+			# @return [String] The file-system path.
 			def readme_path
 				File.expand_path(README, @root)
 			end
 			
+			# Does a README file exist for this guide?
+			# @return [Boolean]
 			def readme?
 				File.exist?(readme_path)
 			end
 			
-			def readme_document
-				content = File.read(self.readme_path)
-				
-				return @base.document(content)
-			end
-			
+			# The document for the README, if one exists.
+			# @return [Kramdown::Document]
 			def document
 				if self.readme?
 					@document ||= self.readme_document.tap do |document|
@@ -89,31 +89,47 @@ module Utopia
 			end
 			
 			# The base instance of the project this example is loaded from.
+			# @attr [Base]
 			attr :base
 			
 			# The file-system path to the root of the project.
+			# @attr [String]
 			attr :root
 			
+			# The name of the guide.
+			# @return [String]
 			def name
 				File.basename(@root)
 			end
 			
+			# The title of the guide.
+			# @return [String]
 			def title
 				@title || Trenni::Strings.to_title(self.name)
 			end
 			
+			# The hypertext reference to this guide.
+			# @return [String]
 			def href
 				"/guides/#{self.name}/index"
 			end
 			
+			# The best documentation, extracted from the source files of the guide.
+			# @return [Decode::Documentation]
 			def documentation
 				@documentation ||= self.best_documentation
 			end
 			
+			# All files associated with this guide.
+			# @return [Array(String)] The file-system paths.
 			def files
 				Dir.glob(File.expand_path("*", @root))
 			end
 			
+			# All the source files associated with this guide.
+			# @block {|source| ... } If a block is given.
+			# @yield source [Decode::Source]
+			# @return [Enumerator(Decode::Source)] If no block is given.
 			def sources
 				return to_enum(:sources) unless block_given?
 				
@@ -125,6 +141,12 @@ module Utopia
 			end
 			
 			private
+			
+			def readme_document
+				content = File.read(self.readme_path)
+				
+				return @base.document(content)
+			end
 			
 			def best_documentation
 				if source = sources.first
