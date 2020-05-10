@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 	
 	spec.required_ruby_version = "~> 2.5"
 	
-	spec.files = Dir.glob('{bake,lib,pages,public,template}/**/*', base: __dir__)
+	spec.files = Dir['{bake,lib,pages,public,template}/**/*', base: __dir__]
 	spec.require_paths = ["lib"]
 	
 	spec.add_dependency "utopia", "~> 2.14"
