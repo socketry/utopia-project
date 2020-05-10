@@ -15,7 +15,7 @@
 						case child
 						when Decode::Comment::Parameter
 							?>　<code class="syntax">#{child.name}</code>　#{base.linkify(child.type, symbol)}<?r
-						when Decode::Comment::Returns
+						when Decode::Comment::Returns, Decode::Comment::Attribute
 							?>　#{base.linkify(child.type, symbol)}<?r
 						when Decode::Comment::Yields
 							?>　<code class="syntax language-#{symbol.language.name}">#{child.block}</code><?r
