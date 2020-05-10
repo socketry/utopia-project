@@ -7,8 +7,14 @@ Gem::Specification.new do |spec|
 	spec.email = ["samuel.williams@oriontransfer.co.nz"]
 	
 	spec.summary = "A project documentation tool based on Utopia."
-	spec.homepage = "https://github.com/socketry/utopia-project"
+	spec.homepage = "https://socketry.github.io/utopia-project/"
 	spec.license = "MIT"
+	
+	spec.metadata = {
+		"documentation_uri" => "https://socketry.github.io/utopia-project/",
+		"source_code_uri" => "https://github.com/socketry/utopia-project/",
+		"funding_uri" => "https://github.com/sponsors/ioquatix/",
+	}
 	
 	spec.required_ruby_version = "~> 2.5"
 	
