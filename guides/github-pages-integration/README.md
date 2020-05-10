@@ -4,7 +4,7 @@ This guide shows you how to use `utopia-project` with GitHub Pages.
 
 ## Static Site Generation
 
-Once you are happy with your project's documentation, simply generate a static site:
+Once you are happy with your project's documentation, use this command to generate a static site:
 
 ~~~ bash
 $ bake utopia:project:static
