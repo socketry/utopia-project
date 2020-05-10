@@ -41,8 +41,8 @@
 
 <p>The <code>@param</code> tag is used to describe the parameters of a method:</p>
 
-<pre><code class="language-ruby"># @param x [Integer] The x co-ordinate.
-# @param y [Integer] The y co-ordinate.
+<pre><code class="language-ruby"># @parameter x [Integer] The x co-ordinate.
+# @parameter y [Integer] The y co-ordinate.
 def move(x, y)
 	# ...
 end
@@ -52,7 +52,7 @@ end
 
 <p>The <code>@return</code> tag is used to describe the return type of the definition:</p>
 
-<pre><code class="language-ruby"># @return [Integer] The result of the computation.
+<pre><code class="language-ruby"># @returns [Integer] The result of the computation.
 def fib(n)
 	# ...
 end
@@ -62,7 +62,7 @@ end
 
 <p>It is possible to insert references in your documentation using curly brackets. In the following example <code>{Input}</code> will be expanded relative to the usage, to some symbol named <code>Input</code>.</p>
 
-<pre><code class="language-ruby"># Frobulates the input, see {Input} for more details.
+<pre><code class="language-ruby"># Frobulates the input, see &lt;code&gt;Input&lt;/code&gt; for more details.
 def frobulate(input)
 	# ... left to the imagination ...
 end
