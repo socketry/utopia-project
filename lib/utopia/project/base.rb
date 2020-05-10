@@ -148,7 +148,7 @@ module Utopia
 					if reference and definition = @index.lookup(reference, relative_to: definition)&.first
 						builder.inline('a', href: link_for(definition)) do
 							builder.inline('code', class: "language-#{definition.language.name}") do
-								builder.text definition.short_form
+								builder.text definition.qualified_form
 							end
 						end
 					elsif reference

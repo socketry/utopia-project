@@ -13,13 +13,24 @@ html {
 		font-size: 18px;
 		--tab-size: 4;
 	}
+	
+	main pre {
+		margin: 2rem;
+	}
 }
 
 @media (min-width: 80em) {
 	html {
 		font-size: 20px;
-		--tab-size: 4;
 	}
+}
+
+p code {
+	padding: 0 0.2rem;
+}
+
+p code:first-child, p code:last-child {
+	padding: 0;
 }
 
 pre {

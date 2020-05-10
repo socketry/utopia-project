@@ -39,31 +39,7 @@
 					
 					if documentation = symbol.documentation
 						?>#{base.format(documentation.description, symbol)}<?r
-						
-						signature = documentation.signature.to_a
-						
-						if signature.any?
-						?><details open>
-								<summary><h4>Signature</h4></summary>
-								<dl><?r
-								signature.each do |kind, match|
-									case kind
-									when :parameter, :yields
-										?><dt><strong>#{kind}</strong> <code class="syntax">#{match[:name]}</code> #{base.linkify(match[:type], symbol)}</dt><?r 
-									when :attribute, :block, :returns, :throws, :raises
-										?><dt><strong>#{kind}</strong> #{base.linkify(match[:type], symbol)}</dt><?r
-									else
-										?><dt><strong>#{kind}</strong></dt><?r
-									end
-									
-									if details = match[:details] ?>
-										<dd>#{base.format(details, symbol)}</dd>
-									<?r end ?>
-								<?r
-								end
-							?></dl>
-							</details><?r
-						end
+						?>#{partial 'content:signature', symbol: symbol}<?r
 					end
 					
 					if symbol.multiline?
