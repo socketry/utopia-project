@@ -14,7 +14,7 @@ html {
 		--tab-size: 4;
 	}
 	
-	main pre {
+	main > pre {
 		margin: 2rem;
 	}
 }
@@ -109,6 +109,10 @@ nav {
 
 li, dt, dd {
 	margin: 0.5rem 0;
+}
+
+details dt, details dd {
+	margin: 1rem 0;
 }
 
 ul.index {

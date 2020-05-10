@@ -3,25 +3,34 @@
 	symbol = self[:symbol]
 	documentation = symbol&.documentation
 	
-	signature = documentation.signature.to_a
-	
-	if signature.any?
+	if documentation.children?
 ?>
 <details open>
 	<summary><h4>Signature</h4></summary>
 	<dl><?r
-		signature.each do |kind, match|
-			case kind
-			when :parameter, :yields
-				?><dt><strong>#{kind}</strong>　<code class="syntax">#{match[:name]}</code>　#{base.linkify(match[:type], symbol)}</dt><?r 
-			when :attribute, :block, :returns, :throws, :raises
-				?><dt><strong>#{kind}</strong>　#{base.linkify(match[:type], symbol)}</dt><?r
-			else
-				?><dt>#{kind}</dt><?r
-			end
-			
-			if details = match[:details]
-				?><dd>#{base.format(details, symbol)}</dd><?r 
+		documentation.traverse do |node, descend|
+			node.each do |child|
+				?><dt>
+					<strong>#{child.directive}</strong><?r
+						case child
+						when Decode::Comment::Parameter
+							?>　<code class="syntax">#{child.name}</code>　#{base.linkify(child.type, symbol)}<?r
+						when Decode::Comment::Returns
+							?>　#{base.linkify(child.type, symbol)}<?r
+						when Decode::Comment::Yields
+							?>　<code class="syntax language-#{symbol.language.name}">#{child.block}</code><?r
+						end
+				?></dt><?r
+				
+				if text = child.text
+					?><dd>#{base.format(text, symbol)}</dd><?r
+				end
+				
+				if child.children?
+					?><dd><dl>
+						<?r descend.call(child) ?>
+					</dl></dd><?r
+				end
 			end
 		end
 	?></dl>

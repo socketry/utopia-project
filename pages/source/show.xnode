@@ -1,15 +1,15 @@
 <content:page>
 	<?r
-	base = controller[:base]
-	node = controller[:node]
-	symbol = controller[:symbol]
+	base = self[:base]
+	node = self[:node]
+	symbol = self[:symbol]
 	?>
 	<content:heading><code class="language-#{symbol.language.name}">#{symbol.qualified_name}</code></content:heading>
 	
 	<main>
 		<?r
 		if documentation = symbol.documentation
-			?>#{base.format(documentation.description.to_a.join("\n"), symbol)}<?r
+			?>#{base.format(documentation.text.join("\n"), symbol)}<?r
 		end
 		?>
 		
@@ -38,7 +38,7 @@
 					?><h3 id="#{base.id_for(symbol)}"><code class="language-#{symbol.language.name}">#{symbol.long_form}</code></h3><?r
 					
 					if documentation = symbol.documentation
-						?>#{base.format(documentation.description, symbol)}<?r
+						?>#{base.format(documentation.text, symbol)}<?r
 						?>#{partial 'content:signature', symbol: symbol}<?r
 					end
 					

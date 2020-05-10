@@ -51,7 +51,7 @@ module Utopia
 			end
 			
 			# Initialize the project with the given root path.
-			# @param root [String] The file-system path to the root of the project.
+			# @parameter root [String] The file-system path to the root of the project.
 			def initialize(root = Dir.pwd)
 				@root = root
 				
@@ -63,16 +63,16 @@ module Utopia
 			end
 			
 			# The file-system path to the root of the project.
-			# @attr [String]
+			# @attribute [String]
 			attr :root
 			
 			# The source code index which is used for generating pages.
-			# @attr [Decode::Index]
+			# @attribute [Decode::Index]
 			attr :index
 			
 			# Return the absolute path for the given file name, if it exists in the project.
-			# @param file_name [String] The relative path to the project file, e.g. `README.md`.
-			# @return [String] The file-system path.
+			# @parameter file_name [String] The relative path to the project file, e.g. `README.md`.
+			# @returns [String] The file-system path.
 			def path_for(file_name)
 				full_path = File.expand_path(file_name, @root)
 				if File.exist?(full_path)
@@ -81,13 +81,13 @@ module Utopia
 			end
 			
 			# Update the index with the specified paths.
-			# @param paths [Array(String)] The paths to load and parse.
+			# @parameter paths [Array(String)] The paths to load and parse.
 			def update(paths)
 				@index.update(paths)
 			end
 			
 			# Given an array of defintions, return the best definition for the purposes of generating documentation.
-			# @return [Decode::Definition | Nil]
+			# @returns [Decode::Definition | Nil]
 			def best(definitions)
 				definitions.each do |definition|
 					if definition.documentation
@@ -99,7 +99,7 @@ module Utopia
 			end
 			
 			# Given a lexical path, find the best definition for that path.
-			# @return [Tuple(Decode::Trie::Node, Decode::Definition)]
+			# @returns [Tuple(Decode::Trie::Node, Decode::Definition)]
 			def lookup(path)
 				if node = @index.trie.lookup(path.map(&:to_sym))
 					return node, best(node.values)
@@ -108,7 +108,7 @@ module Utopia
 			
 			# Format the given text in the context of the given definition and language.
 			# See {document} for details.
-			# @return [Trenni::MarkupString]
+			# @returns [Trenni::MarkupString]
 			def format(text, definition = nil, language: definition&.language)
 				case text
 				when Enumerable
@@ -129,7 +129,7 @@ module Utopia
 			# - Updates source code references (`{language identifier}`) into links.
 			# - Uses {Kramdown} to convert the text into HTML.
 			#
-			# @return [Kramdown::Document]
+			# @returns [Kramdown::Document]
 			def document(text, definition = nil, language: definition&.language)
 				text = text&.gsub(/(?<!`){(.*?)}/) do |match|
 					linkify($1, definition, language: language)
@@ -140,7 +140,7 @@ module Utopia
 			
 			# Replace source code references in the given text with HTML anchors.
 			#
-			# @return [Trenni::Builder]
+			# @returns [Trenni::Builder]
 			def linkify(text, definition = nil, language: definition&.language)
 				reference = @index.languages.parse_reference(text, default_language: language)
 				
@@ -164,7 +164,7 @@ module Utopia
 			end
 			
 			# Compute a unique string which can be used as `id` attribute in the HTML output.
-			# @return [String]
+			# @returns [String]
 			def id_for(definition, suffix = nil)
 				if suffix
 					"#{definition.qualified_name}-#{suffix}"
@@ -174,7 +174,7 @@ module Utopia
 			end
 			
 			# Compute a link href to the given definition for use within the HTML output.
-			# @return [Trenni::Reference]
+			# @returns [Trenni::Reference]
 			def link_for(definition)
 				path = definition.lexical_path.map{|entry| entry.to_s}
 				
@@ -189,7 +189,7 @@ module Utopia
 			# Enumerate over all available guides in order.
 			# @block {|guide| ... }
 			# @yield guide [Guide]
-			# @return [Enumerator(Guide)]
+			# @returns [Enumerator(Guide)]
 			def guides
 				return to_enum(:guides) unless block_given?
 				

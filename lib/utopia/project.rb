@@ -41,9 +41,9 @@ module Utopia
 		
 		# Appends a project application to the rack builder.
 		#
-		# @param builder [Rack::Builder]
-		# @param root [String] The file-system root path of the project/gem.
-		# @param locales [Array(String)] an array of locales to support, e.g. `['en', 'ja']`.
+		# @parameter builder [Rack::Builder]
+		# @parameter root [String] The file-system root path of the project/gem.
+		# @parameter locales [Array(String)] an array of locales to support, e.g. `['en', 'ja']`.
 		def self.call(builder, root = Dir.pwd, locales: nil)
 			if UTOPIA.production?
 				# Handle exceptions in production with a error page and send an email notification:

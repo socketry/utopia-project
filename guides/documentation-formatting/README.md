@@ -13,8 +13,8 @@ Source code documentation is expected to be in markdown format. This is differen
 The `@param` tag is used to describe the parameters of a method:
 
 ~~~ ruby
-# @param x [Integer] The x co-ordinate.
-# @param y [Integer] The y co-ordinate.
+# @parameter x [Integer] The x co-ordinate.
+# @parameter y [Integer] The y co-ordinate.
 def move(x, y)
 	# ...
 end
@@ -25,7 +25,7 @@ end
 The `@return` tag is used to describe the return type of the definition:
 
 ~~~ ruby
-# @return [Integer] The result of the computation.
+# @returns [Integer] The result of the computation.
 def fib(n)
 	# ...
 end
