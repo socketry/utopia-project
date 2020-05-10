@@ -127,8 +127,8 @@ module Utopia
 			end
 			
 			# All the source files associated with this guide.
-			# @block {|source| ... } If a block is given.
-			# @yield source [Decode::Source]
+			# @yields {|source| ...} If a block is given.
+			# 	@parameter source [Decode::Source]
 			# @returns [Enumerator(Decode::Source)] If no block is given.
 			def sources
 				return to_enum(:sources) unless block_given?

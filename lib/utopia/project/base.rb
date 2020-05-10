@@ -187,9 +187,9 @@ module Utopia
 			end
 			
 			# Enumerate over all available guides in order.
-			# @block {|guide| ... }
-			# @yield guide [Guide]
-			# @returns [Enumerator(Guide)]
+			# @yields {|guide| ...} If a block is given.
+			# 	@parameter guide [Guide]
+			# @returns [Enumerator(Guide)] If no block given.
 			def guides
 				return to_enum(:guides) unless block_given?
 				
