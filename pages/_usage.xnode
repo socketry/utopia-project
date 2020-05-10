@@ -10,7 +10,7 @@
 	<h3><a href="#{guide.href}">#{guide.title}</a></h3>
 	
 	<?r if documentation = guide.documentation ?>
-		#{base.format(documentation.details, language: guide.documentation.language)}
+		#{base.format(documentation.text, language: guide.documentation.language)}
 	<?r elsif description = guide.description ?>
 		#{MarkupString.raw Kramdown::Document.new(description, syntax_highlighter: nil).to_html}
 	<?r else ?>
