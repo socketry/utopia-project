@@ -1,0 +1,3 @@
+<figure class="youtube-wrapper">
+	<iframe class="youtube-video" src="https://www.youtube.com/embed/#{attributes[:id]}" frameborder="0" allowfullscreen></iframe>
+</figure>
