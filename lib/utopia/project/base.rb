@@ -28,8 +28,7 @@ require 'decode'
 
 require 'thread/local'
 
-require 'kramdown'
-
+require_relative 'document'
 require_relative 'guide'
 
 module Utopia
@@ -126,41 +125,11 @@ module Utopia
 			
 			# Convert the given markdown text into HTML.
 			#
-			# - Updates source code references (`{language identifier}`) into links.
-			# - Uses {Kramdown} to convert the text into HTML.
+			# Updates source code references (`{language identifier}`) into links.
 			#
-			# @returns [Kramdown::Document]
+			# @returns [Document]
 			def document(text, definition = nil, language: definition&.language)
-				text = text&.gsub(/(?<!`){(.*?)}/) do |match|
-					linkify($1, definition, language: language)
-				end
-				
-				return Kramdown::Document.new(text, syntax_highlighter: nil)
-			end
-			
-			# Replace source code references in the given text with HTML anchors.
-			#
-			# @returns [Trenni::Builder]
-			def linkify(text, definition = nil, language: definition&.language)
-				reference = @index.languages.parse_reference(text, default_language: language)
-				
-				Trenni::Builder.fragment do |builder|
-					if reference and definition = @index.lookup(reference, relative_to: definition)&.first
-						builder.inline('a', href: link_for(definition)) do
-							builder.inline('code', class: "language-#{definition.language.name}") do
-								builder.text definition.qualified_form
-							end
-						end
-					elsif reference
-						builder.inline('code', class: "language-#{reference.language.name}") do
-							builder.text text
-						end
-					else
-						builder.inline('code') do
-							builder.text text
-						end
-					end
-				end
+				Document.new(text, self, definition: definition, default_language: language)
 			end
 			
 			# Compute a unique string which can be used as `id` attribute in the HTML output.

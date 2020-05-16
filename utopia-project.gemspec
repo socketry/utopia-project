@@ -11,7 +11,6 @@ Gem::Specification.new do |spec|
 	spec.license = "MIT"
 	
 	spec.metadata = {
-		"documentation_uri" => "https://socketry.github.io/utopia-project/",
 		"source_code_uri" => "https://github.com/socketry/utopia-project/",
 		"funding_uri" => "https://github.com/sponsors/ioquatix/",
 	}
@@ -24,7 +23,7 @@ Gem::Specification.new do |spec|
 	spec.add_dependency "utopia", "~> 2.14"
 	# spec.add_dependency "utopia-gallery"
 	
-	spec.add_dependency "kramdown"
+	spec.add_dependency "commonmarker"
 	spec.add_dependency "decode", "~> 0.13"
 	spec.add_dependency "rackula"
 	spec.add_dependency "falcon"

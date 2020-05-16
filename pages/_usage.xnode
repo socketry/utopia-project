@@ -12,7 +12,7 @@
 	<?r if documentation = guide.documentation ?>
 		#{base.format(documentation.text, language: guide.documentation.language)}
 	<?r elsif description = guide.description ?>
-		#{MarkupString.raw Kramdown::Document.new(description, syntax_highlighter: nil).to_html}
+		#{MarkupString.raw description.to_html}
 	<?r else ?>
 		<p>No description.</p>
 	<?r end ?>

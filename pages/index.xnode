@@ -1,17 +1,18 @@
 <content:page>
 	<?r
 	if document = self[:document]
-		children = document.root.children
+		child = document.first_child
 		
-		if children.first.type == :header
-			header = children.shift
-			title = header.children.first
+		if child.type == :header
+			header = child
+			child.delete
+			title = header.first_child
+			
 			case title.type
 			when :text
-				?><content:heading>#{title.value}</content:heading><?r
+				?><content:heading>#{title.string_content}</content:heading><?r
 			when :img
-				self.document.attributes[:title] ||= title.attr["alt"]
-				?><header><img src="#{title.attr["src"]}" /></header><?r
+				?><header><img src="#{title.src}" /></header><?r
 			else
 				?><content:heading>Project</content:heading><?r
 			end

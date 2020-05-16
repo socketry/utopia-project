@@ -23,7 +23,6 @@
 require 'utopia/path'
 require 'trenni/reference'
 require 'decode'
-require 'kramdown'
 
 module Utopia
 	module Project
@@ -64,25 +63,16 @@ module Utopia
 			end
 			
 			# The document for the README, if one exists.
-			# @returns [Kramdown::Document]
 			def document
 				if self.readme?
 					@document ||= self.readme_document.tap do |document|
-						root = document.root
-						if element = root.children.first
-							if element.type == :header
-								@title = element.children.first.value
-								
-								# Remove the title:
-								root.children.shift
-								
-								# Remove any blank lines:
-								root.children.shift while root.children.first&.type == :blank
-								
-								# Read the description:
-								root.children.first.options[:encoding] = root.options[:encoding]
-								@description = Kramdown::Converter::Kramdown.convert(root.children.first).first
-							end
+						child = document.first_child
+						
+						if child.type == :header
+							@title = child.first_child.string_content
+							
+							@description = child.next
+							child.delete
 						end
 					end
 				end
