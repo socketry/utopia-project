@@ -25,7 +25,7 @@ require 'decode/syntax/rewriter'
 module Utopia
 	module Project
 		class Linkify < Decode::Syntax::Rewriter
-			# @parameter base [Foo | Base] The base data.
+			# @parameter base [Base] The base data.
 			def initialize(base, language, text)
 				@base = base
 				@language = language
