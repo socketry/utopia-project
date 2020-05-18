@@ -42,7 +42,7 @@ module Utopia
 			def link_to(definition, text)
 				Trenni::Builder.fragment do |builder|
 					builder.inline('a', href: @base.link_for(definition)) do
-						builder.text(text)
+						builder.text(definition.qualified_name)
 					end
 				end
 			end
