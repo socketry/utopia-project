@@ -30,6 +30,7 @@ require 'thread/local'
 
 require_relative 'document'
 require_relative 'guide'
+require_relative 'linkify'
 
 module Utopia
 	module Project
@@ -103,6 +104,16 @@ module Utopia
 				if node = @index.trie.lookup(path.map(&:to_sym))
 					return node, best(node.values)
 				end
+			end
+			
+			def linkify(text, definition, language: definition&.language)
+				rewriter = Linkify.new(self, language, text)
+				
+				code = language.code_for(text, @index, relative_to: definition)
+				
+				code.extract(rewriter)
+				
+				return rewriter.apply
 			end
 			
 			# Format the given text in the context of the given definition and language.

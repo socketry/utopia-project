@@ -68,8 +68,8 @@ module Utopia
 				end
 			end
 			
-			def to_html
-				self.root.to_html(:UNSAFE)
+			def to_html(node = self.root)
+				Trenni::MarkupString.raw(node.to_html(:UNSAFE))
 			end
 			
 			def paragraph_node(child)
@@ -126,7 +126,7 @@ module Utopia
 			#
 			def reference_node(content)
 				if reference = @index.languages.parse_reference(content, default_language: @default_language)
-					definition = @index.lookup(reference, relative_to: @definition)&.first
+					definition = @index.lookup(reference, relative_to: @definition)
 				end
 				
 				if definition
