@@ -8,9 +8,9 @@ Source code documentation is expected to be in markdown format. This is differen
 
 ### Tags
 
-#### `@param`
+#### `@parameter`
 
-The `@param` tag is used to describe the parameters of a method:
+The `@parameter` tag is used to describe the parameters of a method:
 
 ~~~ ruby
 # @parameter x [Integer] The x co-ordinate.
@@ -20,9 +20,9 @@ def move(x, y)
 end
 ~~~
 
-#### `@return`
+#### `@returns`
 
-The `@return` tag is used to describe the return type of the definition:
+The `@returns` tag is used to describe the return type of the definition:
 
 ~~~ ruby
 # @returns [Integer] The result of the computation.
