@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'commonmarker'
+require 'markly'
 
 module Utopia
 	module Project
@@ -37,7 +37,7 @@ module Utopia
 			end
 			
 			def root
-				@root ||= resolve(CommonMarker.render_doc(@text, [:DEFAULT]))
+				@root ||= resolve(Markly.parse(@text))
 			end
 			
 			def first_child
@@ -69,35 +69,35 @@ module Utopia
 			end
 			
 			def to_html(node = self.root)
-				Trenni::MarkupString.raw(node.to_html(:UNSAFE))
+				Trenni::MarkupString.raw(node.to_html(flags: Markly::UNSAFE))
 			end
 			
 			def paragraph_node(child)
-				node = CommonMarker::Node.new(:paragraph)
+				node = Markly::Node.new(:paragraph)
 				node.append_child(child)
 				return node
 			end
 			
 			def html_node(content, type = :html)
-				node = CommonMarker::Node.new(:html)
+				node = Markly::Node.new(:html)
 				node.string_content = content
 				return node
 			end
 			
 			def inline_html_node(content)
-				node = CommonMarker::Node.new(:inline_html)
+				node = Markly::Node.new(:inline_html)
 				node.string_content = content
 				return node
 			end
 			
 			def text_node(content)
-				node = CommonMarker::Node.new(:text)
+				node = Markly::Node.new(:text)
 				node.string_content = content
 				return node
 			end
 			
 			def link_node(title, url, child)
-				node = CommonMarker::Node.new(:link)
+				node = Markly::Node.new(:link)
 				node.title = title
 				node.url = url.to_s
 				
@@ -112,7 +112,7 @@ module Utopia
 						"<code class=\"language-#{language}\">#{Trenni::Strings.to_html(content)}</code>"
 					)
 				else
-					node = CommonMarker::Node.new(:code)
+					node = Markly::Node.new(:code)
 					node.string_content = content
 					return node
 				end
