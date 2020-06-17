@@ -27,11 +27,17 @@ RSpec.describe Utopia::Project::Document do
 	let(:readme_path) {File.expand_path("../../../README.md", __dir__)}
 	subject {described_class.new(File.read(readme_path))}
 	
+	let(:html) {subject.to_html}
+	
+	it "generates title" do
+		expect(html).to include("<h1 id=\"utopia::project\">Utopia::Project</h1>")
+	end
+	
 	it "can replace usage" do
 		subject.replace_section("Usage") do |header|
 			header.insert_after(subject.html_node("<content:usage/>"))
 		end
 		
-		p subject.to_html
+		expect(html).to include("<content:usage/>")
 	end
 end
