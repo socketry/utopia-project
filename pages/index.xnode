@@ -11,8 +11,8 @@
 			case title.type
 			when :text
 				?><content:heading>#{title.string_content}</content:heading><?r
-			when :img
-				?><header><img src="#{title.src}" /></header><?r
+			when :image
+				?><header><img src="#{title.url}" /></header><?r
 			else
 				?><content:heading>Project</content:heading><?r
 			end
