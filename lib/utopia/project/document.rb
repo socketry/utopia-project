@@ -52,7 +52,7 @@ module Utopia
 						header = child
 						
 						# We found the matched header:
-						if header.first_child.string_content == name
+						if header.first_child.to_plaintext.include?(name)
 							# Now subsequent children:
 							current = header.next
 							while current.type != :header and following = current.next
