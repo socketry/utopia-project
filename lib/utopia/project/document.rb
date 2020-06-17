@@ -69,7 +69,8 @@ module Utopia
 			end
 			
 			def to_html(node = self.root)
-				Trenni::MarkupString.raw(node.to_html(flags: Markly::UNSAFE))
+				renderer = Markly::HTMLRenderer.new(ids: true, flags: Markly::UNSAFE)
+				Trenni::MarkupString.raw(renderer.render(node))
 			end
 			
 			def paragraph_node(child)
