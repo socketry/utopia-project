@@ -24,7 +24,6 @@
 
 	<body class="">
 		<nav> › <a class="link" href="../../../../index.html">Project</a> › <a class="link" href="../../../index.html">Source</a></nav>
-
 		
 		
 	<h1><code class="language-ruby">Utopia::Project::Base</code></h1>
@@ -125,7 +124,7 @@ end</code></pre>
 	end
 end</code></pre>
 						</details><h3 id="Utopia::Project::Base#format"><code class="language-ruby">def format(text, definition = nil, language: definition&amp;.language)</code></h3><p>Format the given text in the context of the given definition and language.
-See <a href="index.html#Utopia%3A%3AProject%3A%3ABase%23document"><code class="language-ruby">Utopia::Project::Base#document</code></a> for details.</p>
+See <a href="index.html#Utopia%3A%3AProject%3A%3ABase%23document" title="document"><code class="language-ruby">Utopia::Project::Base#document</code></a> for details.</p>
 <details open>
 	<summary><h4>Signature</h4></summary>
 	<dl><dt>
@@ -148,53 +147,16 @@ See <a href="index.html#Utopia%3A%3AProject%3A%3ABase%23document"><code class="l
 	end
 end</code></pre>
 						</details><h3 id="Utopia::Project::Base#document"><code class="language-ruby">def document(text, definition = nil, language: definition&amp;.language)</code></h3><p>Convert the given markdown text into HTML.</p>
-
-<ul>
-  <li>Updates source code references (<code>{language identifier}</code>) into links.</li>
-  <li>Uses <code class="language-ruby">Kramdown</code> to convert the text into HTML.</li>
-</ul>
+<p>Updates source code references (<code>{language identifier}</code>) into links.</p>
 <details open>
 	<summary><h4>Signature</h4></summary>
 	<dl><dt>
-					<strong>returns</strong>　<code class="language-ruby">Kramdown::Document</code></dt></dl>
+					<strong>returns</strong>　<code class="language-ruby"><a href="../Document/index.html" title="Utopia::Project::Document">Document</a></code></dt></dl>
 </details>
 <details>
 							<summary><h4>Implementation</h4></summary>
 							<pre><code class="language-ruby">def document(text, definition = nil, language: definition&amp;.language)
-	text = text&amp;.gsub(/(?&lt;!`){(.*?)}/) do |match|
-		linkify($1, definition, language: language)
-	end
-	
-	return Kramdown::Document.new(text, syntax_highlighter: nil)
-end</code></pre>
-						</details><h3 id="Utopia::Project::Base#linkify"><code class="language-ruby">def linkify(text, definition = nil, language: definition&amp;.language)</code></h3><p>Replace source code references in the given text with HTML anchors.</p>
-<details open>
-	<summary><h4>Signature</h4></summary>
-	<dl><dt>
-					<strong>returns</strong>　<code class="language-ruby">Trenni::Builder</code></dt></dl>
-</details>
-<details>
-							<summary><h4>Implementation</h4></summary>
-							<pre><code class="language-ruby">def linkify(text, definition = nil, language: definition&amp;.language)
-	reference = @index.languages.parse_reference(text, default_language: language)
-	
-	Trenni::Builder.fragment do |builder|
-		if reference and definition = @index.lookup(reference, relative_to: definition)&amp;.first
-			builder.inline('a', href: link_for(definition)) do
-				builder.inline('code', class: &quot;language-#{definition.language.name}&quot;) do
-					builder.text definition.qualified_form
-				end
-			end
-		elsif reference
-			builder.inline('code', class: &quot;language-#{reference.language.name}&quot;) do
-				builder.text text
-			end
-		else
-			builder.inline('code') do
-				builder.text text
-			end
-		end
-	end
+	Document.new(text, self, definition: definition, default_language: language)
 end</code></pre>
 						</details><h3 id="Utopia::Project::Base#id_for"><code class="language-ruby">def id_for(definition, suffix = nil)</code></h3><p>Compute a unique string which can be used as <code>id</code> attribute in the HTML output.</p>
 <details open>
@@ -236,8 +198,8 @@ end</code></pre>
 					<strong>yields</strong>　<code class="syntax language-ruby">{|guide| ...}</code></dt><dd><p>If a block is given.</p>
 </dd><dd><dl>
 <dt>
-					<strong>parameter</strong>　<code class="syntax">guide</code>　<a href="../Guide/index.html"><code class="language-ruby">class Utopia::Project::Guide</code></a></dt>					</dl></dd><dt>
-					<strong>returns</strong>　<code class="language-ruby">Enumerator(Guide)</code></dt><dd><p>If no block given.</p>
+					<strong>parameter</strong>　<code class="syntax">guide</code>　<code class="language-ruby"><a href="../Guide/index.html" title="Utopia::Project::Guide">Guide</a></code></dt>					</dl></dd><dt>
+					<strong>returns</strong>　<code class="language-ruby">Enumerator(<a href="../Guide/index.html" title="Utopia::Project::Guide">Guide</a>)</code></dt><dd><p>If no block given.</p>
 </dd></dl>
 </details>
 <details>

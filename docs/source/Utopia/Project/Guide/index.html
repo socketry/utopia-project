@@ -24,7 +24,6 @@
 
 	<body class="">
 		<nav> › <a class="link" href="../../../../index.html">Project</a> › <a class="link" href="../../../index.html">Source</a></nav>
-
 		
 		
 	<h1><code class="language-ruby">Utopia::Project::Guide</code></h1>
@@ -39,7 +38,7 @@
 <details open>
 	<summary><h4>Signature</h4></summary>
 	<dl><dt>
-					<strong>parameter</strong>　<code class="syntax">base</code>　<a href="../Base/index.html"><code class="language-ruby">class Utopia::Project::Base</code></a></dt><dd><p>The base instance for the project.</p>
+					<strong>parameter</strong>　<code class="syntax">base</code>　<code class="language-ruby"><a href="../Base/index.html" title="Utopia::Project::Base">Base</a></code></dt><dd><p>The base instance for the project.</p>
 </dd><dt>
 					<strong>parameter</strong>　<code class="syntax">root</code>　<code class="language-ruby">String</code></dt><dd><p>The file-system path to the root of the example.</p>
 </dd></dl>
@@ -88,31 +87,18 @@ end</code></pre>
 	File.exist?(readme_path)
 end</code></pre>
 						</details><h3 id="Utopia::Project::Guide#document"><code class="language-ruby">def document</code></h3><p>The document for the README, if one exists.</p>
-<details open>
-	<summary><h4>Signature</h4></summary>
-	<dl><dt>
-					<strong>returns</strong>　<code class="language-ruby">Kramdown::Document</code></dt></dl>
-</details>
 <details>
 							<summary><h4>Implementation</h4></summary>
 							<pre><code class="language-ruby">def document
 	if self.readme?
 		@document ||= self.readme_document.tap do |document|
-			root = document.root
-			if element = root.children.first
-				if element.type == :header
-					@title = element.children.first.value
-					
-					# Remove the title:
-					root.children.shift
-					
-					# Remove any blank lines:
-					root.children.shift while root.children.first&amp;.type == :blank
-					
-					# Read the description:
-					root.children.first.options[:encoding] = root.options[:encoding]
-					@description = Kramdown::Converter::Kramdown.convert(root.children.first).first
-				end
+			child = document.first_child
+			
+			if child.type == :header
+				@title = child.first_child.string_content
+				
+				@description = child.next
+				child.delete
 			end
 		end
 	end
@@ -121,7 +107,7 @@ end</code></pre>
 <details open>
 	<summary><h4>Signature</h4></summary>
 	<dl><dt>
-					<strong>attribute</strong>　<a href="../Base/index.html"><code class="language-ruby">class Utopia::Project::Base</code></a></dt></dl>
+					<strong>attribute</strong>　<code class="language-ruby"><a href="../Base/index.html" title="Utopia::Project::Base">Base</a></code></dt></dl>
 </details>
 <h3 id="Utopia::Project::Guide#root"><code class="language-ruby">attr :root</code></h3><p>The file-system path to the root of the project.</p>
 <details open>
