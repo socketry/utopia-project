@@ -107,7 +107,7 @@ module Utopia
 				return node
 			end
 			
-			def code_node(content, language)
+			def code_node(content, language = nil)
 				if language
 					node = inline_html_node(
 						"<code class=\"language-#{language}\">#{Trenni::Strings.to_html(content)}</code>"
