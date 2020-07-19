@@ -5,9 +5,9 @@
 	?>
 	<content:heading>#{guide.title}</content:heading>
 	
-	<main><?r
+	<?r
 		if document = guide.document
-			?>#{MarkupString.raw document.to_html}<?r
+			?>#{document.to_html}<?r
 		end
 		
 		guide.sources.each do |source|
@@ -20,5 +20,5 @@
 				?><pre><code class="language-#{source.language.name}">#{segment.code}</code></pre><?r
 			end
 		end
-	?></main>
+	?>
 </content:page>

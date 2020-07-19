@@ -4,14 +4,13 @@
 	?>
 	<content:heading>Guides</content:heading>
 	
-	<main>
-		<ul>
+	<ul>
 		<?r
 		base = controller[:base]
 		
 		base.guides do |guide|
 			?><li><a href="#{guide.name}/">#{guide.title}</a></li><?r
 		end
-		?></ul>
-	</main>
+		?>
+	</ul>
 </content:page>

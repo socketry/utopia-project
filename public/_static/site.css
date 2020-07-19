@@ -33,6 +33,10 @@ p code:first-child, p code:last-child {
 	padding: 0;
 }
 
+p img {
+	max-width: 100%;
+}
+
 pre {
 	/* -moz-tab-size is still required by Firefox */
 	--tab-size: 2;
@@ -80,17 +84,54 @@ html {
 body {
 	margin: 0;
 	padding: 0;
+}
+
+header {
+	padding: 0.5rem;
+	
+	background-color: var(--header-color);
+	border-bottom: 0.2rem solid var(--accent-color);
+}
+
+main {
+	scroll-margin-top: 2rem;
 	
 	/* Force the element to contain margins */
 	display: flow-root;
-	min-height: 100vh;
-		
-	max-width: 48rem;
+	
 	margin: 0 auto;
+	max-width: 48rem;
 }
 
-header, h1, h2, h3, h4, h5, h6, p, pre, ul, dl, ol {
+:target {
+	background-color: var(--header-color);
+}
+
+section {
+	border-radius: 1rem;
+	padding: 0.1rem 0;
+}
+
+main > section {
+	border-radius: 1rem;
+	margin: 4rem 0;
+}
+
+section > section {
+	margin: 1rem 0;
+}
+
+footer {
+	text-align: right;
+	font-size: 0.8rem;
+	
+	padding: 1rem;
+	margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6, p, pre, ul, dl, ol {
 	margin: 1rem;
+	border-radius: 0.5rem;
 }
 
 h1 span {
@@ -99,12 +140,6 @@ h1 span {
 
 header img {
 	max-height: 50vh;
-}
-
-nav {
-	margin: 1rem;
-	font-size: 0.8rem;
-	color: #aaa;
 }
 
 li, dt, dd {
@@ -129,18 +164,6 @@ h1 {
 	margin-bottom: 4rem;
 }
 
-h2 {
-	margin-top: 6rem;
-}
-
-h3 {
-	margin-top: 4rem;
-}
-
-h4, h5, h6 {
-	margin-top: 2rem;
-}
-
 img {
 	border: none;
 }
@@ -150,20 +173,20 @@ a {
 	text-decoration: none;
 }
 
+a.self {
+	visibility: hidden;
+}
+
+*:hover > a.self {
+	visibility: visible;
+}
+
 a:hover {
 	color: var(--accent-hover-color);
 }
 
 pre {
 	overflow: auto;
-}
-
-footer {
-	text-align: right;
-	font-size: 0.8rem;
-	
-	margin: 1rem;
-	margin-top: 5rem;
 }
 
 details {

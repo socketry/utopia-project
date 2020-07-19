@@ -1,0 +1,23 @@
+<header><label for="toggle">☰</label> <?r
+	page_path = first.node.uri_path.dirname
+	
+	Utopia::Path[page_path].descend do |path|
+		unless path.last
+			path = path + "index"
+		end
+		
+		if link = links(path.dirname, name: path.last, locale: localization.current_locale, indices: true).first
+			?> &rsaquo; #{link.to_href}<?r
+		else
+			?> &rsaquo; <span>#{path.last}</span><?r
+		end
+	end
+	
+	if localization.localized?
+		?> &bull; (<?r
+		localization.all_locales.each.with_index do |locale, index|
+			?>#{index.zero? ? '' : ' '}<a href="#{localization.localized_path(page_path, locale)}">#{locale}</a><?r
+		end
+		?>)<?r
+	end
+?></header>

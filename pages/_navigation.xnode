@@ -1,23 +1,19 @@
-<nav><?r
-	page_path = first.node.uri_path
+<nav>
+	<template id="search-result">
+		<li>
+			<a href="link">Title</a>
+			<div class="preview">Overview</div>
+		</li>
+	</template>
 	
-	Utopia::Path[page_path.dirname].descend do |path|
-		unless path.last
-			path = path + "index"
-		end
+	<section style="margin: 1rem;">
+		<input type="search" id="search-input" tabindex="0" placeholder="Search..." aria-label="Search..." autocomplete="off" style="width: 100%;"/>
 		
-		if link = links(path.dirname, name: path.last, locale: localization.current_locale, indices: true).first
-			?> &rsaquo; #{link.to_href}<?r
-		else
-			?> &rsaquo; <span>#{path.last}</span><?r
-		end
-	end
-	
-	if localization.localized?
-		?> &bull; (<?r
-		localization.all_locales.each.with_index do |locale, index|
-			?>#{index.zero? ? '' : ' '}<a href="#{localization.localized_path(page_path, locale)}">#{locale}</a><?r
-		end
-		?>)<?r
-	end
-?></nav>
+		<ul id="search-results" class="search-results">
+			<li>
+				<a href="link">Title</a>
+				<div class="preview">Overview</div>
+			</li>
+		</ul>
+	</section>
+</nav>
