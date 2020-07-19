@@ -18,7 +18,6 @@
 		<script src="/_components/jquery/jquery.min.js"></script>
 		<script src="/_components/jquery-syntax/jquery.syntax.min.js"></script>
 		
-		<script src="/_components/lunr/lunr.min.js"></script>
 		<script src="/_static/links.js"></script>
 		
 		<script type="text/javascript">
