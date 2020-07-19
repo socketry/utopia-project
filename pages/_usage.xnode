@@ -5,15 +5,17 @@
 	
 	base.guides do |guide|
 ?>
-	<h3><a href="#{guide.href}">#{guide.title}</a></h3>
-	
-	<?r if documentation = guide.documentation ?>
-		#{base.format(documentation.text, language: guide.documentation.language)}
-	<?r elsif description = guide.description ?>
-		#{MarkupString.raw description.to_html}
-	<?r else ?>
-		<p>No description.</p>
-	<?r end ?>
+	<section>
+		<h3><a href="#{guide.href}">#{guide.title}</a></h3>
+		
+		<?r if documentation = guide.documentation ?>
+			#{base.format(documentation.text, language: guide.documentation.language)}
+		<?r elsif description = guide.description ?>
+			#{MarkupString.raw description.to_html}
+		<?r else ?>
+			<p>No description.</p>
+		<?r end ?>
+	</section>
 <?r
 	end
 ?>
