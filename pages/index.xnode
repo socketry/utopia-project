@@ -12,7 +12,9 @@
 			when :text
 				?><content:heading>#{title.string_content}</content:heading><?r
 			when :image
-				?><header><img src="#{title.url}" /></header><?r
+				self.document.attributes[:title] ||= title.to_plaintext
+				
+				?><h1><img src="#{title.url}" /></h1><?r
 			else
 				?><content:heading>Project</content:heading><?r
 			end

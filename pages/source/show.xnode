@@ -7,7 +7,9 @@
 	<content:heading><code class="language-#{symbol.language.name}">#{symbol.qualified_name}</code></content:heading>
 	
 	<?r
-	if documentation = symbol.documentation
+	if document = base.document_for(symbol)
+		?>#{document.to_html}<?r
+	elsif documentation = symbol.documentation
 		?>#{base.format(documentation.text.join("\n"), symbol)}<?r
 	end
 	?>

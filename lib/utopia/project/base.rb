@@ -106,6 +106,20 @@ module Utopia
 				end
 			end
 			
+			def document_for(definition)
+				document_path = File.join("lib", definition.lexical_path.map{|_| _.to_s.downcase}) + ".md"
+				
+				if File.exist?(document_path)
+					document = self.document(File.read(document_path), definition)
+					
+					if document.first_child.type == :header
+						document.first_child.delete
+					end
+					
+					return document
+				end
+			end
+			
 			def linkify(text, definition, language: definition&.language)
 				rewriter = Linkify.new(self, language, text)
 				
