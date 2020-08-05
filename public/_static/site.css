@@ -48,7 +48,7 @@ html {
 	--main-color: #111;
 	--main-background-color: #fff;
 	
-	--header-color: #bed1f0;
+	--header-color: #dfebff;
 	--underlay-color: #ddd;
 	
 	--accent-color: #1a73e8;
@@ -131,7 +131,10 @@ footer {
 
 h1, h2, h3, h4, h5, h6, p, pre, ul, dl, ol {
 	margin: 1rem;
-	border-radius: 0.5rem;
+}
+
+pre {
+	margin: 2rem 1rem;
 }
 
 h1 span {
