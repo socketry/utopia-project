@@ -6,11 +6,11 @@ jQuery(function() {
 			document.createTextNode("¶")
 		);
 		
-		anchor.title = element.innerText;
 		anchor.href = "#" + element.id;
 		anchor.className = "self";
 		
 		let heading = element.firstChild;
+		anchor.title = heading.innerText;
 		
 		heading.appendChild(
 			document.createTextNode(' ')
