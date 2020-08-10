@@ -240,3 +240,20 @@ figure.youtube-wrapper iframe {
 	height: 100%;
 	border: 0;
 }
+
+table {
+	width: 100%;
+	margin: 1rem;
+	
+	border-collapse: collapse;
+	width: calc(100% - 2rem);
+}
+
+table thead {
+	background-color: var(--header-color);
+	border-bottom: 0.2rem solid var(--accent-color);
+}
+
+table tr:hover {
+	background-color: var(--header-color);
+}

@@ -37,7 +37,7 @@ module Utopia
 			end
 			
 			def root
-				@root ||= resolve(Markly.parse(@text))
+				@root ||= resolve(Markly.parse(@text, extensions: [:table]))
 			end
 			
 			def first_child
