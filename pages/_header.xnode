@@ -1,4 +1,4 @@
-<header><label for="toggle">☰</label> <?r
+<header><?r
 	page_path = first.node.uri_path.dirname
 	
 	Utopia::Path[page_path].descend do |path|
