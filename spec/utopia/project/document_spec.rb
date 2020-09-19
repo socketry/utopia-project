@@ -30,7 +30,7 @@ RSpec.describe Utopia::Project::Document do
 	let(:html) {subject.to_html}
 	
 	it "generates title" do
-		expect(html).to include("<h1 id=\"utopia::project\">Utopia::Project</h1>")
+		expect(html).to include("<section id=\"utopia::project\"><h1>Utopia::Project</h1>")
 	end
 	
 	it "can replace usage" do
