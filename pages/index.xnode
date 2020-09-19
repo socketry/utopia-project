@@ -14,7 +14,7 @@
 			when :image
 				self.document.attributes[:title] ||= title.to_plaintext
 				
-				?><h1><img src="#{title.url}" /></h1><?r
+				?><h1 style="text-align: center"><img src="#{title.url}" /></h1><?r
 			else
 				?><content:heading>Project</content:heading><?r
 			end
