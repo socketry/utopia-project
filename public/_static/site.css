@@ -271,10 +271,6 @@ ul.pragmas.inline {
 	display: inline;
 }
 
-ul.pragmas .directive {
-	font-weight: bold;
-}
-
 ul.pragmas li {
 	list-style: none;
 	

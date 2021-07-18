@@ -9,8 +9,8 @@ pragmas = documentation&.filter(Decode::Comment::Pragma).to_a
 if pragmas&.any? ?>
 <ul class="pragmas #{attributes[:class]}">
 	<?r pragmas.each do |pragma| ?>
-		<li class="pragma #{pragma.directive}">
-			<span class="directive">#{pragma.directive}</span>
+		<li class="pragma #{pragma.directive}" title="#{pragma.text.first}">
+			#{pragma.directive}
 		</li>
 	<?r end ?>
 </ul>
