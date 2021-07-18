@@ -6,7 +6,7 @@
 	?>
 	<content:heading><code class="language-#{symbol.language.name}">#{symbol.qualified_name}</code></content:heading>
 	
-	#{partial 'content:pragmas', symbol: symbol}
+	#{partial 'content:signature', symbol: symbol}
 	
 	<?r
 	if document = base.document_for(symbol)

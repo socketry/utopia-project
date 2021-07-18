@@ -267,6 +267,10 @@ ul.pragmas {
 	font-size: 80%;
 }
 
+ul.pragmas.inline {
+	display: inline;
+}
+
 ul.pragmas .directive {
 	font-weight: bold;
 }
