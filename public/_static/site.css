@@ -279,9 +279,12 @@ ul.pragmas li {
 	
 	box-shadow: 0 0 2px #eee;
 	padding: 0.1rem 0.2rem;
-	margin: 0;
 	
 	display: inline-block;
+}
+
+ul.pragmas li + li {
+	margin-left: 0.5rem;
 }
 
 ul.pragmas li.public {
