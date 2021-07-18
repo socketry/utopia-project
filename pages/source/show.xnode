@@ -6,8 +6,6 @@
 	?>
 	<content:heading><code class="language-#{symbol.language.name}">#{symbol.qualified_name}</code></content:heading>
 	
-	#{partial 'content:signature', symbol: symbol}
-	
 	<?r
 	if document = base.document_for(symbol)
 		?>#{document.to_html}<?r
@@ -15,6 +13,8 @@
 		?>#{base.format(documentation.text.join("\n"), symbol)}<?r
 	end
 	?>
+	
+	#{partial 'content:signature', symbol: symbol}
 	
 	<?r
 	nested = node.children.map{|name, child| base.best(child.values)}.select{|symbol| symbol.container?}
