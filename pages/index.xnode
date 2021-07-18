@@ -14,7 +14,11 @@
 			when :image
 				self.document.attributes[:title] ||= title.to_plaintext
 				
-				?><h1 style="text-align: center"><img src="#{title.url}" /></h1><?r
+				if title.url =~ /\.svg/
+					?><h1 style="text-align: center"><object type="image/svg+xml" data="#{title.url}"></object></h1><?r
+				else
+					?><h1 style="text-align: center"><img src="#{title.url}" /></h1><?r
+				end
 			else
 				?><content:heading>Project</content:heading><?r
 			end
