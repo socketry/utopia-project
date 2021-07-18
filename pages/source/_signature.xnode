@@ -10,6 +10,7 @@
 	<dl><?r
 		documentation.traverse do |node, descend|
 			node.each do |child|
+				next if child.is_a?(Decode::Comment::Pragma)
 				?><dt>
 					<strong>#{child.directive}</strong><?r
 						case child

@@ -1,5 +1,5 @@
 <content:page>
-	<content:heading>Source</content:heading>
+	<content:heading>Overview</content:heading>
 	
 	<?r
 	base = controller[:base]
@@ -11,10 +11,12 @@
 			
 			if documentation = symbol.documentation or symbol.container?
 				?><li>
-					<a href="#{base.link_for(symbol)}"><code class="language-#{symbol.language.name}">#{symbol.long_form}</code></a>
-					
-					<?r if documentation and text = documentation.text ?>
-						#{base.format(text.first, symbol)}
+					<?r if symbol.container? ?>
+						<a href="#{base.link_for(symbol)}"><code class="language-#{symbol.language.name}">#{symbol.long_form}</code></a>
+						
+						<?r if documentation and text = documentation.text ?>
+							#{base.format(text.first, symbol)}
+						<?r end ?>
 					<?r end ?>
 					
 					<?r if symbol.container?

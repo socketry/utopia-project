@@ -133,7 +133,7 @@ module Utopia
 			# Format the given text in the context of the given definition and language.
 			# See {document} for details.
 			# @returns [Trenni::MarkupString]
-			def format(text, definition = nil, language: definition&.language)
+			def format(text, definition = nil, language: definition&.language, **options)
 				case text
 				when Enumerable
 					text = text.to_a.join("\n")
@@ -143,7 +143,7 @@ module Utopia
 				
 				if document = self.document(text, definition, language: language)
 					return Trenni::MarkupString.raw(
-						document.to_html
+						document.to_html(**options)
 					)
 				end
 			end
