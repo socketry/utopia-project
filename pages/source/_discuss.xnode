@@ -1,0 +1,24 @@
+<?r 
+	repo = ENV['UTOPIA_PROJECT_GISCUS_REPO']
+	repo_id = ENV['UTOPIA_PROJECT_GISCUS_REPO_ID']
+	category = ENV['UTOPIA_PROJECT_GISCUS_CATEGORY']
+	category_id = ENV['UTOPIA_PROJECT_GISCUS_CATEGORY_ID']
+
+	if repo
+?>
+<section>
+<h2>Discussion</h2>
+<script src="https://giscus.app/client.js"
+	data-repo="#{repo}"
+	data-repo-id="#{repo_id}"
+	data-category="#{category}"
+	data-category-id="#{category_id}"
+	data-mapping="title"
+	data-reactions-enabled="0"
+	data-emit-metadata="0"
+	data-theme="preferred_color_scheme"
+	crossorigin="anonymous"
+	async>
+</script>
+</section>
+<?r end ?>

@@ -1,4 +1,6 @@
 
+* {box-sizing: border-box;}
+
 html {
 	font-family: "PT Sans", Verdana, Helvetica, Arial, sans-serif;
 	font-size: 16px;
@@ -133,6 +135,11 @@ footer {
 
 h1, h2, h3, h4, h5, h6, p, pre, ul, dl, ol {
 	margin: 1rem;
+}
+
+div.giscus {
+	margin: 1rem 0;
+	padding: 0 1rem;
 }
 
 pre {
