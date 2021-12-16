@@ -3,7 +3,7 @@
 	symbol = self[:symbol]
 	documentation = symbol&.documentation
 	
-	if documentation.children?
+	if documentation&.children?
 ?>
 <details open>
 	<summary><h4>Signature</h4></summary>
