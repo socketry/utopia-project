@@ -14,5 +14,9 @@ on '**/*/index' do |request, path|
 	
 	@node, @symbol = @base.lookup(lexical_path)
 	
+	unless @symbol
+		fail! :not_found
+	end
+	
 	path.components = ["show"]
 end
