@@ -9,8 +9,8 @@
 	<?r
 	if document = base.document_for(symbol)
 		?>#{document.to_html}<?r
-	elsif documentation = symbol.documentation
-		?>#{base.format(documentation.text.join("\n"), symbol)}<?r
+	elsif text = symbol.documentation&.text
+		?>#{base.format(text.join("\n"), symbol)}<?r
 	end
 	?>
 	
