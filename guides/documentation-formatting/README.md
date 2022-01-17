@@ -53,3 +53,15 @@ If an example has a `README.md` file, it is used as the main source of documenta
 ### Source Files
 
 All other source files are listed on the example page. Top level comments with trailing code (segments) are used to help guide the user through the example.
+
+## Diagrams
+
+You can add diagrams formatted using `mermaid.js`.
+
+``` mermaid
+	graph LR;
+			A-->B;
+			A-->C;
+			B-->D;
+			C-->D;
+```

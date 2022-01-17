@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'markly'
+require_relative 'renderer'
 
 module Utopia
 	module Project
@@ -69,7 +69,7 @@ module Utopia
 			end
 			
 			def to_html(node = self.root, **options)
-				renderer = Markly::HTMLRenderer.new(ids: true, flags: Markly::UNSAFE, **options)
+				renderer = Renderer.new(ids: true, flags: Markly::UNSAFE, **options)
 				Trenni::MarkupString.raw(renderer.render(node))
 			end
 			

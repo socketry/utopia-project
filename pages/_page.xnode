@@ -17,12 +17,14 @@
 		
 		<script src="/_components/jquery/jquery.min.js"></script>
 		<script src="/_components/jquery-syntax/jquery.syntax.min.js"></script>
+		<script src="/_components/mermaid/mermaid.min.js"></script>
 		
 		<script src="/_static/links.js"></script>
 		
 		<script type="text/javascript">
 		//<![CDATA[
 			jQuery(function($) {
+				mermaid.init();
 				$.syntax();
 			});
 		//]]>
