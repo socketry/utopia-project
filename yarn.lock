@@ -594,10 +594,10 @@
   "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
   "version" "4.17.21"
 
-"mermaid@^8.13.8":
-  "integrity" "sha512-Z5v31rvo8P7BPTiGicdJl9BbzyUe9s5sXILK8sM1g7ijkagpfFjPtXZVsq5P1WlN8m/fUp2PPNXVF9SqeTM91w=="
-  "resolved" "https://registry.npmjs.org/mermaid/-/mermaid-8.13.8.tgz"
-  "version" "8.13.8"
+"mermaid@^8.13.9":
+  "integrity" "sha512-kMH676xEomSe/gzxMpDx91L+z9L+9iB3lvtPFA8aeOPRNNrfd3ZDvDCGFnuqQaJvPRCxs3Me2JDaVVNOZjojrg=="
+  "resolved" "https://registry.npmjs.org/mermaid/-/mermaid-8.13.9.tgz"
+  "version" "8.13.9"
   dependencies:
     "@braintree/sanitize-url" "^3.1.0"
     "d3" "^7.0.0"
