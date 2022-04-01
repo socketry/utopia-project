@@ -68,7 +68,7 @@ module Utopia
 					@document ||= self.readme_document.tap do |document|
 						child = document.first_child
 						
-						if child.type == :header
+						if child&.type == :header
 							@title = child.first_child.string_content
 							
 							@description = child.next
