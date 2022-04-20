@@ -32,13 +32,26 @@ end
 
 # Generate a static copy of the site.
 # @parameter output_path [String] The output path for the static site.
-def static(output_path: "docs")
+# @parameter force [Boolean] Remove the output directory before generating the static content.
+def static(output_path: "docs", force: true)
 	require 'rackula/command'
 	
 	config_path = File.expand_path("../../template/config.ru", __dir__)
 	public_path = File.expand_path("../../public", __dir__)
 	
-	Rackula::Command::Top["generate", "--force",
+	arguments = []
+	
+	if force
+		arguments << "--force"
+	end
+	
+	pp ["generate", *arguments,
+		"--config", config_path,
+		"--public", public_path,
+		"--output-path", output_path
+	]
+	
+	Rackula::Command::Top["generate", *arguments,
 		"--config", config_path,
 		"--public", public_path,
 		"--output-path", output_path
