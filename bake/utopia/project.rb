@@ -45,12 +45,6 @@ def static(output_path: "docs", force: true)
 		arguments << "--force"
 	end
 	
-	pp ["generate", *arguments,
-		"--config", config_path,
-		"--public", public_path,
-		"--output-path", output_path
-	]
-	
 	Rackula::Command::Top["generate", *arguments,
 		"--config", config_path,
 		"--public", public_path,
