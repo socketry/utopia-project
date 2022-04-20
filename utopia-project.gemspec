@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require_relative "lib/utopia/project/version"
 
@@ -6,7 +7,7 @@ Gem::Specification.new do |spec|
 	spec.version = Utopia::Project::VERSION
 	
 	spec.summary = "A project documentation tool based on Utopia."
-	spec.authors = ["Samuel Williams"]
+	spec.authors = ["Samuel Williams", "Olle Jonsson"]
 	spec.license = "MIT"
 	
 	spec.cert_chain  = ['release.cert']
