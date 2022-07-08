@@ -12,7 +12,20 @@
 			?> &rsaquo; <span>#{path.last}</span><?r
 		end
 	end
-	
+
+	if lexical_path = controller[:lexical_path]
+		current = []
+		lexical_path.each do |part|
+			current << part
+
+			?> &rsaquo; <a href="/source/#{current.join('/')}/index">#{part}</a> <?r
+		end
+	end
+
+	if guide = controller[:guide]
+		?> &rsaquo; <a href="/guides/#{guide.name}/index">#{guide.title}</a> <?r
+	end
+
 	if localization.localized?
 		?> &bull; (<?r
 		localization.all_locales.each.with_index do |locale, index|

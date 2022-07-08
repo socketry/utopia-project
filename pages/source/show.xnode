@@ -3,12 +3,12 @@
 	base = self[:base]
 	node = self[:node]
 	symbol = self[:symbol]
+	document.attributes[:title] ||= symbol.qualified_name
 	?>
-	<content:heading>#{symbol.qualified_name}</content:heading>
-	
-	<p>
-		<code class="language-#{symbol.language.name}">#{symbol.long_form}</code>
-	</p>
+
+	<h1>
+		<code class="language-#{symbol.language.name}">#{symbol.short_form}</code>
+	</h1>
 	
 	<?r
 	if document = base.document_for(symbol)
@@ -17,33 +17,39 @@
 		?>#{base.format(text.join("\n"), symbol)}<?r
 	end
 	?>
-	
 	#{partial 'content:signature', symbol: symbol}
-	
 	<?r
-	nested = node.children.map{|name, child| base.best(child.values)}.select{|symbol| symbol.container?}
+	nested = node.children.map do |name, child|
+		base.best(child.values)
+	end.select do |symbol|
+		symbol.container?
+	end
 	
 	if nested.any?
 	?>
 	<section>
-	<h2>Nested</h2>
-	
-	<ul>
-		<?r nested.each do |symbol| ?>
-		<li><a href="#{base.link_for(symbol)}"><code class="language-#{symbol.language.name}">#{symbol.qualified_name}</code></a></li>
-		<?r end ?>
-	</ul>
+		<h2>Nested</h2>
+		
+		<ul>
+			<?r nested.each do |symbol| ?>
+			<li><a href="#{base.link_for(symbol)}"><code class="language-#{symbol.language.name}">#{symbol.nested_name}</code></a></li>
+			<?r end ?>
+		</ul>
 	</section>
 	<?r
 	end
+	
+	definitions = node.children.map do |name, child|
+		child.values.select{|symbol| symbol.documentation and !symbol.container?}
+	end.flatten
+
+	if definitions.any?
 	?>
-	
 	<section>
-	<h2>Definitions</h2>
-	
-	<?r
-	node.children.each do |name, child|
-		child.values.each do |symbol|
+		<h2>Definitions</h2>
+		
+		<?r
+		definitions.each do |symbol|
 			if symbol.documentation and !symbol.container?
 				?><section id="#{base.id_for(symbol)}"><h3><code class="language-#{symbol.language.name}">#{symbol.long_form}</code></h3><?r
 				
@@ -62,9 +68,10 @@
 				?></section><?r
 			end
 		end
+		?>
+	</section>
+	<?r
 	end
 	?>
-	</section>
-	
 	<content:discuss/>
 </content:page>

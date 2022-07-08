@@ -8,11 +8,11 @@ end
 on '**/*/index' do |request, path|
 	@base = Utopia::Project::Base.instance
 	
-	lexical_path = path.components.dup
+	@lexical_path = path.components.dup
 	# Remove the last "index" part:
-	lexical_path.pop
+	@lexical_path.pop
 	
-	@node, @symbol = @base.lookup(lexical_path)
+	@node, @symbol = @base.lookup(@lexical_path)
 	
 	unless @symbol
 		fail! :not_found
