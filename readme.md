@@ -2,7 +2,7 @@
 
 A simple Ruby project documentation website.
 
-[![Development Status](https://github.com/socketry/utopia-project/workflows/Development/badge.svg)](https://github.com/socketry/utopia-project/actions?workflow=Development)
+[![Development Status](https://github.com/socketry/utopia-project/workflows/Test/badge.svg)](https://github.com/socketry/utopia-project/actions?workflow=Test)
 
 ## Motivation
 
