@@ -31,7 +31,7 @@
 		?>
 		<content:heading>Project</content:heading>
 		
-		<p>This project does not have a README.md file.</p>
+		<p>This project does not have a <code>readme.md</code> file.</p>
 		<?r
 	end
 	?>

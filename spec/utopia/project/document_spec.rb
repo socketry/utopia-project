@@ -24,7 +24,7 @@ require 'utopia/project'
 require 'rack/test'
 
 RSpec.describe Utopia::Project::Document do
-	let(:readme_path) {File.expand_path("../../../README.md", __dir__)}
+	let(:readme_path) {File.expand_path("../../../readme.md", __dir__)}
 	subject {described_class.new(File.read(readme_path))}
 	
 	let(:html) {subject.to_html}

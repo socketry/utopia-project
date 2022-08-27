@@ -7,7 +7,11 @@
 		end
 		
 		if link = links(path.dirname, name: path.last, locale: localization.current_locale, indices: true).first
-			?> &rsaquo; #{link.to_href}<?r
+			if replace = link[:replace]&.to_sym
+				?> &rsaquo; #{link.to_href(content: controller[:base].public_send(replace))}<?r
+			else
+				?> &rsaquo; #{link.to_href}<?r
+			end
 		else
 			?> &rsaquo; <span>#{path.last}</span><?r
 		end

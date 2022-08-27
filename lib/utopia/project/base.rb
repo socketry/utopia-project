@@ -71,7 +71,7 @@ module Utopia
 			attr :index
 			
 			# Return the absolute path for the given file name, if it exists in the project.
-			# @parameter file_name [String] The relative path to the project file, e.g. `README.md`.
+			# @parameter file_name [String] The relative path to the project file, e.g. `readme.md`.
 			# @returns [String] The file-system path.
 			def path_for(file_name)
 				full_path = File.expand_path(file_name, @root)
@@ -194,6 +194,16 @@ module Utopia
 					
 					yield Guide.new(self, guide_path)
 				end
+			end
+			
+			def readme_document
+				if path = self.path_for('readme.md')
+					Document.new(File.read(path), self)
+				end
+			end
+			
+			def project_title
+				readme_document&.title || "Project"
 			end
 		end
 	end

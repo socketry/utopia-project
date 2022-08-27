@@ -40,6 +40,14 @@ module Utopia
 				@root ||= resolve(Markly.parse(@text, extensions: [:table]))
 			end
 			
+			def title
+				child = self.root.first_child
+				
+				if child && child.type == :header
+					return child.first_child.to_plaintext
+				end
+			end
+			
 			def first_child
 				self.root.first_child
 			end

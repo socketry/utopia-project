@@ -48,18 +48,18 @@ module Utopia
 			# @attribute [String | Nil]
 			attr :description
 			
-			README = "README.md"
+			README = "readme.md"
 			
 			# The path to the README file for the guide.
 			# @returns [String] The file-system path.
 			def readme_path
-				File.expand_path(README, @root)
+				Dir[File.expand_path(README, @root)].first
 			end
 			
 			# Does a README file exist for this guide?
 			# @returns [Boolean]
 			def readme?
-				File.exist?(readme_path)
+				!readme_path.nil?
 			end
 			
 			# The document for the README, if one exists.

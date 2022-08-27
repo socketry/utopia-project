@@ -46,9 +46,9 @@ end
 
 Examples provide structured information to help users understand your project and are located in the `examples/` directory. One sub-directory per example.
 
-### `README.md`
+### `readme.md`
 
-If an example has a `README.md` file, it is used as the main source of documentation.
+If an example has a `readme.md` file, it is used as the main source of documentation.
 
 ### Source Files
 

@@ -1,4 +1,5 @@
 index:
   title: Project
+  replace: project_title
 errors:
   display: false
