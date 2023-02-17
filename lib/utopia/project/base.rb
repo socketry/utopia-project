@@ -180,7 +180,7 @@ module Utopia
 			end
 			
 			def readme_document
-				if path = self.path_for('readme.md')
+				if path = self.path_for('readme.md') || self.path_for('README.md')
 					Document.new(File.read(path), self)
 				end
 			end
