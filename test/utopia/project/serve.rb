@@ -21,4 +21,22 @@ describe Utopia::Project do
 		
 		expect(last_response.body).to be(:include?, "Project")
 	end
+
+	it "has guide page" do
+		get "/guides/getting-started/index"
+		
+		expect(last_response.body).to be(:include?, "Getting Started")
+	end
+	
+	it "has source code index" do
+		get "/source/index"
+		
+		expect(last_response.body).to be(:include?, "module Utopia")
+	end
+	
+	it "has source code file" do
+		get "/source/Utopia/Project/Base/index"
+		
+		expect(last_response.body).to be(:include?, "def initialize")
+	end
 end
