@@ -13,4 +13,8 @@ group :maintenance, optional: true do
 	gem "bake-modernize"
 end
 
+group :test do
+	gem "bake-test"
+end
+
 # gem "decode", path: "../../ioquatix/decode"
