@@ -31,9 +31,8 @@ Gem::Specification.new do |spec|
 	spec.add_dependency "thread-local"
 	spec.add_dependency "utopia", "~> 2.14"
 	
-	spec.add_development_dependency "async-rspec"
 	spec.add_development_dependency "bundler"
 	spec.add_development_dependency "covered"
 	spec.add_development_dependency "rack-test"
-	spec.add_development_dependency "rspec"
+	spec.add_development_dependency "sus"
 end

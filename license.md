@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright, 2020-2022, by Samuel Williams.  
+Copyright, 2020-2023, by Samuel Williams.  
 Copyright, 2020, by Olle Jonsson.  
 Copyright, 2022, by dependabot[bot].  
 
