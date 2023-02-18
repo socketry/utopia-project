@@ -11,7 +11,6 @@ gemspec
 group :maintenance, optional: true do
 	gem "bake-gem"
 	gem "bake-modernize"
-	gem "rack", "~> 2"
 end
 
 group :test do
