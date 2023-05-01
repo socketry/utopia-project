@@ -46,11 +46,12 @@ module Utopia
 						if header.first_child.to_plaintext.include?(name)
 							# Now subsequent children:
 							current = header.next
-
+							
 							# Delete everything in the section until we encounter another header:
 							while current && current.type != :header
+								current_next = current.next
 								current.delete
-								current = current.next
+								current = current_next
 							end
 							
 							return yield(header)
