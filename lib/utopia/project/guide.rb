@@ -83,8 +83,8 @@ module Utopia
 			
 			# The hypertext reference to this guide.
 			# @returns [String]
-			def href
-				"/guides/#{self.name}/index"
+			def href(base = "/")
+				"#{base}guides/#{self.name}/index"
 			end
 			
 			# The best documentation, extracted from the source files of the guide.
