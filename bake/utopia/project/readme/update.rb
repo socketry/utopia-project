@@ -37,7 +37,13 @@ end
 
 # The public documentation URL if it can be determined.
 def public_documentation_url
-	gemspec&.homepage
+	if metadata = gemspec.metadata
+		if documentation_uri = metadata['documentation_uri']
+			return documentation_uri
+		end
+	end
+	
+	return gemspec&.homepage
 end
 
 def usage_section(documentation_url, project)
