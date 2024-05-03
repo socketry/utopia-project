@@ -4,7 +4,7 @@
 # Copyright, 2020-2022, by Samuel Williams.
 
 require 'utopia/path'
-require 'trenni/reference'
+require 'xrb/reference'
 require 'decode'
 
 module Utopia
@@ -78,7 +78,7 @@ module Utopia
 			# The title of the guide.
 			# @returns [String]
 			def title
-				@title || Trenni::Strings.to_title(self.name)
+				@title || XRB::Strings.to_title(self.name)
 			end
 			
 			# The hypertext reference to this guide.

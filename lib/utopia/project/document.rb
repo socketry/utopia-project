@@ -64,7 +64,7 @@ module Utopia
 			
 			def to_html(node = self.root, **options)
 				renderer = Renderer.new(ids: true, flags: Markly::UNSAFE, **options)
-				Trenni::MarkupString.raw(renderer.render(node))
+				XRB::MarkupString.raw(renderer.render(node))
 			end
 			
 			def paragraph_node(child)
@@ -104,7 +104,7 @@ module Utopia
 			def code_node(content, language = nil)
 				if language
 					node = inline_html_node(
-						"<code class=\"language-#{language}\">#{Trenni::Strings.to_html(content)}</code>"
+						"<code class=\"language-#{language}\">#{XRB::Strings.to_html(content)}</code>"
 					)
 				else
 					node = Markly::Node.new(:code)

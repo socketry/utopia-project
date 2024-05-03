@@ -6,7 +6,7 @@
 require 'utopia/path'
 require 'utopia/content/links'
 
-require 'trenni/reference'
+require 'xrb/reference'
 require 'decode'
 
 require 'thread/local'
@@ -115,7 +115,7 @@ module Utopia
 			
 			# Format the given text in the context of the given definition and language.
 			# See {document} for details.
-			# @returns [Trenni::MarkupString]
+			# @returns [XRB::MarkupString]
 			def format(text, definition = nil, language: definition&.language, **options)
 				case text
 				when Enumerable
@@ -125,7 +125,7 @@ module Utopia
 				end
 				
 				if document = self.document(text, definition, language: language)
-					return Trenni::MarkupString.raw(
+					return XRB::MarkupString.raw(
 						document.to_html(**options)
 					)
 				end
@@ -151,15 +151,15 @@ module Utopia
 			end
 			
 			# Compute a link href to the given definition for use within the HTML output.
-			# @returns [Trenni::Reference]
+			# @returns [XRB::Reference]
 			def link_for(definition)
 				path = definition.lexical_path.map{|entry| entry.to_s}
 				
 				if definition.container?
-					return Trenni::Reference.new(@source_path + path + "index")
+					return XRB::Reference.new(@source_path + path + "index")
 				else
 					name = path.pop
-					return Trenni::Reference.new(@source_path + path + "index", fragment: id_for(definition))
+					return XRB::Reference.new(@source_path + path + "index", fragment: id_for(definition))
 				end
 			end
 			

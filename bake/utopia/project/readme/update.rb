@@ -1,6 +1,6 @@
 
 require 'utopia/project'
-require 'trenni'
+require 'xrb'
 
 def update(path: "readme.md", documentation_url: nil)
 	project = Utopia::Project::Base.new(context.root)
@@ -47,7 +47,7 @@ def public_documentation_url
 end
 
 def usage_section(documentation_url, project)
-	template = Trenni::Template.load_file(File.expand_path("usage.trenni", __dir__))
+	template = XRB::Template.load_file(File.expand_path("usage.xrb", __dir__))
 	scope = Scope.new(documentation_url, project)
 	
 	output = template.to_string(scope)

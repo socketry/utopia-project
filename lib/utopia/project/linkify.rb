@@ -19,18 +19,18 @@ module Utopia
 			def text_for(range)
 				text = super(range)
 				
-				return Trenni::Strings.to_html(text)
+				return XRB::Strings.to_html(text)
 			end
 			
 			def link_to(definition, text)
-				Trenni::Builder.fragment do |builder|
+				XRB::Builder.fragment do |builder|
 					builder.inline('a', href: @base.link_for(definition), title: definition.qualified_name) do
 						builder.text(text)
 					end
 				end
 			end
 			
-			def apply(output = Trenni::Builder.new)
+			def apply(output = XRB::Builder.new)
 				output.inline('code', class: "language-#{@language.name}") do
 					super
 				end
