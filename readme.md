@@ -2,7 +2,7 @@
 
 A simple Ruby project documentation website.
 
-[![Test](https://github.com/socketry/utopia-project/actions/workflows/test.yaml/badge.svg)](https://github.com/socketry/utopia-project/actions/workflows/test.yaml)
+[![Development Status](https://github.com/socketry/utopia-project/workflows/Test/badge.svg)](https://github.com/socketry/utopia-project/actions?workflow=Test)
 
 ## Motivation
 
@@ -39,6 +39,14 @@ We welcome contributions to this project.
 3.  Commit your changes (`git commit -am 'Add some feature'`).
 4.  Push to the branch (`git push origin my-new-feature`).
 5.  Create new Pull Request.
+
+### Developer Certificate of Origin
+
+This project uses the [Developer Certificate of Origin](https://developercertificate.org/). All contributors to this project must agree to this document to have their contributions accepted.
+
+### Contributor Covenant
+
+This project is governed by the [Contributor Covenant](https://www.contributor-covenant.org/). All contributors and participants agree to abide by its terms.
 
 ## See Also
 

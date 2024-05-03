@@ -7,13 +7,13 @@ Gem::Specification.new do |spec|
 	spec.version = Utopia::Project::VERSION
 	
 	spec.summary = "A project documentation tool based on Utopia."
-	spec.authors = ["Samuel Williams", "Olle Jonsson", "dependabot[bot]"]
+	spec.authors = ["Samuel Williams", "Olle Jonsson", "dependabot[bot]", "Michael Adams"]
 	spec.license = "MIT"
 	
 	spec.cert_chain  = ['release.cert']
 	spec.signing_key = File.expand_path('~/.gem/release.pem')
 	
-	spec.homepage = "https://socketry.github.io/utopia-project/"
+	spec.homepage = "https://socketry.github.io/utopia-project"
 	
 	spec.metadata = {
 		"funding_uri" => "https://github.com/sponsors/ioquatix/",
@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 	
 	spec.files = Dir.glob(['{bake,lib,pages,public,template}/**/*', '*.md'], File::FNM_DOTMATCH, base: __dir__)
 	
-	spec.required_ruby_version = ">= 2.5"
+	spec.required_ruby_version = ">= 3.1"
 	
 	spec.add_dependency "decode", "~> 0.17"
 	spec.add_dependency "falcon"
@@ -30,9 +30,4 @@ Gem::Specification.new do |spec|
 	spec.add_dependency "rackula", "~> 1.3"
 	spec.add_dependency "thread-local"
 	spec.add_dependency "utopia", "~> 2.14"
-	
-	spec.add_development_dependency "bundler"
-	spec.add_development_dependency "covered"
-	spec.add_development_dependency "rack-test"
-	spec.add_development_dependency "sus"
 end

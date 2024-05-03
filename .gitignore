@@ -5,3 +5,4 @@
 /external
 
 /node_modules
+/.github/workflows/test-external.yaml
