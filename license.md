@@ -1,8 +1,9 @@
 # MIT License
 
-Copyright, 2020-2023, by Samuel Williams.  
+Copyright, 2020-2024, by Samuel Williams.  
 Copyright, 2020, by Olle Jonsson.  
-Copyright, 2022, by dependabot[bot].  
+Copyright, 2022-2023, by dependabot[bot].  
+Copyright, 2023, by Michael Adams.  
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
