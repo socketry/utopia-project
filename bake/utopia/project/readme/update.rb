@@ -35,7 +35,7 @@ end
 
 def gemspec
 	if gemspec_path = self.gemspec_path
-		@gemspec ||= Gem::Specification.load(gemspec_path)
+		@gemspec ||= ::Gem::Specification.load(gemspec_path)
 	end
 end
 
