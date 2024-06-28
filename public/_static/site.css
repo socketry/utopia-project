@@ -37,10 +37,6 @@ p code:first-child, p code:last-child {
 	padding: 0;
 }
 
-p img {
-	max-width: 100%;
-}
-
 pre {
 	/* -moz-tab-size is still required by Firefox */
 	--tab-size: 2;
@@ -105,6 +101,10 @@ main {
 	
 	margin: 0 auto;
 	max-width: 48rem;
+}
+
+main img {
+	max-width: 100%;
 }
 
 :target {
