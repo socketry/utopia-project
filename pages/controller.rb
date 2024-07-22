@@ -5,11 +5,12 @@
 
 prepend Actions
 
-on 'index' do
+on '**' do
 	@base = Utopia::Project::Base.instance
-	
+end
+
+on 'index' do
 	if @document = @base.readme_document
-		
 		@document.replace_section("Usage") do |header|
 			header.insert_after(@document.html_node("<content:usage/>"))
 		end
