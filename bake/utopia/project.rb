@@ -57,3 +57,23 @@ def static(output_path: "docs", force: true)
 	
 	FileUtils.touch File.expand_path(".nojekyll", output_path)
 end
+
+# Extract a description for the project.
+def description(root: context.root)
+	require 'markly'
+	
+	readme_path = File.join(root, "readme.md")
+	if File.exist?(readme_path)
+		document = Markly.parse(File.read(readme_path))
+		child = document.first_child
+		
+		if child&.type == :header
+			title = child.first_child.string_content
+			
+			# First sentence
+			if introduction = child.next
+				$stdout.puts introduction.to_plaintext[/.*?\./]
+			end
+		end
+	end
+end
