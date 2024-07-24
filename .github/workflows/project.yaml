@@ -1,0 +1,29 @@
+name: Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-description:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ruby
+          bundler-cache: true
+      
+      - name: Update repository description
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const {owner, name} = context.repo;
+            const description = execSync('bundle exec bake utopia:project:description').toString().trim();
+            
+            await github.repos.update({owner, name,
+              description: description
+            });
