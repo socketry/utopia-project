@@ -4,6 +4,7 @@
 # Copyright, 2020-2024, by Samuel Williams.
 
 require_relative 'renderer'
+require 'xrb'
 
 module Utopia
 	module Project
@@ -35,7 +36,7 @@ module Utopia
 				self.root.first_child
 			end
 			
-			def replace_section(name)
+			def replace_section(name, children: false)
 				child = self.first_child
 				
 				while child
@@ -48,7 +49,16 @@ module Utopia
 							current = header.next
 							
 							# Delete everything in the section until we encounter another header:
-							while current && current.type != :header
+							while current
+								if current.type == :header
+									# If we are removing all children, keep on going until we reach a header of the same level or higher:
+									if children
+										break if current.header_level <= header.header_level
+									else
+										break
+									end
+								end
+								
 								current_next = current.next
 								current.delete
 								current = current_next

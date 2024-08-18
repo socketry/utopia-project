@@ -22,6 +22,16 @@ def update(path: "readme.md", documentation_url: nil)
 		end
 	end
 	
+	readme.replace_section("Releases", children: true) do |header|
+		current = header
+		
+		releases_section = self.releases_section(documentation_url, project)
+		releases_section.each do |child|
+			current.insert_after(child)
+			current = child
+		end
+	end
+	
 	File.write(path, readme.root.to_markdown)
 end
 
@@ -52,6 +62,15 @@ end
 
 def usage_section(documentation_url, project)
 	template = XRB::Template.load_file(File.expand_path("usage.xrb", __dir__))
+	scope = Scope.new(documentation_url, project)
+	
+	output = template.to_string(scope)
+	
+	return Markly.parse(output)
+end
+
+def releases_section(documentation_url, project)
+	template = XRB::Template.load_file(File.expand_path("releases.xrb", __dir__))
 	scope = Scope.new(documentation_url, project)
 	
 	output = template.to_string(scope)

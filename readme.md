@@ -21,14 +21,17 @@ needs of my users.
 
 Please see the [project documentation](https://socketry.github.io/utopia-project/) for more details.
 
-  - [Getting Started](https://socketry.github.io/utopia-project/guides/getting-started/index) - This guide explains how
-    to use `utopia-project` for your own project.
+  - [Getting Started](https://socketry.github.io/utopia-project/guides/getting-started/index) - This guide explains how to use `utopia-project` for your own project.
 
-  - [Documentation Formatting](https://socketry.github.io/utopia-project/guides/documentation-formatting/index) - This
-    guide explains the conventions used by `utopia-project` when generating documentation for your project.
+  - [Documentation Formatting](https://socketry.github.io/utopia-project/guides/documentation-formatting/index) - This guide explains the conventions used by `utopia-project` when generating documentation for your project.
 
-  - [GitHub Pages Integration](https://socketry.github.io/utopia-project/guides/github-pages-integration/index) - This
-    guide shows you how to use `utopia-project` with GitHub Pages.
+  - [GitHub Pages Integration](https://socketry.github.io/utopia-project/guides/github-pages-integration/index) - This guide shows you how to use `utopia-project` with GitHub Pages.
+
+## Releases
+
+### v0.28.0
+
+  - [Introduce Changes Document](https://socketry.github.io/utopia-project/changes/index#introduce-changes-document)
 
 ## Contributing
 

@@ -1,0 +1,11 @@
+<?r
+project.releases.each do |release|
+?>
+### #{release.name}
+
+<?r release.summary do |title| ?>
+  - [#{title}](#{release.href(documentation_url, title)})
+<?r
+	end
+end 
+?>

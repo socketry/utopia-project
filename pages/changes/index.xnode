@@ -1,0 +1,13 @@
+<content:page>
+	<?r
+	if document = self[:document]
+		?>#{MarkupString.raw document.to_html}<?r
+	else
+		?>
+		<content:heading>Project</content:heading>
+		
+		<p>This project does not have a <code>changes.md</code> file.</p>
+		<?r
+	end
+	?>
+</content:page>
