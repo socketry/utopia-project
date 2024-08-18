@@ -45,8 +45,8 @@ module Utopia
 					end
 				end
 				
-				def href(base = "/", change)
-					"#{base}changes/index##{change.downcase.gsub(/\s+/, "-")}"
+				def href(base = "/", anchor:)
+					"#{base}changes/index##{anchor.downcase.gsub(/\s+/, "-")}"
 				end
 			end
 			

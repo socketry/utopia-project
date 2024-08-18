@@ -14,5 +14,9 @@ on 'index' do
 		@document.replace_section("Usage") do |header|
 			header.insert_after(@document.html_node("<content:usage/>"))
 		end
+		
+		@document.replace_section("Releases", children: true) do |header|
+			header.insert_after(@document.html_node("<content:releases/>"))
+		end
 	end
 end

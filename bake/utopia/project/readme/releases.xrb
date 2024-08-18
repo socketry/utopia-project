@@ -1,10 +1,12 @@
+Please see the [project changes](#{documentation_url}/changes/index) for all releases.
+
 <?r
-project.releases.each do |release|
+project.releases.first(10).each do |release|
 ?>
 ### #{release.name}
 
 <?r release.summary do |title| ?>
-  - [#{title}](#{release.href(documentation_url, title)})
+  - [#{title}](#{release.href(documentation_url, anchor: title)})
 <?r
 	end
 end 
