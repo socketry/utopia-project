@@ -33,6 +33,11 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
   - [Introduce Changes Document](https://socketry.github.io/utopia-project/changes/index#introduce-changes-document)
 
+## See Also
+
+  - [Utopia](https://github.com/socketry/utopia) — The website framework which powers this web application.
+  - [Decode](https://github.com/ioquatix/decode) — The source code parser and cross-referencing library.
+
 ## Contributing
 
 We welcome contributions to this project.
@@ -50,8 +55,3 @@ In order to protect users of this project, we require all contributors to comply
 ### Community Guidelines
 
 This project is best served by a collaborative and respectful environment. Treat each other professionally, respect differing viewpoints, and engage constructively. Harassment, discrimination, or harmful behavior is not tolerated. Communicate clearly, listen actively, and support one another. If any issues arise, please inform the project maintainers.
-
-## See Also
-
-  - [Utopia](https://github.com/socketry/utopia) — The website framework which powers this web application.
-  - [Decode](https://github.com/ioquatix/decode) — The source code parser and cross-referencing library.
