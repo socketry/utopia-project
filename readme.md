@@ -29,9 +29,15 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 ## Releases
 
+Please see the [project changes](https://socketry.github.io/utopia-project/changes/index) for all releases.
+
+### Next
+
+  - [Improve `changes.md` document organization](https://socketry.github.io/utopia-project/changes/index#improve-changes.md-document-organization)
+
 ### v0.28.0
 
-  - [Introduce Changes Document](https://socketry.github.io/utopia-project/changes/index#introduce-changes-document)
+  - [Introduce `changes.md` document](https://socketry.github.io/utopia-project/changes/index#introduce-changes.md-document)
 
 ## See Also
 

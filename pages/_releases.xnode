@@ -9,8 +9,8 @@
 		<h3>#{release.name}</h3>
 		
 		<ul>
-			<?r release.summary do |title| ?>
-				<li><a href="#{release.href(anchor: title)}">#{title}</a></li>
+			<?r release.changes do |change| ?>
+				<li><a href="#{release.href(anchor: change.id)}">#{MarkupString.raw(change.to_html)}</a></li>
 			<?r end ?>
 		</ul>
 	</section>

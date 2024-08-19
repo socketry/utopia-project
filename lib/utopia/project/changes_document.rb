@@ -8,6 +8,26 @@ require_relative 'document'
 module Utopia
 	module Project
 		class ChangesDocument < Document
+			class Summary
+				def initialize(node)
+					@node = node
+				end
+				
+				attr :node
+				
+				def id
+					@node.to_plaintext.chomp.downcase.gsub(/\s+/, "-")
+				end
+				
+				def to_markdown
+					@node.dup.extract_children.to_markdown
+				end
+				
+				def to_html
+					@node.dup.extract_children.to_html
+				end
+			end
+			
 			class Release
 				def initialize(node)
 					@node = node
@@ -25,7 +45,7 @@ module Utopia
 							end
 							
 							if node.header_level == @node.header_level + 1
-								yield node
+								yield Summary.new(node)
 							end
 						end
 						
@@ -37,14 +57,6 @@ module Utopia
 					@node.to_plaintext.chomp
 				end
 				
-				def summary
-					return to_enum(:summary) unless block_given?
-					
-					changes.each do |node|
-						yield node.to_plaintext.chomp
-					end
-				end
-				
 				def href(base = "/", anchor:)
 					"#{base}changes/index##{anchor.downcase.gsub(/\s+/, "-")}"
 				end
@@ -54,7 +66,7 @@ module Utopia
 				return to_enum(:release_names) unless block_given?
 				
 				self.root.each do |node|
-					if node.type == :header and node.header_level == 1
+					if node.type == :header and node.header_level == 2
 						yield node.to_plaintext.chomp
 					end
 				end
@@ -62,7 +74,7 @@ module Utopia
 			
 			def release(name)
 				self.root.each do |node|
-					if node.type == :header and node.header_level == 1 and node.to_plaintext.chomp == name
+					if node.type == :header and node.header_level == 2 and node.to_plaintext.chomp == name
 						return Release.new(node)
 					end
 				end
