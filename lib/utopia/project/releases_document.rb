@@ -7,7 +7,7 @@ require_relative 'document'
 
 module Utopia
 	module Project
-		class ChangesDocument < Document
+		class ReleasesDocument < Document
 			class Summary
 				def initialize(node)
 					@node = node
@@ -58,7 +58,7 @@ module Utopia
 				end
 				
 				def href(base = "/", anchor:)
-					"#{base}changes/index##{anchor.downcase.gsub(/\s+/, "-")}"
+					"#{base}releases/index##{anchor.downcase.gsub(/\s+/, "-")}"
 				end
 			end
 			

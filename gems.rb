@@ -12,7 +12,7 @@ group :maintenance, optional: true do
 	gem "bake-gem"
 	gem "bake-modernize"
 	
-	gem "bake-changes"
+	gem "bake-releases"
 end
 
 group :test do

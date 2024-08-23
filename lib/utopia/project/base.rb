@@ -13,7 +13,7 @@ require 'decode'
 require 'thread/local'
 
 require_relative 'document'
-require_relative 'changes_document'
+require_relative 'releases_document'
 
 require_relative 'guide'
 require_relative 'linkify'
@@ -192,15 +192,15 @@ module Utopia
 				readme_document&.title || "Project"
 			end
 			
-			def changes_document
-				if path = self.path_for('changes.md')
-					ChangesDocument.new(File.read(path), self)
+			def releases_document
+				if path = self.path_for('releases.md')
+					ReleasesDocument.new(File.read(path), self)
 				end
 			end
 			
 			def releases
-				if changes_document = self.changes_document
-					changes_document.releases
+				if releases_document = self.releases_document
+					releases_document.releases
 				end
 			end
 		end

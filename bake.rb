@@ -7,6 +7,6 @@
 #
 # @parameter version [String] The new version number.
 def after_gem_release_version_increment(version)
-	context['changes:release'].call(version)
+	context['releases:update'].call(version)
 	context['utopia:project:readme:update'].call
 end

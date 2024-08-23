@@ -6,5 +6,5 @@
 prepend Actions
 
 on 'index' do
-	@document = @base.changes_document
+	@document = @base.releases_document
 end

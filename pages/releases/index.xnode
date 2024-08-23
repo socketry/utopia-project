@@ -6,7 +6,7 @@
 		?>
 		<content:heading>Project</content:heading>
 		
-		<p>This project does not have a <code>changes.md</code> file.</p>
+		<p>This project does not have a <code>releases.md</code> file.</p>
 		<?r
 	end
 	?>

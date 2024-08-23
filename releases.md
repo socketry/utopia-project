@@ -4,7 +4,9 @@ This document outlines major changes and new features in each release of the pro
 
 ## Unreleased
 
-### Fix the foo bar bug
+### Rename `changes.md` to `releases.md`
+
+The `changes.md` document has been renamed to `releases.md` to better reflect its purpose.
 
 ## v0.29.0
 
