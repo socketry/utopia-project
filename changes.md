@@ -2,6 +2,10 @@
 
 This document outlines major changes and new features in each release of the project.
 
+## Unreleased
+
+### Fix the foo bar bug
+
 ## v.0.29.0
 
 ### Improve `changes.md` document organization
