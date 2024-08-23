@@ -2,7 +2,7 @@
 
 This document outlines major changes and new features in each release of the project.
 
-## Unreleased
+## v0.30.0
 
 ### Rename `changes.md` to `releases.md`
 

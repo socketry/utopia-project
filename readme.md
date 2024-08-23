@@ -29,15 +29,19 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 ## Releases
 
-Please see the [project changes](https://socketry.github.io/utopia-project/changes/index) for more details.
+Please see the [project changes](https://socketry.github.io/utopia-project/changes/index) for all releases.
+
+### v0.30.0
+
+  - [Rename `changes.md` to `releases.md`](https://socketry.github.io/utopia-project/releases/index#rename-changes.md-to-releases.md)
 
 ### v0.29.0
 
-  - [Improve `changes.md` document organization](https://socketry.github.io/utopia-project/changes/index#improve-changes.md-document-organization)
+  - [Improve `changes.md` document organization](https://socketry.github.io/utopia-project/releases/index#improve-changes.md-document-organization)
 
 ### v0.28.0
 
-  - [Introduce `changes.md` document](https://socketry.github.io/utopia-project/changes/index#introduce-changes.md-document)
+  - [Introduce `changes.md` document](https://socketry.github.io/utopia-project/releases/index#introduce-changes.md-document)
 
 ## See Also
 
