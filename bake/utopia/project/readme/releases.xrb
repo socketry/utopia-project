@@ -1,4 +1,4 @@
-Please see the [project changes](#{documentation_url}changes/index) for all releases.
+Please see the [project releases](#{documentation_url}releases/index) for all releases.
 
 <?r
 project.releases.first(10).each do |release|
