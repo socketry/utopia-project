@@ -6,7 +6,7 @@ This document outlines major changes and new features in each release of the pro
 
 ### Fix the foo bar bug
 
-## v.0.29.0
+## v0.29.0
 
 ### Improve `changes.md` document organization
 
