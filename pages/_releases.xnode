@@ -1,4 +1,4 @@
-<p>Please browse the <a href="changes/index">changes</a> for all releases.</p>
+<p>Please browse the <a href="changes/index">changes</a> for more details.</p>
 
 <?r
 	base = self[:base]
