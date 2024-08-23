@@ -29,7 +29,7 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 ## Releases
 
-Please see the [project changes](https://socketry.github.io/utopia-project/changes/index) for all releases.
+Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
 ### v0.30.0
 
