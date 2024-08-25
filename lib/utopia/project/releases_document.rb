@@ -33,6 +33,20 @@ module Utopia
 					@node = node
 				end
 				
+				def notes
+					node = @node.next
+					
+					notes = Markly::Node.new(:document)
+					
+					while node and node.type != :header
+						notes.append_child(node.dup)
+						
+						node = node.next
+					end
+					
+					return notes
+				end
+				
 				def changes
 					return to_enum(:changes) unless block_given?
 					

@@ -2,6 +2,10 @@
 
 This document outlines major changes and new features in each release of the project.
 
+## Unreleased
+
+- Support brief release notes in `releases.md` document.
+
 ## v0.30.0
 
 ### Rename `changes.md` to `releases.md`

@@ -31,6 +31,10 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
+### Unreleased
+
+  - Support brief release notes in `releases.md` document.
+
 ### v0.30.0
 
   - [Rename `changes.md` to `releases.md`](https://socketry.github.io/utopia-project/releases/index#rename-changes.md-to-releases.md)

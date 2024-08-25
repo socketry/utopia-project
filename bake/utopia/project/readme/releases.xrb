@@ -4,7 +4,9 @@ Please see the [project releases](#{documentation_url}releases/index) for all re
 project.releases.first(10).each do |release|
 ?>
 ### #{release.name}
-
+<?r if notes = release.notes ?>
+#{notes.to_markdown}
+<?r end ?>
 <?r release.changes do |change| ?>
   - [#{change.to_markdown}](#{release.href(documentation_url, anchor: change.id)})
 <?r
