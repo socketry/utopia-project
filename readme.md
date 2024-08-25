@@ -31,7 +31,7 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
-### Unreleased
+### v0.31.0
 
   - Support brief release notes in `releases.md` document.
 

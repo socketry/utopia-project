@@ -2,9 +2,9 @@
 
 This document outlines major changes and new features in each release of the project.
 
-## Unreleased
+## v0.31.0
 
-- Support brief release notes in `releases.md` document.
+  - Support brief release notes in `releases.md` document.
 
 ## v0.30.0
 
