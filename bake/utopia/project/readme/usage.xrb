@@ -1,5 +1,0 @@
-Please see the [project documentation](#{documentation_url}) for more details.
-
-<?r project.guides.each do |guide| ?>
-- [#{guide.title}](#{guide.href(documentation_url)}) - #{guide.description.to_markdown}
-<?r end ?>

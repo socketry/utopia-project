@@ -61,19 +61,33 @@ def public_documentation_url
 end
 
 def usage_section(documentation_url, project)
-	template = XRB::Template.load_file(File.expand_path("usage.xrb", __dir__))
-	scope = Scope.new(documentation_url, project)
+	buffer = String.new
 	
-	output = template.to_string(scope)
+	buffer << "Please see the [project documentation](#{documentation_url}) for more details.\n"
 	
-	return Markly.parse(output)
+	project.guides.each do |guide|
+		buffer << "  - [#{guide.title}](#{guide.href(documentation_url)}) - #{guide.description.to_markdown}\n"
+	end
+	
+	return Markly.parse(buffer)
 end
 
 def releases_section(documentation_url, project)
-	template = XRB::Template.load_file(File.expand_path("releases.xrb", __dir__))
-	scope = Scope.new(documentation_url, project)
+	buffer = String.new
 	
-	output = template.to_string(scope)
+	buffer << "Please see the [project releases](#{documentation_url}releases/index) for all releases.\n"
+
+	project.releases.first(10).each do |release|
+		buffer << "\n### #{release.name}\n\n"
+		
+		if notes = release.notes
+			buffer << notes.to_markdown
+		end
+		
+		release.changes.each do |change|
+			buffer << "  - [#{change.to_markdown}](#{release.href(documentation_url, anchor: change.id)})\n"
+		end
+	end
 	
-	return Markly.parse(output)
+	return Markly.parse(buffer)
 end
