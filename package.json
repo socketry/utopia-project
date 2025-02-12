@@ -1,8 +1,8 @@
 {
   "dependencies": {
-    "ace-builds": "^1.5.3",
+    "jquery": "^3.7.1",
     "jquery-litebox": "^1.0.2",
     "jquery-syntax": "^4.1.1",
-    "mermaid": "^9.4.0"
+    "mermaid": "^11.4.1"
   }
 }
