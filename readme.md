@@ -31,6 +31,10 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
+### v0.33.0
+
+  - Fix presentation of release notes on releases page.
+
 ### v0.31.0
 
   - Support brief release notes in `releases.md` document.

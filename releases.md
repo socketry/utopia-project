@@ -2,7 +2,7 @@
 
 This document outlines major changes and new features in each release of the project.
 
-## Unreleased
+## v0.33.0
 
   - Fix presentation of release notes on releases page.
 
