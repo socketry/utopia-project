@@ -26,7 +26,7 @@
 			?><content:heading>Project</content:heading><?r
 		end
 		
-		?>#{MarkupString.raw document.to_html}<?r
+		?>#{Markup.raw document.to_html}<?r
 	else
 		?>
 		<content:heading>Project</content:heading>

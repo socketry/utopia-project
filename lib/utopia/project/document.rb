@@ -74,7 +74,7 @@ module Utopia
 			
 			def to_html(node = self.root, **options)
 				renderer = Renderer.new(ids: true, flags: Markly::UNSAFE, **options)
-				XRB::MarkupString.raw(renderer.render(node))
+				XRB::Markup.raw(renderer.render(node))
 			end
 			
 			def paragraph_node(child)

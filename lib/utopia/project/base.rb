@@ -128,7 +128,7 @@ module Utopia
 				end
 				
 				if document = self.document(text, definition, language: language)
-					return XRB::MarkupString.raw(
+					return XRB::Markup.raw(
 						document.to_html(**options)
 					)
 				end

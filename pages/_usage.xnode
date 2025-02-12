@@ -9,7 +9,7 @@
 		<h3><a href="#{guide.href}">#{guide.title}</a></h3>
 		
 		<?r if description = guide.description ?>
-			#{MarkupString.raw description.to_html}
+			#{Markup.raw description.to_html}
 		<?r elsif documentation = guide.documentation ?>
 			#{base.format(documentation.text, language: guide.documentation.language)}
 		<?r else ?>

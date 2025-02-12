@@ -1,7 +1,7 @@
 <content:page>
 	<?r
 	if document = self[:document]
-		?>#{MarkupString.raw document.to_html}<?r
+		?>#{Markup.raw document.to_html}<?r
 	else
 		?>
 		<content:heading>Project</content:heading>

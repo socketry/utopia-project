@@ -8,9 +8,13 @@
 	<section>
 		<h3>#{release.name}</h3>
 		
+		<?r if notes = release.notes ?>
+			#{Markup.raw(notes.to_html)}
+		<?r end ?>
+		
 		<ul>
 			<?r release.changes do |change| ?>
-				<li><a href="#{release.href(anchor: change.id)}">#{MarkupString.raw(change.to_html)}</a></li>
+				<li><a href="#{release.href(anchor: change.id)}">#{Markup.raw(change.to_html)}</a></li>
 			<?r end ?>
 		</ul>
 	</section>
