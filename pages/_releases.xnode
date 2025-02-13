@@ -3,7 +3,7 @@
 <?r
 	base = self[:base]
 	
-	base.releases.first(10).each do |release|
+	base.releases&.first(10)&.each do |release|
 ?>
 	<section>
 		<h3>#{release.name}</h3>
