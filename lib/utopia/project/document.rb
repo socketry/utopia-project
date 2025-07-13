@@ -72,6 +72,10 @@ module Utopia
 				end
 			end
 			
+			def to_markdown(**options)
+				self.root.to_markdown(**options)
+			end
+			
 			def to_html(node = self.root, **options)
 				renderer = Renderer.new(ids: true, flags: Markly::UNSAFE, **options)
 				XRB::Markup.raw(renderer.render(node))

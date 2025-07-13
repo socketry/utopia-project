@@ -120,13 +120,6 @@ module Utopia
 			# See {document} for details.
 			# @returns [XRB::MarkupString]
 			def format(text, definition = nil, language: definition&.language, **options)
-				case text
-				when Enumerable
-					text = text.to_a.join("\n")
-				when nil
-					return nil
-				end
-				
 				if document = self.document(text, definition, language: language)
 					return XRB::Markup.raw(
 						document.to_html(**options)
@@ -140,6 +133,13 @@ module Utopia
 			#
 			# @returns [Document]
 			def document(text, definition = nil, language: definition&.language)
+				case text
+				when Enumerable
+					text = text.to_a.join("\n")
+				when nil
+					return nil
+				end
+				
 				Document.new(text, self, definition: definition, default_language: language)
 			end
 			

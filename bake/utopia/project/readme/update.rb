@@ -66,7 +66,14 @@ def usage_section(documentation_url, project)
 	buffer << "Please see the [project documentation](#{documentation_url}) for more details.\n"
 	
 	project.guides.each do |guide|
-		buffer << "  - [#{guide.title}](#{guide.href(documentation_url)}) - #{guide.description.to_markdown}\n"
+		if description = guide.description
+			buffer << "  - [#{guide.title}](#{guide.href(documentation_url)}) - #{description.to_markdown}\n"
+		elsif documentation = guide.documentation
+			document = project.document(documentation.text, language: guide.documentation.language)
+			buffer << "  - [#{guide.title}](#{guide.href(documentation_url)}) - #{document.to_markdown}\n"
+		else
+			buffer << "  - [#{guide.title}](#{guide.href(documentation_url)})\n"
+		end
 	end
 	
 	return Markly.parse(buffer)
