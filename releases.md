@@ -1,6 +1,6 @@
 # Changes
 
-## Unreleased
+## v0.33.2
 
   - Fixed handling of segmented code guides when rendered into a `readme.md` file.
 
