@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
 	spec.authors = ["Samuel Williams", "Olle Jonsson", "dependabot[bot]", "Michael Adams"]
 	spec.license = "MIT"
 	
-	spec.cert_chain  = ['release.cert']
-	spec.signing_key = File.expand_path('~/.gem/release.pem')
+	spec.cert_chain  = ["release.cert"]
+	spec.signing_key = File.expand_path("~/.gem/release.pem")
 	
 	spec.homepage = "https://socketry.github.io/utopia-project"
 	
@@ -21,9 +21,9 @@ Gem::Specification.new do |spec|
 		"source_code_uri" => "https://github.com/socketry/utopia-project/",
 	}
 	
-	spec.files = Dir.glob(['{bake,lib,pages,public,template}/**/*', '*.md'], File::FNM_DOTMATCH, base: __dir__)
+	spec.files = Dir.glob(["{bake,lib,pages,public,template}/**/*", "*.md"], File::FNM_DOTMATCH, base: __dir__)
 	
-	spec.required_ruby_version = ">= 3.1"
+	spec.required_ruby_version = ">= 3.2"
 	
 	spec.add_dependency "decode", "~> 0.17"
 	spec.add_dependency "falcon"

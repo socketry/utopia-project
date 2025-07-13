@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2020-2022, by Samuel Williams.
+# Copyright, 2020-2024, by Samuel Williams.
 
 # Create an empty project in the current directory.
 def create
@@ -38,7 +38,7 @@ end
 # @parameter output_path [String] The output path for the static site.
 # @parameter force [Boolean] Remove the output directory before generating the static content.
 def static(output_path: "docs", force: true)
-	require 'rackula/command'
+	require "rackula/command"
 	
 	config_path = File.expand_path("../../template/config.ru", __dir__)
 	public_path = File.expand_path("../../public", __dir__)
@@ -60,7 +60,7 @@ end
 
 # Extract a description for the project.
 def description(root: context.root)
-	require 'markly'
+	require "markly"
 	
 	readme_path = File.join(root, "readme.md")
 	if File.exist?(readme_path)

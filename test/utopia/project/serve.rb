@@ -3,8 +3,8 @@
 # Released under the MIT License.
 # Copyright, 2020-2023, by Samuel Williams.
 
-require 'utopia/project'
-require 'rack/test'
+require "utopia/project"
+require "rack/test"
 
 describe Utopia::Project do
 	include Rack::Test::Methods

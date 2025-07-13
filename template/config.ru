@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 
-require 'utopia/setup'
+require "utopia/setup"
 UTOPIA ||= Utopia.setup(Dir.pwd)
 
-require 'utopia/project'
+require "utopia/project"
 Utopia::Project.call(self)

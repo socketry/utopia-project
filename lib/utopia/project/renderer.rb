@@ -3,8 +3,8 @@
 # Released under the MIT License.
 # Copyright, 2022, by Samuel Williams.
 
-require 'markly'
-require 'markly/renderer/html'
+require "markly"
+require "markly/renderer/html"
 
 module Utopia
 	module Project

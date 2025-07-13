@@ -3,9 +3,9 @@
 # Released under the MIT License.
 # Copyright, 2020-2024, by Samuel Williams.
 
-require 'utopia/path'
-require 'xrb/reference'
-require 'decode'
+require "utopia/path"
+require "xrb/reference"
+require "decode"
 
 module Utopia
 	module Project

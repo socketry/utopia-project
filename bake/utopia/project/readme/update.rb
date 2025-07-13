@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2023-2024, by Samuel Williams.
+# Copyright, 2023-2025, by Samuel Williams.
 
-require 'utopia/project'
-require 'xrb'
+require "utopia/project"
+require "xrb"
 
 def update(path: "readme.md", documentation_url: nil)
 	project = Utopia::Project::Base.new(context.root)
@@ -52,7 +52,7 @@ end
 # The public documentation URL if it can be determined.
 def public_documentation_url
 	if metadata = gemspec.metadata
-		if documentation_uri = metadata['documentation_uri']
+		if documentation_uri = metadata["documentation_uri"]
 			return documentation_uri
 		end
 	end

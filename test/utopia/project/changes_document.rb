@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2020-2023, by Samuel Williams.
+# Copyright, 2024, by Samuel Williams.
 
-require 'utopia/project/releases_document'
+require "utopia/project/releases_document"
 
 describe Utopia::Project::ReleasesDocument do
 	let(:releases_path) {File.expand_path("../../../releases.md", __dir__)}

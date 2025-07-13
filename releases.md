@@ -1,6 +1,8 @@
 # Changes
 
-This document outlines major changes and new features in each release of the project.
+## Unreleased
+
+  - Fixed handling of segmented code guides when rendered into a `readme.md` file.
 
 ## v0.33.0
 

@@ -3,7 +3,7 @@
 # Released under the MIT License.
 # Copyright, 2020-2023, by Samuel Williams.
 
-require 'utopia/project'
+require "utopia/project"
 
 describe Utopia::Project::Document do
 	let(:readme_path) {File.expand_path("../../../readme.md", __dir__)}

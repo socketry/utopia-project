@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2020-2024, by Samuel Williams.
+# Copyright, 2020-2025, by Samuel Williams.
 # Copyright, 2023, by Michael Adams.
 
-require 'utopia/path'
-require 'utopia/content/links'
+require "utopia/path"
+require "utopia/content/links"
 
-require 'xrb/reference'
-require 'decode'
+require "xrb/reference"
+require "decode"
 
-require 'thread/local'
+require "thread/local"
 
-require_relative 'document'
-require_relative 'releases_document'
+require_relative "document"
+require_relative "releases_document"
 
-require_relative 'guide'
-require_relative 'linkify'
+require_relative "guide"
+require_relative "linkify"
 
 module Utopia
 	module Project
@@ -183,7 +183,7 @@ module Utopia
 			end
 			
 			def readme_document
-				if path = self.path_for('readme.md') || self.path_for('README.md')
+				if path = self.path_for("readme.md") || self.path_for("README.md")
 					Document.new(File.read(path), self)
 				end
 			end
@@ -193,7 +193,7 @@ module Utopia
 			end
 			
 			def releases_document
-				if path = self.path_for('releases.md')
+				if path = self.path_for("releases.md")
 					ReleasesDocument.new(File.read(path), self)
 				end
 			end

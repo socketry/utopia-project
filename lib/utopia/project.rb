@@ -5,11 +5,11 @@
 
 require "utopia/project/version"
 
-require 'variant'
+require "variant"
 
-require 'utopia/localization'
+require "utopia/localization"
 
-require_relative 'project/base'
+require_relative "project/base"
 
 module Utopia
 	module Project
@@ -43,13 +43,13 @@ module Utopia
 			builder.use Utopia::Static, root: PUBLIC_ROOT
 			
 			builder.use Utopia::Redirection::Rewrite, {
-				'/' => '/index'
+				"/" => "/index"
 			}
 			
 			builder.use Utopia::Redirection::DirectoryIndex
 			
 			builder.use Utopia::Redirection::Errors, {
-				404 => '/errors/file-not-found'
+				404 => "/errors/file-not-found"
 			}
 			
 			if locales
@@ -66,7 +66,7 @@ module Utopia
 				# 'gallery' => Utopia::Gallery::Tags.new
 			}
 			
-			builder.run lambda { |env| [404, {}, []] }
+			builder.run lambda {|env| [404, {}, []]}
 		end
 	end
 end

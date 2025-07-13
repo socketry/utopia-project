@@ -18,6 +18,8 @@ end
 group :test do
 	gem "sus"
 	gem "covered"
+	gem "decode"
+	gem "rubocop"
 	
 	gem "rack-test"
 	
