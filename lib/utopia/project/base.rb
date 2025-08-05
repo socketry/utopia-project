@@ -178,7 +178,7 @@ module Utopia
 					
 					next unless File.directory?(guide_path)
 					
-					yield Guide.new(self, guide_path)
+					yield Guide.new(self, guide_path, link.info)
 				end
 			end
 			

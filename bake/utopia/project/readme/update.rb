@@ -3,8 +3,11 @@
 # Released under the MIT License.
 # Copyright, 2023-2025, by Samuel Williams.
 
-require "utopia/project"
-require "xrb"
+def initialize(...)
+	super
+	
+	require "utopia/project"
+end
 
 def update(path: "readme.md", documentation_url: nil)
 	project = Utopia::Project::Base.new(context.root)

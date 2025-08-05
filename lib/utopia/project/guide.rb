@@ -14,9 +14,10 @@ module Utopia
 			# Initialize the example with the given root path.
 			# @parameter base [Base] The base instance for the project.
 			# @parameter root [String] The file-system path to the root of the example.
-			def initialize(base, root)
+			def initialize(base, root, metadata)
 				@base = base
 				@root = root
+				@metadata = metadata
 				
 				@documentation = nil
 				
@@ -30,6 +31,14 @@ module Utopia
 			# The description from the first paragraph in the README.
 			# @attribute [String | Nil]
 			attr :description
+			
+			# The metadata associated with the guide.
+			# @attribute [Hash]
+			attr :metadata
+			
+			def order
+				metadata[:order]
+			end
 			
 			README = "readme.md"
 			
