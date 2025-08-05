@@ -86,7 +86,7 @@ def releases_section(documentation_url, project)
 	buffer = String.new
 	
 	buffer << "Please see the [project releases](#{documentation_url}releases/index) for all releases.\n"
-
+	
 	project.releases.first(10).each do |release|
 		buffer << "\n### #{release.name}\n\n"
 		
