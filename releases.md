@@ -1,6 +1,6 @@
 # Changes
 
-## Unreleased
+## v0.34.0
 
   - Introduce `bake utopia:project:agent:context:update` command to update the agent context from the guides in the project.
 
