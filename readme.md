@@ -31,6 +31,10 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
+### v0.34.1
+
+  - Fix schema for `index.yaml` context file.
+
 ### v0.34.0
 
   - Introduce `bake utopia:project:agent:context:update` command to update the agent context from the guides in the project.

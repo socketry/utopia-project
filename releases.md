@@ -1,6 +1,6 @@
 # Changes
 
-## Unreleased
+## v0.34.1
 
   - Fix schema for `index.yaml` context file.
 
