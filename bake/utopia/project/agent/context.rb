@@ -14,28 +14,39 @@ def update
 	project = Utopia::Project::Base.new(context.root)
 	
 	FileUtils.mkdir_p self.context_root
-	index = {}
+	files = []
 	
-	project.guides.each do |guide|
-		if guide.readme?
-			FileUtils.cp guide.readme_path, self.context_path_for(guide)
-			index[guide.name] = {
-				"title" => guide.title,
-				"order" => guide.order,
-				"description" => guide.description.to_markdown.chomp,
-			}
-		end
+	# Sort guides by order, then by name
+	sorted_guides = project.guides.select(&:readme?).sort
+	
+	sorted_guides.each do |guide|
+		FileUtils.cp guide.readme_path, self.context_path_for(guide)
+		files << {
+			"path" => guide.name + ".md",
+			"title" => guide.title,
+			"description" => guide.description.to_markdown.chomp,
+		}
 	end
 	
-	if index.any?
+	if files.any?
+		# Create index in agent-context compatible format
+		gemspec = project.gemspec
+		index = {
+			"description" => gemspec&.summary,
+			"metadata" => gemspec&.metadata || {},
+			"files" => files,
+		}
+		
 		File.open(self.context_index_path, "w") do |file|
 			file.puts "# Automatically generated context index for Utopia::Project guides."
 			file.puts "# Do not edit then files in this directory directly, instead edit the guides and then run `bake utopia:project:agent:context:update`."
 			YAML.dump(index, file)
 		end
+		
+		return index
 	end
 	
-	return index
+	return nil
 end
 
 private

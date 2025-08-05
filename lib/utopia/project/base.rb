@@ -203,6 +203,20 @@ module Utopia
 					releases_document.releases
 				end
 			end
+			
+			# Get the path to the gemspec file for this project.
+			# @returns [String | nil] The relative path to the gemspec file, or nil if not found.
+			private def gemspec_path
+				Dir.glob("*.gemspec", base: @root).first
+			end
+			
+			# Load and return the gemspec for this project.
+			# @returns [Gem::Specification | nil] The loaded gemspec, or nil if not found.
+			def gemspec
+				if gemspec_path = self.gemspec_path
+					@gemspec ||= ::Gem::Specification.load(File.join(@root, gemspec_path))
+				end
+			end
 		end
 	end
 end

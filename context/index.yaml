@@ -1,16 +1,19 @@
 # Automatically generated context index for Utopia::Project guides.
 # Do not edit then files in this directory directly, instead edit the guides and then run `bake utopia:project:agent:context:update`.
 ---
-getting-started:
+description: A project documentation tool based on Utopia.
+metadata:
+  documentation_uri: https://socketry.github.io/utopia-project/
+  funding_uri: https://github.com/sponsors/ioquatix/
+  source_code_uri: https://github.com/socketry/utopia-project/
+files:
+- path: getting-started.md
   title: Getting Started
-  order: 1
   description: This guide explains how to use `utopia-project` for your own project.
-documentation-formatting:
+- path: documentation-formatting.md
   title: Documentation Formatting
-  order: 2
   description: This guide explains the conventions used by `utopia-project` when generating
     documentation for your project.
-github-pages-integration:
+- path: github-pages-integration.md
   title: GitHub Pages Integration
-  order: 3
   description: This guide shows you how to use `utopia-project` with GitHub Pages.
