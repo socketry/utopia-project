@@ -1,17 +1,67 @@
 # GitHub Pages Integration
 
-This guide shows you how to use `utopia-project` with GitHub Pages.
-
-## Static Site Generation
-
-Once you are happy with your project's documentation, use this command to generate a static site:
-
-~~~ bash
-$ bake utopia:project:static
-~~~
-
-This will generate a static copy of your documentation into `docs/` which is what is required by GitHub Pages.
+This guide shows you how to use `utopia-project` with GitHub Pages to deploy documentation.
 
 ## Enable GitHub Pages
 
-In your GitHub project settings, you will need to [enable GitHub Pages served from `docs/`](https://help.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#choosing-a-publishing-source).
+In your GitHub project settings, you will need to [enable GitHub Pages from a custom GitHub Actions workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow). Then, use the workflow below to publish the documentation:
+
+```yaml
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment:
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+env:
+  BUNDLE_WITH: maintenance
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ruby
+        bundler-cache: true
+    
+    - name: Installing packages
+      run: sudo apt-get install wget
+    
+    - name: Generate documentation
+      timeout-minutes: 5
+      run: bundle exec bake utopia:project:static --force no
+    
+    - name: Upload documentation artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: docs
+  
+  deploy:
+    runs-on: ubuntu-latest
+    
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+    
+    needs: generate
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```

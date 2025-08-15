@@ -1,6 +1,6 @@
 getting-started:
   order: 1
-documentation-formatting:
+documentation-guidelines:
   order: 2
 github-pages-integration:
   order: 3
