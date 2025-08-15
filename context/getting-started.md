@@ -1,14 +1,16 @@
 # Getting Started
 
-This guide explains how to use `utopia-project` for your own project.
+This guide explains how to use `utopia-project` to add documentation to your project.
 
 ## Installation
 
-Firstly, add the gem to your project:
+Add the gem to your project:
 
 ~~~ bash
 $ bundle add utopia-project
 ~~~
+
+## Usage
 
 ## Start Local Server
 

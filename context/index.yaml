@@ -9,11 +9,13 @@ metadata:
 files:
 - path: getting-started.md
   title: Getting Started
-  description: This guide explains how to use `utopia-project` for your own project.
-- path: documentation-formatting.md
-  title: Documentation Formatting
-  description: This guide explains the conventions used by `utopia-project` when generating
-    documentation for your project.
+  description: This guide explains how to use `utopia-project` to add documentation
+    to your project.
+- path: documentation-guidelines.md
+  title: Documentation Guides
+  description: This guide explains how to create and maintain documentation for your
+    project using `utopia-project`.
 - path: github-pages-integration.md
   title: GitHub Pages Integration
-  description: This guide shows you how to use `utopia-project` with GitHub Pages.
+  description: This guide shows you how to use `utopia-project` with GitHub Pages
+    to deploy documentation.
