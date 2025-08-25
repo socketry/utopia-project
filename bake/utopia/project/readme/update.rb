@@ -36,6 +36,8 @@ def update(path: "readme.md", documentation_url: nil)
 	end
 	
 	File.write(path, readme.root.to_markdown)
+	
+	return nil
 end
 
 private

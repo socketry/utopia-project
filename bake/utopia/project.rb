@@ -12,6 +12,17 @@ def create
 	end
 end
 
+# Update the project files.
+#
+# - Update the README file.
+# - Update the agent context.
+#
+# This task can be used as part of a pre-release process.
+def update
+	context["utopia:project:agent:context:update"].call
+	context["utopia:project:readme:update"].call
+end
+
 # Serve the project using a web server.
 # Binds to `https://localhost:9292` by default.
 #
@@ -77,3 +88,4 @@ def description(root: context.root)
 		end
 	end
 end
+

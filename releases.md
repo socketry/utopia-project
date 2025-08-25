@@ -1,5 +1,9 @@
 # Changes
 
+## Unreleased
+
+  - Introduce `bake utopia:project:update` which invokes readme and agent context updates.
+
 ## v0.34.1
 
   - Fix schema for `index.yaml` context file.
