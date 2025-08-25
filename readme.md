@@ -31,6 +31,10 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
+### v0.36.0
+
+  - Introduce `bake utopia:project:update` which invokes readme and agent context updates.
+
 ### v0.34.1
 
   - Fix schema for `index.yaml` context file.

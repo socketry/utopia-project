@@ -1,6 +1,6 @@
 # Changes
 
-## Unreleased
+## v0.36.0
 
   - Introduce `bake utopia:project:update` which invokes readme and agent context updates.
 
