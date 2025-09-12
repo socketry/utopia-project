@@ -7,6 +7,8 @@ require "utopia/path"
 require "xrb/reference"
 require "decode"
 
+require_relative "sidebar"
+
 module Utopia
 	module Project
 		# Provides structured access to a directory which contains documentation and source code to explain a specific process.
@@ -125,6 +127,12 @@ module Utopia
 			# @returns [Decode::Documentation]
 			def documentation
 				@documentation ||= self.best_documentation
+			end
+			
+			# Generate a navigation from the guide's document.
+			# @returns [Sidebar]
+			def navigation
+				@navigation ||= Sidebar.build(self.document)
 			end
 			
 			# All files associated with this guide.

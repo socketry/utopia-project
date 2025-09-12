@@ -39,7 +39,7 @@ def serve(port: nil, bind: nil)
 	end
 	
 	if port
-		options << "--port" << port
+		options << "--port" << port.to_s
 	end
 	
 	system("falcon", "serve", "--config", config_path, "--preload", preload_path, *options)

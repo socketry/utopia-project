@@ -4,6 +4,7 @@
 # Copyright, 2024-2025, by Samuel Williams.
 
 require_relative "document"
+require_relative "sidebar"
 
 module Utopia
 	module Project
@@ -105,6 +106,19 @@ module Utopia
 				
 				release_names.each do |name|
 					yield release(name)
+				end
+			end
+			
+			# Generate a navigation from the releases.
+			# @returns [Sidebar]
+			def navigation
+				@navigation ||= begin
+					entries = release_names.map do |name|
+						anchor = name.downcase.gsub(/\s+/, "-")
+						Sidebar::Entry.new(name, 2, anchor)
+					end
+					
+					Sidebar.new(entries)
 				end
 			end
 		end

@@ -1,13 +1,18 @@
-<content:page>
-	<?r
-	if document = self[:document]
-		?>#{Markup.raw document.to_html}<?r
-	else
-		?>
-		<content:heading>Project</content:heading>
+<?r if document = self[:document] ?>
+	<content:page class="with-sidebar">
+		<?r navigation = document.navigation ?>
+		<aside class="sidebar">
+			#{navigation.to_html(sidebar: true, title: "Releases")}
+		</aside>
+		<div class="content">
+			#{Markup.raw document.to_html}
+		</div>
+		<script src="/_static/sidebar.js"></script>
+	</content:page>
+<?r else ?>
+	<content:page>
+		<content:heading>Releases</content:heading>
 		
 		<p>This project does not have a <code>releases.md</code> file.</p>
-		<?r
-	end
-	?>
-</content:page>
+	</content:page>
+<?r end ?>

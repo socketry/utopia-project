@@ -103,21 +103,118 @@ main {
 	max-width: 48rem;
 }
 
+@media (min-width: 64em) {
+	main.with-sidebar {
+		display: grid;
+		grid-template-columns: 16rem 1fr;
+		gap: 1rem;
+		align-items: start;
+
+		 /* 48rem content + 16rem sidebar + 1rem gap */
+		max-width: 65rem;
+	}
+	
+	main.with-sidebar .content {
+		max-width: 48rem;
+	}
+}
+
+.sidebar {
+	display: none; /* Hidden on small screens */
+}
+
+@media (min-width: 64em) {
+	.sidebar {
+		display: block;
+		position: sticky;
+		top: 2rem;
+		max-height: calc(100vh - 4rem);
+		overflow-y: auto;
+		
+		/* Custom scrollbar styling */
+		scrollbar-width: thin;
+		scrollbar-color: var(--underlay-color) transparent;
+	}
+}
+
+/* Sidebar navigation styles */
+.sidebar nav {
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	padding: 0;
+	margin: 1rem;
+	position: sticky;
+	top: 0;
+}
+
+.sidebar nav h2 {
+	font-size: 0.9rem;
+	margin-bottom: 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--underlay-color);
+}
+
+.sidebar nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sidebar nav li {
+	margin: 0.1rem 0;
+}
+
+.sidebar nav li.level-2 {
+	padding-left: 0;
+}
+
+.sidebar nav li.level-3 {
+	padding-left: 1rem;
+}
+
+.sidebar nav li.level-4 {
+	padding-left: 2rem;
+}
+
+.sidebar nav li.level-5 {
+	padding-left: 3rem;
+}
+
+.sidebar nav li.level-6 {
+	padding-left: 4rem;
+}
+
+.sidebar nav a {
+	padding: 0.4rem 0.75rem;
+	font-size: 0.9rem;
+	border-left: 3px solid transparent;
+	color: var(--main-color);
+	text-decoration: none;
+	display: block;
+	border-radius: 0.25rem;
+	transition: all 0.2s ease;
+}
+
+.sidebar nav a:hover {
+	border-left-color: var(--accent-color);
+	background-color: var(--header-color);
+}
+
 main img {
 	max-width: 100%;
 }
 
-:target {
-	background-color: var(--header-color);
+/* Ensure last section has enough height to be scrollable */
+.content section:last-of-type {
+	min-height: 100vh;
 }
 
 section {
-	border-radius: 1rem;
-	padding: 0.1rem 0;
+	padding: 1rem 0;
 }
 
 main > section {
-	border-radius: 1rem;
 	margin: 4rem 0;
 }
 
@@ -223,7 +320,7 @@ summary {
 }
 
 details[open] {
-	/* padding: .5rem; */
+	padding: .5rem;
 }
 
 details[open] summary {
@@ -312,4 +409,192 @@ ul.pragmas li.asynchronous {
 	border-color: #8C00FF;
 	box-shadow: 0 0 0.3rem #8C00FF;
 	color: #8C00FF;
+}
+
+/* Navigation - Inline styles (boxed display for small screens) */
+.inline-nav nav {
+	background-color: var(--header-color);
+	border-radius: 0.5rem;
+	padding: 1rem;
+	margin: 1rem;
+	border-left: 0.25rem solid var(--accent-color);
+}
+
+.inline-nav nav heading {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+	color: var(--accent-color);
+	font-size: 1rem;
+	display: block;
+	font-weight: 500;
+}
+
+.inline-nav nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.inline-nav nav li {
+	margin: 0.25rem 0;
+}
+
+.inline-nav nav li.level-2 {
+	padding-left: 0;
+}
+
+.inline-nav nav li.level-3 {
+	padding-left: 1rem;
+}
+
+.inline-nav nav li.level-4 {
+	padding-left: 2rem;
+}
+
+.inline-nav nav li.level-5 {
+	padding-left: 3rem;
+}
+
+.inline-nav nav li.level-6 {
+	padding-left: 4rem;
+}
+
+.inline-nav nav a {
+	color: var(--main-color);
+	text-decoration: none;
+	display: block;
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.25rem;
+	transition: all 0.2s ease;
+}
+
+.inline-nav nav a:hover {
+	color: var(--accent-hover-color);
+	background-color: var(--overlay-color);
+	text-decoration: none;
+}
+
+/* Sidebar navigation styles */
+.sidebar nav,
+.sidebar details nav {
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	padding: 0;
+	margin: 1rem;
+	position: sticky;
+	top: 0;
+}
+
+.sidebar nav heading {
+	font-size: 0.9rem;
+	margin-bottom: 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--underlay-color);
+	display: block;
+	font-weight: 500;
+	color: var(--accent-color);
+}
+
+.sidebar nav li,
+.sidebar details nav li {
+	margin: 0.1rem 0;
+}
+
+.sidebar nav li.level-2 {
+	padding-left: 0;
+}
+
+.sidebar nav li.level-3 {
+	padding-left: 1rem;
+}
+
+.sidebar nav li.level-4 {
+	padding-left: 2rem;
+}
+
+.sidebar nav li.level-5 {
+	padding-left: 3rem;
+}
+
+.sidebar nav li.level-6 {
+	padding-left: 4rem;
+}
+
+.sidebar nav a,
+.sidebar details nav a {
+	padding: 0.4rem 0.75rem;
+	font-size: 0.9rem;
+	border-left: 3px solid transparent;
+	color: var(--main-color);
+	text-decoration: none;
+	display: block;
+	border-radius: 0.25rem;
+	transition: all 0.2s ease;
+}
+
+/* Compact mode for long navigation lists */
+.sidebar nav.compact li {
+	margin: 0.05rem 0;
+}
+
+.sidebar nav.compact a {
+	padding: 0.25rem 0.5rem;
+	font-size: 0.85rem;
+	line-height: 1.3;
+}
+
+.sidebar nav.compact heading {
+	font-size: 0.8rem;
+	margin-bottom: 0.75rem;
+}
+
+.sidebar nav.compact li.level-3 {
+	padding-left: 0.75rem;
+}
+
+.sidebar nav.compact li.level-4 {
+	padding-left: 1.5rem;
+}
+
+.sidebar nav.compact li.level-5 {
+	padding-left: 2.25rem;
+}
+
+.sidebar nav.compact li.level-6 {
+	padding-left: 3rem;
+}
+
+.sidebar nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sidebar nav a:hover {
+	border-left-color: var(--accent-color);
+	background-color: var(--header-color);
+}
+
+/* Subtle focus indicator for keyboard navigation */
+.sidebar nav a:focus {
+	outline: 2px solid var(--accent-color);
+	outline-offset: 2px;
+	border-radius: 0.25rem;
+}
+
+/* Brief click feedback */
+.sidebar nav a:active {
+	background-color: var(--accent-hover-color);
+	color: white;
+	transform: scale(0.98);
+	transition: transform 0.1s ease;
+}
+
+/* Active section highlighting (set by JavaScript) */
+.sidebar nav a.active {
+	background-color: var(--accent-color);
+	color: white;
+	border-left-color: var(--accent-color);
+	font-weight: 500;
 }

@@ -1,24 +1,32 @@
-<content:page>
+<content:page class="with-sidebar">
 	<?r
 		base = self[:base]
 		guide = self[:guide]
+		navigation = guide.navigation
 	?>
-	<content:heading>#{guide.title}</content:heading>
 	
-	<?r
-		if document = guide.document
-			?>#{document.to_html}<?r
-		end
+	<aside class="sidebar">
+		#{navigation.to_html}
+	</aside>
+	<div class="content">
+		<content:heading>#{guide.title}</content:heading>
 		
-		guide.sources.each do |source|
-			?><h2><code>#{File.basename source.path}</code></h2><?r
-			source.segments.each do |segment|
-				if documentation = segment.documentation
-					?>#{base.format(documentation.text, language: source.language)}<?r
-				end
-				
-				?><pre><code class="language-#{source.language.name}">#{segment.code}</code></pre><?r
+		<?r
+			if document = guide.document
+				?>#{document.to_html}<?r
 			end
-		end
-	?>
+			
+			guide.sources.each do |source|
+				?><h2><code>#{File.basename source.path}</code></h2><?r
+				source.segments.each do |segment|
+					if documentation = segment.documentation
+						?>#{base.format(documentation.text, language: source.language)}<?r
+					end
+					
+					?><pre><code class="language-#{source.language.name}">#{segment.code}</code></pre><?r
+				end
+			end
+		?>
+	</div>
+	<script src="/_static/sidebar.js"></script>
 </content:page>
