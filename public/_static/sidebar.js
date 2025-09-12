@@ -10,15 +10,19 @@
 	const sidebarNav = document.querySelector('.sidebar nav');
 	if (!sidebarNav) return;
 	
-	const navLinks = sidebarNav.querySelectorAll('a[href^="#"]');
+	const navLinks = sidebarNav.querySelectorAll('a[href*="#"]');
 	const sections = Array.from(navLinks).map(link => {
-		const href = link.getAttribute('href').substring(1);
-		// Try to find the section element using the href as-is first
-		let sectionElement = document.getElementById(href);
+		const href = link.getAttribute('href');
+		// Extract fragment from both "#section" and "page.html#section" formats
+		const fragmentIndex = href.indexOf('#');
+		if (fragmentIndex === -1) return null;
+		const fragment = href.substring(fragmentIndex + 1);
+		// Try to find the section element using the fragment
+		let sectionElement = document.getElementById(fragment);
 		
 		// If not found, try with CSS.escape for special characters
-		if (!sectionElement && href !== CSS.escape(href)) {
-			sectionElement = document.querySelector(`#${CSS.escape(href)}`);
+		if (!sectionElement && fragment !== CSS.escape(fragment)) {
+			sectionElement = document.querySelector(`#${CSS.escape(fragment)}`);
 		}
 		
 		// The element we found should be the section container, not just the heading
@@ -27,8 +31,8 @@
 			sectionElement = sectionElement.closest('section') || sectionElement.parentElement;
 		}
 		
-		return { link, sectionElement, id: href };
-	}).filter(item => item.sectionElement);
+		return { link, sectionElement, id: fragment };
+	}).filter(item => item && item.sectionElement);
 	
 	if (sections.length === 0) return;
 	
@@ -144,20 +148,25 @@
 	// Smooth scroll enhancement for sidebar navigation links
 	navLinks.forEach(link => {
 		link.addEventListener('click', (event) => {
-			const href = link.getAttribute('href').substring(1);
-			// Try to find the target using the href as-is first
-			let target = document.getElementById(href);
+			const href = link.getAttribute('href');
+			// Extract fragment from both "#section" and "page.html#section" formats
+			const fragmentIndex = href.indexOf('#');
+			if (fragmentIndex === -1) return;
+			const fragment = href.substring(fragmentIndex + 1);
+			
+			// Try to find the target using the fragment
+			let target = document.getElementById(fragment);
 			
 			// If not found, try with CSS.escape for special characters
-			if (!target && href !== CSS.escape(href)) {
-				target = document.querySelector(`#${CSS.escape(href)}`);
+			if (!target && fragment !== CSS.escape(fragment)) {
+				target = document.querySelector(`#${CSS.escape(fragment)}`);
 			}
 			
 			if (target) {
 				event.preventDefault();
 				
 				// Update URL to trigger :target and let browser handle scrolling
-				window.location.hash = href;
+				window.location.hash = fragment;
 			}
 
 			link.focus();
