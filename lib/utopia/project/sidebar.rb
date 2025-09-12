@@ -3,21 +3,24 @@
 # Released under the MIT License.
 # Copyright, 2020-2025, by Samuel Williams.
 
+require_relative "renderer"
+
 module Utopia
 	module Project
 		# Generates a sidebar navigation from markdown document headings.
 		class Sidebar
+			
 			# Represents a sidebar navigation entry with title, level, and anchor.
 			class Entry
-				def initialize(title, level, anchor)
-					@title = title
+				def initialize(title_html, level, anchor)
+					@title_html = title_html
 					@level = level
 					@anchor = anchor
 				end
 				
-				# The text content of the heading.
-				# @attribute [String]
-				attr :title
+				# The HTML content of the heading.
+				# @attribute [XRB::Markup]
+				attr :title_html
 				
 				# The heading level (1-6).
 				# @attribute [Integer]
@@ -68,13 +71,13 @@ module Utopia
 								if entry.level > 2
 									builder.tag :li, {class: "level-#{entry.level}"} do
 										builder.tag :a, {href: "##{entry.anchor}"} do
-											builder.text entry.title
+											builder << entry.title_html
 										end
 									end
 								else
 									builder.tag :li do
 										builder.tag :a, {href: "##{entry.anchor}"} do
-											builder.text entry.title
+											builder << entry.title_html
 										end
 									end
 								end
@@ -85,38 +88,25 @@ module Utopia
 			end
 			
 			private
-			
+
 			def self.extract_headings_from_document(document)
 				headings = []
 				return headings unless document&.root
 				
 				document.root.walk do |node|
 					if node.type == :header
-						title = node.first_child&.to_plaintext
-						level = node.header_level
-						anchor = generate_anchor(title)
+						next if node.header_level < 2 or node.header_level > 3
 						
-						# Only include H2 and below in sidebar (skip H1 main title)
-						if title && !title.empty? && level >= 2
-							headings << Entry.new(title, level, anchor)
-						end
+						title = XRB::Markup.raw(node.to_html)
+						level = node.header_level
+						anchor = Markly::Renderer::HTML.anchor_for(node)
+						
+						headings << Entry.new(title, level, anchor)
 					end
 				end
 				
 				headings
 			end
-			
-			def self.generate_anchor(title)
-				# Generate anchor ID exactly like Markly renderer does it
-				title.downcase
-					.gsub(/\s+/, "-")     # Replace spaces with hyphens
-					.gsub("&", "&amp;")   # HTML encode ampersand
-					.gsub('"', "&quot;")  # HTML encode quotes
-					.gsub("'", "&#39;")   # HTML encode single quotes
-					.gsub("<", "&lt;")    # HTML encode less than
-					.gsub(">", "&gt;")    # HTML encode greater than
-			end
-			
 		end
 	end
 end
