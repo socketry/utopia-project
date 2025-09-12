@@ -97,9 +97,11 @@ module Utopia
 					if node.type == :header
 						next if node.header_level < 2 or node.header_level > 3
 						
-						title = XRB::Markup.raw(node.to_html)
+						fragment = node.dup.extract_children
+						
+						title = XRB::Markup.raw(fragment.to_html)
 						level = node.header_level
-						anchor = Markly::Renderer::HTML.anchor_for(node)
+						anchor = Markly::Renderer::HTML.anchor_for(fragment)
 						
 						headings << Entry.new(title, level, anchor)
 					end
