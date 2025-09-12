@@ -109,12 +109,12 @@ module Utopia
 			def self.generate_anchor(title)
 				# Generate anchor ID exactly like Markly renderer does it
 				title.downcase
-					.gsub(/\s+/, '-')     # Replace spaces with hyphens
-					.gsub('&', '&amp;')   # HTML encode ampersand
-					.gsub('"', '&quot;')  # HTML encode quotes
-					.gsub("'", '&#39;')   # HTML encode single quotes
-					.gsub('<', '&lt;')    # HTML encode less than
-					.gsub('>', '&gt;')    # HTML encode greater than
+					.gsub(/\s+/, "-")     # Replace spaces with hyphens
+					.gsub("&", "&amp;")   # HTML encode ampersand
+					.gsub('"', "&quot;")  # HTML encode quotes
+					.gsub("'", "&#39;")   # HTML encode single quotes
+					.gsub("<", "&lt;")    # HTML encode less than
+					.gsub(">", "&gt;")    # HTML encode greater than
 			end
 			
 		end
