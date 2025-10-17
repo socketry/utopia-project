@@ -31,6 +31,10 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
+### v0.37.2
+
+  - Fix mermaid diagram text color in dark mode.
+
 ### v0.36.0
 
   - Introduce `bake utopia:project:update` which invokes readme and agent context updates.

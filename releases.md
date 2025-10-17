@@ -1,6 +1,6 @@
 # Changes
 
-## Unreleased
+## v0.37.2
 
   - Fix mermaid diagram text color in dark mode.
 
