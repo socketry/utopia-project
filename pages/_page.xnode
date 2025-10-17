@@ -26,12 +26,6 @@
 			jQuery(function($) {
 				$.syntax();
 			});
-			
-			let isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
-			let config = {theme: 'light'};
-			if (isDarkMode) config.theme = 'dark';
-			else config.theme = 'forest';
-			mermaid.initialize(config);
 		//]]>
 		</script>
 	</head>
