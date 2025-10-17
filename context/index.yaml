@@ -15,6 +15,10 @@ files:
   title: Documentation Guides
   description: This guide explains how to create and maintain documentation for your
     project using `utopia-project`.
+- path: mermaid-diagrams.md
+  title: Mermaid Diagrams
+  description: This guide explains how to use Mermaid diagrams in your documentation
+    to visualize complex relationships, flows, and architectures.
 - path: github-pages-integration.md
   title: GitHub Pages Integration
   description: This guide shows you how to use `utopia-project` with GitHub Pages

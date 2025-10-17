@@ -25,6 +25,8 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
   - [Documentation Guides](https://socketry.github.io/utopia-project/guides/documentation-guidelines/index) - This guide explains how to create and maintain documentation for your project using `utopia-project`.
 
+  - [Mermaid Diagrams](https://socketry.github.io/utopia-project/guides/mermaid-diagrams/index) - This guide explains how to use Mermaid diagrams in your documentation to visualize complex relationships, flows, and architectures.
+
   - [GitHub Pages Integration](https://socketry.github.io/utopia-project/guides/github-pages-integration/index) - This guide shows you how to use `utopia-project` with GitHub Pages to deploy documentation.
 
 ## Releases

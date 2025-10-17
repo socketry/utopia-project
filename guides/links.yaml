@@ -2,5 +2,7 @@ getting-started:
   order: 1
 documentation-guidelines:
   order: 2
-github-pages-integration:
+mermaid-diagrams:
   order: 3
+github-pages-integration:
+  order: 4
