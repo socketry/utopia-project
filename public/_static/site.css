@@ -239,12 +239,6 @@ div.mermaid {
 	text-align: center;
 }
 
-@media (prefers-color-scheme: dark) {
-	div.mermaid {
-		filter: invert(0.88);
-	}
-}
-
 div.giscus {
 	margin: 1rem 0;
 	padding: 0 1rem;

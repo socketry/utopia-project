@@ -17,7 +17,6 @@
 		
 		<script src="/_components/jquery/jquery.min.js"></script>
 		<script src="/_components/jquery-syntax/jquery.syntax.min.js"></script>
-		<script src="/_components/mermaid/mermaid.min.js"></script>
 		
 		<script src="/_static/links.js"></script>
 		
@@ -27,6 +26,15 @@
 				$.syntax();
 			});
 		//]]>
+		</script>
+		
+		<script type="module">
+		// <![CDATA[
+			import mermaid from '/_components/mermaid/mermaid.esm.min.mjs';
+			const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+			const theme = isDarkMode ? 'dark' : 'default';
+			mermaid.initialize({startOnLoad: true, theme: theme});
+		// ]]>
 		</script>
 	</head>
 
