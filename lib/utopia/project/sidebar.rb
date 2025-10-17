@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2020-2025, by Samuel Williams.
+# Copyright, 2025, by Samuel Williams.
 
 require_relative "renderer"
 
@@ -88,7 +88,7 @@ module Utopia
 			end
 			
 			private
-
+			
 			def self.extract_headings_from_document(document)
 				headings = []
 				return headings unless document&.root

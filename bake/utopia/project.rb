@@ -3,6 +3,12 @@
 # Released under the MIT License.
 # Copyright, 2020-2025, by Samuel Williams.
 
+def initialize(context)
+	super
+	
+	require "fileutils"
+end
+
 # Create an empty project in the current directory.
 def create
 	template_path = File.expand_path("../../template/*", __dir__)

@@ -85,7 +85,7 @@ Use MULTI and EXEC to run commands atomically:
 
 ```ruby
 client.multi
-client.set('key', 'value')
+client.set("key", "value")
 client.exec
 ```
 ~~~
@@ -103,8 +103,8 @@ Use transactions when you need:
 
 ```ruby
 client.multi
-client.set('user:balance', new_balance)
-client.set('user:last_transaction', transaction_id)
+client.set("user:balance", new_balance)
+client.set("user:last_transaction", transaction_id)
 client.exec
 ```
 ~~~
@@ -236,8 +236,8 @@ Every code example should demonstrate a realistic scenario, not abstract operati
 
 ❌ **Abstract**:
 ```ruby
-client.set('key', 'value')
-client.get('key')
+client.set("key", "value")
+client.get("key")
 ```
 
 ✅ **Contextual**:
