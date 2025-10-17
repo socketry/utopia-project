@@ -237,7 +237,12 @@ h1, h2, h3, h4, h5, h6, p, pre, ul, dl, ol {
 div.mermaid {
 	margin: 1rem;
 	text-align: center;
-	color: initial; /* Don't inherit page text color */
+}
+
+@media (prefers-color-scheme: dark) {
+	div.mermaid {
+		filter: invert(0.88);
+	}
 }
 
 div.giscus {
