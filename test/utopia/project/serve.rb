@@ -4,6 +4,8 @@
 # Copyright, 2020-2025, by Samuel Williams.
 
 require "utopia/project"
+
+require "rack/builder"
 require "rack/test"
 
 describe Utopia::Project do
