@@ -5,6 +5,6 @@
 
 module Utopia
 	module Project
-		VERSION = "0.37.4"
+		VERSION = "0.37.5"
 	end
 end
