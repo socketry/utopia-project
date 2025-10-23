@@ -33,6 +33,10 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
+### v0.37.3
+
+  - Support for `@example` pragmas from the `decode` gem, allowing inline code examples to be rendered in API documentation.
+
 ### v0.37.2
 
   - Fix mermaid diagram text color in dark mode.
@@ -68,10 +72,6 @@ Please see the [project releases](https://socketry.github.io/utopia-project/rele
 ### v0.29.0
 
   - [Improve `changes.md` document organization](https://socketry.github.io/utopia-project/releases/index#improve-changes.md-document-organization)
-
-### v0.28.0
-
-  - [Introduce `changes.md` document](https://socketry.github.io/utopia-project/releases/index#introduce-changes.md-document)
 
 ## See Also
 

@@ -1,6 +1,6 @@
 # Changes
 
-## Unreleased
+## v0.37.3
 
   - Support for `@example` pragmas from the `decode` gem, allowing inline code examples to be rendered in API documentation.
 
