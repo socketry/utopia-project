@@ -17,6 +17,7 @@
 		?>#{base.format(text.join("\n"), symbol)}<?r
 	end
 	?>
+	#{partial 'content:examples', symbol: symbol}
 	#{partial 'content:signature', symbol: symbol}
 	<?r
 	nested = node.children.map do |name, child|
@@ -56,6 +57,7 @@
 				if documentation = symbol.documentation
 					?>#{partial 'content:pragmas', symbol: symbol}<?r
 					?>#{base.format(documentation.text, symbol)}<?r
+					?>#{partial 'content:examples', symbol: symbol}<?r
 					?>#{partial 'content:signature', symbol: symbol}<?r
 				end
 				

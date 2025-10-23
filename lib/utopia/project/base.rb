@@ -59,6 +59,10 @@ module Utopia
 			# Return the absolute path for the given file name, if it exists in the project.
 			# @parameter file_name [String] The relative path to the project file, e.g. `readme.md`.
 			# @returns [String] The file-system path.
+			#
+			# @example Get README path
+			# 	base = Utopia::Project::Base.new
+			# 	base.path_for("readme.md") # => "/path/to/project/readme.md" or nil
 			def path_for(file_name)
 				full_path = File.expand_path(file_name, @root)
 				if File.exist?(full_path)
@@ -86,6 +90,10 @@ module Utopia
 			
 			# Given a lexical path, find the best definition for that path.
 			# @returns [Tuple(Decode::Trie::Node, Decode::Definition)]
+			#
+			# @example Lookup a definition
+			# 	base = Utopia::Project::Base.local
+			# 	_, definition = base.lookup(%i[Utopia Project Base])
 			def lookup(path)
 				if node = @index.trie.lookup(path.map(&:to_sym))
 					return node, best(node.values)
@@ -119,6 +127,10 @@ module Utopia
 			# Format the given text in the context of the given definition and language.
 			# See {document} for details.
 			# @returns [XRB::MarkupString]
+			#
+			# @example Format text with code links
+			# 	base = Utopia::Project::Base.new
+			# 	base.format("See {Utopia::Project::Base#guides}.") # => XRB::MarkupString
 			def format(text, definition = nil, language: definition&.language, **options)
 				if document = self.document(text, definition, language: language)
 					return XRB::Markup.raw(
@@ -132,6 +144,11 @@ module Utopia
 			# Updates source code references (`{language identifier}`) into links.
 			#
 			# @returns [Document]
+			#
+			# @example Convert markdown to HTML
+			# 	base = Utopia::Project::Base.new
+			# 	doc = base.document("# Title")
+			# 	doc.to_html # => "<h1>Title</h1>\n"
 			def document(text, definition = nil, language: definition&.language)
 				case text
 				when Enumerable
@@ -145,6 +162,11 @@ module Utopia
 			
 			# Compute a unique string which can be used as `id` attribute in the HTML output.
 			# @returns [String]
+			#
+			# @example Compute id for a definition
+			# 	base = Utopia::Project::Base.local
+			# 	_, definition = base.lookup(%i[Utopia Project Base])
+			# 	base.id_for(definition) # => "Utopia::Project::Base"
 			def id_for(definition, suffix = nil)
 				if suffix
 					"#{definition.qualified_name}-#{suffix}"
@@ -155,6 +177,11 @@ module Utopia
 			
 			# Compute a link href to the given definition for use within the HTML output.
 			# @returns [XRB::Reference]
+			#
+			# @example Link to a definition
+			# 	base = Utopia::Project::Base.local
+			# 	_, definition = base.lookup(%i[Utopia Project Base])
+			# 	base.link_for(definition).to_s # => "/source/utopia/project/index#Utopia::Project::Base"
 			def link_for(definition)
 				path = definition.lexical_path.map{|entry| entry.to_s}
 				
@@ -170,6 +197,12 @@ module Utopia
 			# @yields {|guide| ...} If a block is given.
 			# 	@parameter guide [Guide]
 			# @returns [Enumerator(Guide)] If no block given.
+			#
+			# @example List guide titles
+			# 	base = Utopia::Project::Base.new
+			# 	base.guides.each do |guide|
+			# 		puts guide.title
+			# 	end
 			def guides
 				return to_enum(:guides) unless block_given?
 				

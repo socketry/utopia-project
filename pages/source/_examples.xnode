@@ -1,0 +1,18 @@
+<?r
+base = self[:base]
+
+symbol = attributes[:symbol] 
+documentation = symbol.documentation
+
+examples = documentation&.filter(Decode::Comment::Example).to_a
+
+if examples&.any? ?>
+	<?r examples.each do |example| ?>
+		<details closed>
+			<?r if title = example.title ?>
+				<summary><h4>Example: #{title}</h4></summary>
+			<?r end ?>
+			<pre><code class="language-#{symbol.language.name}">#{example.code}</code></pre>
+		</details>
+	<?r end ?>
+<?r end ?>

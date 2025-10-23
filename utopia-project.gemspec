@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
 	
 	spec.required_ruby_version = ">= 3.2"
 	
-	spec.add_dependency "decode", "~> 0.17"
+	spec.add_dependency "decode", "~> 0.26"
 	spec.add_dependency "falcon"
 	spec.add_dependency "markly", "~> 0.7"
 	spec.add_dependency "rackula", "~> 1.3"

@@ -1,5 +1,9 @@
 # Changes
 
+## Unreleased
+
+  - Support for `@example` pragmas from the `decode` gem, allowing inline code examples to be rendered in API documentation.
+
 ## v0.37.2
 
   - Fix mermaid diagram text color in dark mode.
