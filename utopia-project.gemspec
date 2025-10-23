@@ -30,5 +30,5 @@ Gem::Specification.new do |spec|
 	spec.add_dependency "markly", "~> 0.7"
 	spec.add_dependency "rackula", "~> 1.3"
 	spec.add_dependency "thread-local"
-	spec.add_dependency "utopia", "~> 2.24"
+	spec.add_dependency "utopia", "~> 2.31"
 end

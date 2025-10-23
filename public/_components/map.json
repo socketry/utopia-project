@@ -1,5 +1,0 @@
-{
-	"imports": {
-		"mermaid": "./mermaid/mermaid.esm.min.mjs"
-	}
-}

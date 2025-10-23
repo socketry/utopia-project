@@ -7,6 +7,7 @@ prepend Actions
 
 on "**" do
 	@base = Utopia::Project::Base.instance
+	@import_map = Utopia::Project::IMPORT_MAP
 end
 
 on "index" do

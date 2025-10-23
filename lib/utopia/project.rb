@@ -10,6 +10,7 @@ require "variant"
 require "utopia/localization"
 
 require_relative "project/base"
+require_relative "project/import_map"
 
 module Utopia
 	module Project
