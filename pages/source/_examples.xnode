@@ -11,6 +11,8 @@ if examples&.any? ?>
 		<details closed>
 			<?r if title = example.title ?>
 				<summary><h4>Example: #{title}</h4></summary>
+			<?r else ?>
+				<summary><h4>Example.</h4></summary>
 			<?r end ?>
 			<pre><code class="language-#{symbol.language.name}">#{example.code}</code></pre>
 		</details>
