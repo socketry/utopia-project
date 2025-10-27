@@ -1,0 +1,22 @@
+/* Per-language overrides for CSS (empty by default). */
+
+/* Color box styling */
+.colour-box {
+	display: inline-block;
+	margin: 0 0.2em;
+	border: 1px solid #999;
+	line-height: 0.9;
+	vertical-align: middle;
+}
+
+.colour-box .sample {
+	display: inline-block;
+	width: 0.9em;
+	height: 0.9em;
+}
+
+@media (prefers-color-scheme: dark) {
+	.colour-box {
+		border-color: #666;
+	}
+}

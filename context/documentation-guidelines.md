@@ -75,9 +75,10 @@ Every feature or concept should be introduced with clear context about why users
 3. **Solution overview**: How does this feature address the problem?
 4. **Implementation**: Code examples and detailed usage
 
-**Example:**
+#### Example
 
-❌ **Poor context**:
+❌ Poor context:
+
 ~~~markdown
 ## Transactions
 
@@ -90,7 +91,8 @@ client.exec
 ```
 ~~~
 
-✅ **Good context**:
+✅ Good context:
+
 ~~~markdown
 ## Transactions
 
@@ -127,7 +129,8 @@ When documenting advanced features, follow this structure:
 4. **Best Practices**: When to use vs when not to use
 5. **Common Pitfalls**: What to watch out for
 
-**Template:**
+#### Template
+
 ```markdown
 ## [Feature Name]
 

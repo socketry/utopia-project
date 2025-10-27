@@ -15,23 +15,19 @@
 		<link rel="icon" type="image/png" href="/_static/icon.png" />
 		<link rel="stylesheet" href="/_static/site.css" type="text/css" media="screen" />
 		
-		#{Utopia::Project::IMPORT_MAP.relative_to(request.path + "/")}
+		#{Utopia::Project::IMPORT_MAP.relative_to(request.env["REQUEST_PATH"]).to_html}
 		
 		<script src="/_components/jquery/jquery.min.js"></script>
-		<script src="/_components/jquery-syntax/jquery.syntax.min.js"></script>
 		
 		<script src="/_static/links.js"></script>
-		
-		<script type="text/javascript">
-		//<![CDATA[
-			jQuery(function($) {
-				$.syntax();
-			});
-		//]]>
-		</script>
-		
-	<script type="module">
+
+		<script type="module">
 		// <![CDATA[
+			import {Syntax} from '@socketry/syntax';
+			document.addEventListener('DOMContentLoaded', async function() {
+				await Syntax.highlight();
+			});
+			
 			import mermaid from 'mermaid';
 			const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 			const theme = isDarkMode ? 'dark' : 'default';
@@ -39,7 +35,6 @@
 		// ]]>
 		</script>
 	</head>
-
 	<body>
 		<content:header />
 		

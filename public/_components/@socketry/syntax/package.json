@@ -1,0 +1,43 @@
+{
+	"name": "@socketry/syntax",
+	"version": "0.3.3",
+	"description": "A modern, framework-agnostic syntax highlighter using Web Components",
+	"type": "module",
+	"main": "Syntax.js",
+	"exports": {
+		".": "./Syntax.js",
+		"./Match": "./Syntax/Match.js",
+		"./Language": "./Syntax/Language.js",
+		"./Loader": "./Syntax/Loader.js",
+		"./Errors": "./Syntax/Errors.js",
+		"./Language/*": "./Syntax/Language/*.js"
+	},
+	"files": [
+		"Syntax.js",
+		"Syntax/",
+		"styles/",
+		"themes/"
+	],
+	"scripts": {
+		"test": "node --test 'test/**/*.js'",
+		"format": "prettier --write '**/*.{js,json,md}'",
+		"format:check": "prettier --check '**/*.{js,json,md}'"
+	},
+	"keywords": [
+		"syntax",
+		"highlighting",
+		"web-components",
+		"code",
+		"highlighter"
+	],
+	"author": "Samuel G. D. Williams",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/socketry/syntax-js.git"
+	},
+	"devDependencies": {
+		"jsdom": "^25.0.0",
+		"prettier": "^3.6.2"
+	}
+}

@@ -1,0 +1,33 @@
+/* SuperCollider-specific token styles */
+
+/* Light mode */
+/* Symbols like \freq or 'name' */
+code.syntax .symbol {
+	color: #d73a49; /* red accent distinct from strings */
+}
+
+/* SC instance/class/global variables (@var, @@var, $char shown as constant) */
+code.syntax .variable {
+	color: #6f42c1; /* purple distinct from constants */
+}
+
+/* Optional: emphasize function/method calls a bit more */
+code.syntax .function {
+	color: #005cc5;
+	font-weight: 600;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+	code.syntax .symbol {
+		color: #e06c75; /* reddish accent distinct from strings */
+	}
+
+	code.syntax .variable {
+		color: #e5c07b; /* warm yellow distinct from constants */
+	}
+
+	code.syntax .function {
+		color: #61afef;
+	}
+}

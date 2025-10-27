@@ -1,0 +1,63 @@
+:host {
+	/* Base color - all other colors derive from this via hue rotation */
+	--syntax-base-hue: 270;
+	--syntax-base-saturation: 60%;
+	--syntax-base-lightness: 50%;
+}
+
+@media (prefers-color-scheme: dark) {
+	:host {
+		--syntax-base-saturation: 50%;
+		--syntax-base-lightness: 70%;
+	}
+}
+
+:host(:not([wrap])) {
+	overflow-x: auto;
+	white-space: pre;
+}
+
+:host[wrap] {
+	white-space: pre-wrap;
+}
+
+:host([wrap]) code.syntax > span {
+	display: flex;
+}
+
+code.syntax {
+	tab-size: 2;
+}
+
+:host([wrap]) code.syntax .indent {
+	flex-grow: 0;
+	flex-shrink: 0;
+	opacity: 0.5;
+}
+
+:host([wrap]) code.syntax .text {
+	white-space: pre-wrap;
+	padding-left: 2ch;
+	text-indent: -2ch;
+}
+
+/* Token type styles - colors derived from base via hue rotation */
+code.syntax .keyword { color: hsl(calc(var(--syntax-base-hue) + 15), var(--syntax-base-saturation), var(--syntax-base-lightness)); font-weight: bold; }
+code.syntax .string { color: hsl(calc(var(--syntax-base-hue) - 45), calc(var(--syntax-base-saturation) - 10%), calc(var(--syntax-base-lightness) - 5%)); }
+code.syntax .comment { color: hsl(var(--syntax-base-hue), calc(var(--syntax-base-saturation) - 45%), var(--syntax-base-lightness)); font-style: italic; }
+code.syntax .number { color: hsl(calc(var(--syntax-base-hue) - 30), var(--syntax-base-saturation), var(--syntax-base-lightness)); }
+code.syntax .operator { color: hsl(calc(var(--syntax-base-hue) + 45), var(--syntax-base-saturation), var(--syntax-base-lightness)); }
+code.syntax .function { color: hsl(calc(var(--syntax-base-hue) - 60), var(--syntax-base-saturation), var(--syntax-base-lightness)); }
+code.syntax .constant { color: hsl(calc(var(--syntax-base-hue) - 30), var(--syntax-base-saturation), var(--syntax-base-lightness)); }
+code.syntax .type { color: hsl(var(--syntax-base-hue), var(--syntax-base-saturation), var(--syntax-base-lightness)); }
+code.syntax .preprocessor { color: hsl(calc(var(--syntax-base-hue) + 30), var(--syntax-base-saturation), var(--syntax-base-lightness)); font-style: italic; }
+code.syntax .access { color: hsl(calc(var(--syntax-base-hue) + 15), var(--syntax-base-saturation), var(--syntax-base-lightness)); font-weight: bold; }
+code.syntax .escape { color: hsl(calc(var(--syntax-base-hue) + 60), var(--syntax-base-saturation), var(--syntax-base-lightness)); font-weight: bold; }
+
+/* HTML-oriented tokens */
+code.syntax .tag { color: hsl(calc(var(--syntax-base-hue) + 50), var(--syntax-base-saturation), var(--syntax-base-lightness)); }
+code.syntax .tag-name { color: hsl(calc(var(--syntax-base-hue) + 50), var(--syntax-base-saturation), var(--syntax-base-lightness)); font-weight: bold; }
+code.syntax .attribute { color: hsl(calc(var(--syntax-base-hue) - 40), var(--syntax-base-saturation), var(--syntax-base-lightness)); }
+code.syntax .entity { color: hsl(calc(var(--syntax-base-hue) + 45), var(--syntax-base-saturation), var(--syntax-base-lightness)); }
+code.syntax .doctype { color: hsl(calc(var(--syntax-base-hue) + 15), var(--syntax-base-saturation), var(--syntax-base-lightness)); }
+code.syntax .cdata { color: hsl(var(--syntax-base-hue), calc(var(--syntax-base-saturation) - 45%), var(--syntax-base-lightness)); }

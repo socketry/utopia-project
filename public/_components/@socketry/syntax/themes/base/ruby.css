@@ -1,0 +1,23 @@
+/* Ruby-specific token styles */
+
+/* Light mode */
+/* Symbols like :symbol */
+code.syntax .symbol {
+	color: #d73a49;
+}
+
+/* Instance/class/global variables */
+code.syntax .variable {
+	color: #6f42c1;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+	code.syntax .symbol {
+		color: #e06c75;
+	}
+
+	code.syntax .variable {
+		color: #e5c07b;
+	}
+}

@@ -1,0 +1,29 @@
+/* XRB (XML with embedded Ruby) styles */
+
+/* Light mode */
+/* Delimiters for Ruby processing instruction: <?r ... ?> */
+code.syntax .ruby-pi-open,
+code.syntax .ruby-pi-close {
+   color: #005cc5; /* blue */
+   opacity: 0.9;
+}
+
+/* Delimiters for interpolation: #{ ... } */
+code.syntax .ruby-interp-open,
+code.syntax .ruby-interp-close {
+   color: #22863a; /* green */
+   opacity: 0.95;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+	code.syntax .ruby-pi-open,
+	code.syntax .ruby-pi-close {
+	   color: #61afef; /* blue-ish */
+	}
+
+	code.syntax .ruby-interp-open,
+	code.syntax .ruby-interp-close {
+	   color: #98c379; /* green-ish */
+	}
+}
