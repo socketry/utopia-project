@@ -16,7 +16,15 @@ describe Utopia::Project do
 	let(:rackup_path) {File.expand_path("config.ru", template_root)}
 	let(:rackup_directory) {File.dirname(rackup_path)}
 	
-	let(:app) {Rack::Builder.parse_file(rackup_path)}
+	let(:app) do
+		inner_app = Rack::Builder.parse_file(rackup_path)
+		
+		# Middleware to set REQUEST_PATH from PATH_INFO
+		lambda do |env|
+			env["REQUEST_PATH"] ||= env["PATH_INFO"]
+			inner_app.call(env)
+		end
+	end
 	
 	it "has root page" do
 		get "/index"
