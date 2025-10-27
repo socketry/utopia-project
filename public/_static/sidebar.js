@@ -11,28 +11,57 @@
 	if (!sidebarNav) return;
 	
 	const navLinks = sidebarNav.querySelectorAll('a[href*="#"]');
-	const sections = Array.from(navLinks).map(link => {
+	
+	// Build a map of sidebar links by their fragment IDs
+	const sidebarLinksByFragment = new Map();
+	navLinks.forEach(link => {
 		const href = link.getAttribute('href');
-		// Extract fragment from both "#section" and "page.html#section" formats
 		const fragmentIndex = href.indexOf('#');
-		if (fragmentIndex === -1) return null;
-		const fragment = href.substring(fragmentIndex + 1);
-		// Try to find the section element using the fragment
-		let sectionElement = document.getElementById(fragment);
+		if (fragmentIndex !== -1) {
+			const fragment = href.substring(fragmentIndex + 1);
+			sidebarLinksByFragment.set(fragment, link);
+		}
+	});
+	
+	if (sidebarLinksByFragment.size === 0) return;
+	
+	// Get all sections/headings on the page and annotate them with their sidebar link
+	const allSections = Array.from(document.querySelectorAll('section, h1, h2, h3, h4, h5, h6'))
+		.filter(el => el.id) // Only keep elements with IDs
+		.map(el => {
+			// Get the section element (section or heading's parent)
+			const sectionElement = el.tagName === 'SECTION' ? el : (el.closest('section') || el.parentElement);
+			return { element: sectionElement, id: el.id };
+		});
+	
+	// Annotate each section with which sidebar link should be active
+	// Walk through in DOM order and track the "last seen" sidebar link
+	let lastSeenSidebarId = null;
+	allSections.forEach(({element, id}) => {
+		if (sidebarLinksByFragment.has(id)) {
+			// This section has a sidebar link - use it
+			lastSeenSidebarId = id;
+		}
+		// Annotate the section element with the sidebar link to activate
+		if (lastSeenSidebarId) {
+			element.dataset.sidebarLink = lastSeenSidebarId;
+		}
+	});
+	
+	// Build sections array with link references for active state tracking
+	const sections = Array.from(sidebarLinksByFragment.entries()).map(([id, link]) => {
+		let sectionElement = document.getElementById(id);
 		
-		// If not found, try with CSS.escape for special characters
-		if (!sectionElement && fragment !== CSS.escape(fragment)) {
-			sectionElement = document.querySelector(`#${CSS.escape(fragment)}`);
+		if (!sectionElement && id !== CSS.escape(id)) {
+			sectionElement = document.querySelector(`#${CSS.escape(id)}`);
 		}
 		
-		// The element we found should be the section container, not just the heading
-		// If it's a heading, find its parent section
 		if (sectionElement && sectionElement.tagName.match(/^H[1-6]$/)) {
 			sectionElement = sectionElement.closest('section') || sectionElement.parentElement;
 		}
 		
-		return { link, sectionElement, id: fragment };
-	}).filter(item => item && item.sectionElement);
+		return sectionElement ? { link, sectionElement, id } : null;
+	}).filter(Boolean);
 	
 	if (sections.length === 0) return;
 	
@@ -41,26 +70,30 @@
 	function updateActiveLink(updatePageState = true) {
 		let activeSectionData = null;
 		let smallestValidBottom = Infinity;
+		let currentSectionElement = null;
 		
-		// Find the section with the smallest bottom position that is still >= 0
-		// This gives us the section that we're currently reading through
-		sections.forEach((sectionData) => {
-			const { sectionElement } = sectionData;
-			const rect = sectionElement.getBoundingClientRect();
+		// Find which section the user is currently viewing
+		allSections.forEach(({element}) => {
+			const rect = element.getBoundingClientRect();
 			const sectionBottom = rect.bottom;
 			
 			// Get the actual bottom padding for this section
-			const bottomPadding = parseFloat(getComputedStyle(sectionElement).paddingBottom);
+			const bottomPadding = parseFloat(getComputedStyle(element).paddingBottom);
 			
 			// We want the section whose bottom is closest to the top but still visible
 			if (sectionBottom > bottomPadding && sectionBottom < smallestValidBottom) {
 				smallestValidBottom = sectionBottom;
-				activeSectionData = sectionData;
+				currentSectionElement = element;
 			}
 		});
 		
-		// If no section has bottom >= 0, fall back to the last section
-		// (meaning we've scrolled past all content)
+		// Look up which sidebar link should be active using the data attribute
+		if (currentSectionElement && currentSectionElement.dataset.sidebarLink) {
+			const sidebarLinkId = currentSectionElement.dataset.sidebarLink;
+			activeSectionData = sections.find(s => s.id === sidebarLinkId);
+		}
+		
+		// If still no section found, fall back to the last section
 		if (!activeSectionData && sections.length > 0) {
 			activeSectionData = sections[sections.length - 1];
 		}
