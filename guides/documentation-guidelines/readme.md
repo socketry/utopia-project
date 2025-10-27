@@ -237,13 +237,15 @@ Help users understand when to choose between alternatives:
 
 Every code example should demonstrate a realistic scenario, not abstract operations:
 
-❌ **Abstract**:
+❌ Abstract:
+
 ```ruby
 client.set("key", "value")
 client.get("key")
 ```
 
-✅ **Contextual**:
+✅ Contextual:
+
 ```ruby
 # Store user session data:
 client.set("session:#{session_id}", user_data.to_json)
