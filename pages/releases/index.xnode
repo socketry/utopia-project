@@ -7,7 +7,6 @@
 		<div class="content">
 			#{Markup.raw document.to_html}
 		</div>
-		<script src="/_static/sidebar.js"></script>
 	</content:page>
 <?r else ?>
 	<content:page>

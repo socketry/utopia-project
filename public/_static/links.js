@@ -1,21 +1,23 @@
-jQuery(function() {
-	$.each($('section[id]'), function(index, element) {
-		let anchor = document.createElement('a');
+/**
+ * Section Heading Links
+ * Adds pilcrow (¶) self-links to section headings for easy linking
+ */
+
+export function initializeSectionHeadingLinks() {
+	const sections = document.querySelectorAll('section[id]');
+	
+	sections.forEach(element => {
+		const anchor = document.createElement('a');
 		
-		anchor.appendChild(
-			document.createTextNode("¶")
-		);
-		
+		anchor.appendChild(document.createTextNode("¶"));
 		anchor.href = "#" + element.id;
 		anchor.className = "self";
 		
-		let heading = element.firstChild;
-		anchor.title = heading.innerText;
-		
-		heading.appendChild(
-			document.createTextNode(' ')
-		);
-		
-		heading.appendChild(anchor);
+		const heading = element.firstChild;
+		if (heading) {
+			anchor.title = heading.innerText;
+			heading.appendChild(document.createTextNode(' '));
+			heading.appendChild(anchor);
+		}
 	});
-});
+}

@@ -16,24 +16,7 @@
 		<link rel="stylesheet" href="/_static/site.css" type="text/css" media="screen" />
 		
 		#{Utopia::Project::IMPORT_MAP.relative_to(request.env["REQUEST_PATH"]).to_html}
-		
-		<script src="/_components/jquery/jquery.min.js"></script>
-		
-		<script src="/_static/links.js"></script>
-
-		<script type="module">
-		// <![CDATA[
-			import {Syntax} from '@socketry/syntax';
-			document.addEventListener('DOMContentLoaded', async function() {
-				await Syntax.highlight();
-			});
-			
-			import mermaid from 'mermaid';
-			const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-			const theme = isDarkMode ? 'dark' : 'default';
-			mermaid.initialize({startOnLoad: true, theme: theme});
-		// ]]>
-		</script>
+		<script type="module" src="/_static/application.js"></script>
 	</head>
 	<body>
 		<content:header />
