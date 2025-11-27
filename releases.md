@@ -1,5 +1,9 @@
 # Changes
 
+## Unreleased
+
+  - Fixed duplicate heading IDs when multiple sections have the same title. Permalinks and sidebar scroll tracking now work correctly when you have headings with identical text in different sections (e.g., multiple "Deployment" subsections under "Kubernetes" and "Systemd").
+
 ## v0.37.3
 
   - Support for `@example` pragmas from the `decode` gem, allowing inline code examples to be rendered in API documentation.

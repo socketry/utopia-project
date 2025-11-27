@@ -90,24 +90,14 @@ module Utopia
 			private
 			
 			def self.extract_headings_from_document(document)
-				headings = []
-				return headings unless document&.root
+				return [] unless document&.root
 				
-				document.root.walk do |node|
-					if node.type == :header
-						next if node.header_level < 2 or node.header_level > 3
-						
-						fragment = node.dup.extract_children
-						
-						title = XRB::Markup.raw(fragment.to_html)
-						level = node.header_level
-						anchor = Markly::Renderer::HTML.anchor_for(fragment)
-						
-						headings << Entry.new(title, level, anchor)
-					end
+				Markly::Renderer::Headings.extract(document.root, min_level: 2, max_level: 3).map do |heading|
+					fragment = heading.node.dup.extract_children
+					title = XRB::Markup.raw(fragment.to_html)
+					
+					Entry.new(title, heading.level, heading.anchor)
 				end
-				
-				headings
 			end
 		end
 	end

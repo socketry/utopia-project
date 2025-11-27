@@ -22,4 +22,61 @@ describe Utopia::Project::Document do
 		
 		expect(html).to be(:include?, "<content:usage/>")
 	end
+	
+	it "generates unique IDs for duplicate headings" do
+		markdown = <<~MARKDOWN
+			## Kubernetes
+			
+			### Deployment
+			
+			Some content about Kubernetes deployment.
+			
+			## Systemd
+			
+			### Deployment
+			
+			Some content about Systemd deployment.
+		MARKDOWN
+		
+		doc = subject.new(markdown)
+		html = doc.to_html.to_s
+		
+		# First "Deployment" should have id="deployment"
+		expect(html).to be(:include?, '<section id="deployment">')
+		
+		# Second "Deployment" should have id="deployment-2"
+		expect(html).to be(:include?, '<section id="deployment-2">')
+	end
+	
+	it "generates matching IDs in sidebar and document" do
+		markdown = <<~MARKDOWN
+			## Kubernetes
+			
+			### Deployment
+			
+			Some content about Kubernetes deployment.
+			
+			## Systemd
+			
+			### Deployment
+			
+			Some content about Systemd deployment.
+		MARKDOWN
+		
+		doc = subject.new(markdown)
+		sidebar = Utopia::Project::Sidebar.build(doc)
+		html = doc.to_html.to_s
+		
+		# Check that sidebar anchors match the IDs in the HTML
+		expect(sidebar.entries.size).to be == 4
+		expect(sidebar.entries[0].anchor).to be == "kubernetes"
+		expect(sidebar.entries[1].anchor).to be == "deployment"
+		expect(sidebar.entries[2].anchor).to be == "systemd"
+		expect(sidebar.entries[3].anchor).to be == "deployment-2"
+		
+		# Verify all sidebar anchors have corresponding sections in HTML
+		sidebar.entries.each do |entry|
+			expect(html).to be(:include?, %{id="#{entry.anchor}"})
+		end
+	end
 end
