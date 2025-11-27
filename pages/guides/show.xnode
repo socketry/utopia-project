@@ -9,6 +9,24 @@
 		#{navigation.to_html}
 	</aside>
 	<div class="content">
+		<?r
+			previous_guide, next_guide = base.guides.related(guide)
+			
+			if previous_guide or next_guide
+				?>
+				<nav class="top">
+					<?r if previous_guide
+						?><a href="#{previous_guide.href}" class="previous">← #{previous_guide.title}</a><?r
+					end
+					
+					if next_guide
+						?><a href="#{next_guide.href}" class="next">#{next_guide.title} →</a><?r
+					end ?>
+				</nav>
+				<?r
+			end
+		?>
+		
 		<content:heading>#{guide.title}</content:heading>
 		
 		<?r
@@ -25,6 +43,22 @@
 					
 					?><pre><code class="language-#{source.language.name}">#{segment.code}</code></pre><?r
 				end
+			end
+		?>
+		
+		<?r
+			if previous_guide or next_guide
+				?>
+				<nav class="bottom">
+					<?r if previous_guide
+						?><a href="#{previous_guide.href}" class="previous">← #{previous_guide.title}</a><?r
+					end
+					
+					if next_guide
+						?><a href="#{next_guide.href}" class="next">#{next_guide.title} →</a><?r
+					end ?>
+				</nav>
+				<?r
 			end
 		?>
 	</div>

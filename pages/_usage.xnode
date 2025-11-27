@@ -3,7 +3,7 @@
 <?r
 	base = self[:base]
 	
-	base.guides do |guide|
+	base.guides.each do |guide|
 ?>
 	<section>
 		<h3><a href="#{guide.href}">#{guide.title}</a></h3>

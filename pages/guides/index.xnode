@@ -1,16 +1,25 @@
 <content:page>
-	<?r
-		base = self[:base]
-	?>
 	<content:heading>Guides</content:heading>
 	
-	<ul>
+	<section>
 		<?r
-		base = controller[:base]
+		base = self[:base]
 		
-		base.guides do |guide|
-			?><li><a href="#{guide.name}/">#{guide.title}</a></li><?r
+		base.guides.each do |guide|
+		?>
+		<section>
+			<h3><a href="#{guide.href}">#{guide.title}</a></h3>
+			
+			<?r if description = guide.description ?>
+				#{Markup.raw description.to_html}
+			<?r elsif documentation = guide.documentation ?>
+				#{base.format(documentation.text, language: guide.documentation.language)}
+			<?r else ?>
+				<p>No description.</p>
+			<?r end ?>
+		</section>
+		<?r
 		end
 		?>
-	</ul>
+	</section>
 </content:page>

@@ -594,3 +594,37 @@ ul.pragmas li.asynchronous {
 	border-left-color: var(--accent-color);
 	font-weight: 500;
 }
+
+/* Guide navigation (previous/next) */
+.content nav {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	margin: 1rem;
+	font-size: 0.9rem;
+	font-weight: 500;
+}
+
+.content nav.top {
+	border-bottom: 1px solid var(--underlay-color);
+	padding-bottom: 0.5rem;
+}
+
+.content nav.bottom {
+	border-top: 1px solid var(--underlay-color);
+	padding-top: 0.5rem;
+}
+
+.content nav .next {
+	margin-left: auto;
+}
+
+@media (max-width: 768px) {
+	.content nav {
+		flex-direction: column;
+	}
+	
+	.content nav .next {
+		margin-left: 0;
+	}
+}

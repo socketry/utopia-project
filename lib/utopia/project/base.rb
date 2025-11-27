@@ -15,7 +15,7 @@ require "thread/local"
 require_relative "document"
 require_relative "releases_document"
 
-require_relative "guide"
+require_relative "guides"
 require_relative "linkify"
 
 module Utopia
@@ -193,10 +193,8 @@ module Utopia
 				end
 			end
 			
-			# Enumerate over all available guides in order.
-			# @yields {|guide| ...} If a block is given.
-			# 	@parameter guide [Guide]
-			# @returns [Enumerator(Guide)] If no block given.
+			# Get the guides collection for this project.
+			# @returns [Guides]
 			#
 			# @example List guide titles
 			# 	base = Utopia::Project::Base.new
@@ -204,15 +202,7 @@ module Utopia
 			# 		puts guide.title
 			# 	end
 			def guides
-				return to_enum(:guides) unless block_given?
-				
-				@links.index("/guides").each do |link|
-					guide_path = File.join(@root, link.path)
-					
-					next unless File.directory?(guide_path)
-					
-					yield Guide.new(self, guide_path, link.info)
-				end
+				@guides ||= Guides.new(self, @links)
 			end
 			
 			def readme_document
