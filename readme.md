@@ -33,6 +33,12 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
+### v0.40.0
+
+  - Fixed duplicate heading IDs when multiple sections have the same title. Permalinks and sidebar scroll tracking now work correctly when you have headings with identical text in different sections (e.g., multiple "Deployment" subsections under "Kubernetes" and "Systemd").
+  - Improved guides index page to show guide summaries (first paragraph) instead of just listing titles.
+  - Added previous/next navigation at the top and bottom of guide pages for easier sequential reading.
+
 ### v0.37.3
 
   - Support for `@example` pragmas from the `decode` gem, allowing inline code examples to be rendered in API documentation.
@@ -68,10 +74,6 @@ Please see the [project releases](https://socketry.github.io/utopia-project/rele
 ### v0.30.0
 
   - [Rename `changes.md` to `releases.md`](https://socketry.github.io/utopia-project/releases/index#rename-changes.md-to-releases.md)
-
-### v0.29.0
-
-  - [Improve `changes.md` document organization](https://socketry.github.io/utopia-project/releases/index#improve-changes.md-document-organization)
 
 ## See Also
 
