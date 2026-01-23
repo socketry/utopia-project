@@ -3,7 +3,21 @@
 	symbol = self[:symbol]
 	documentation = symbol&.documentation
 	
+	# Check if there are any non-Example children before rendering:
+	has_signature_children = false
 	if documentation&.children?
+		documentation.traverse do |node, descend|
+			node.each do |child|
+				unless child.is_a?(Decode::Comment::Example)
+					has_signature_children = true
+					break
+				end
+			end
+			break if has_signature_children
+		end
+	end
+	
+	if has_signature_children
 ?>
 <details open>
 	<summary><h4>Signature</h4></summary>

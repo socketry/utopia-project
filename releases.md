@@ -1,5 +1,9 @@
 # Changes
 
+## Unreleased
+
+  - Don't render empty signature block when there are only examples.
+
 ## v0.40.0
 
   - Fixed duplicate heading IDs when multiple sections have the same title. Permalinks and sidebar scroll tracking now work correctly when you have headings with identical text in different sections (e.g., multiple "Deployment" subsections under "Kubernetes" and "Systemd").
