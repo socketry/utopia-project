@@ -35,7 +35,7 @@ end
 # @parameter port [Integer] The port to bind to.
 # @parameter bind [String] The URL to bind to, e.g. `http://localhost:80`.
 def serve(port: nil, bind: nil)
-	config_path = File.expand_path("../../template/config.ru", __dir__)
+	config_path = File.expand_path("../../template/falcon.rb", __dir__)
 	preload_path = File.expand_path("../../template/preload.rb", __dir__)
 	
 	options = []
@@ -48,29 +48,14 @@ def serve(port: nil, bind: nil)
 		options << "--port" << port.to_s
 	end
 	
-	system("falcon", "serve", "--config", config_path, "--preload", preload_path, *options)
+	system("falcon", "host", config_path, "--preload", preload_path, *options)
 end
 
 # Generate a static copy of the site.
 # @parameter output_path [String] The output path for the static site.
 # @parameter force [Boolean] Remove the output directory before generating the static content.
 def static(output_path: "docs", force: true)
-	require "rackula/command"
-	
-	config_path = File.expand_path("../../template/config.ru", __dir__)
-	public_path = File.expand_path("../../public", __dir__)
-	
-	arguments = []
-	
-	if force
-		arguments << "--force"
-	end
-	
-	Rackula::Command::Top["generate", *arguments,
-		"--config", config_path,
-		"--public", public_path,
-		"--output-path", output_path
-	].call
+	context["utopia:static:generate"].call(output_path: output_path)
 	
 	FileUtils.touch File.expand_path(".nojekyll", output_path)
 end
@@ -94,4 +79,3 @@ def description(root: context.root)
 		end
 	end
 end
-

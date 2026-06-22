@@ -7,7 +7,14 @@ require "utopia/project/version"
 
 require "variant"
 
+require "utopia/application"
+require "utopia/content"
+require "utopia/controller"
+require "utopia/exceptions"
 require "utopia/localization"
+require "utopia/redirection"
+require "utopia/response"
+require "utopia/static"
 
 require_relative "project/base"
 require_relative "project/import_map"
@@ -23,51 +30,45 @@ module Utopia
 		# The root directory for static assets.
 		PUBLIC_ROOT = File.expand_path("public", SITE_ROOT)
 		
-		# Appends a project application to the rack builder.
+		# Build a project application.
 		#
-		# @parameter builder [Rack::Builder]
 		# @parameter root [String] The file-system root path of the project/gem.
 		# @parameter locales [Array(String)] an array of locales to support, e.g. `['en', 'ja']`.
-		def self.call(builder, root = Dir.pwd, locales: nil)
-			if UTOPIA.production?
-				# Handle exceptions in production with a error page and send an email notification:
-				builder.use Utopia::Exceptions::Handler
-				builder.use Utopia::Exceptions::Mailer
-			else
-				# We want to propate exceptions up when running tests:
-				builder.use Rack::ShowExceptions unless UTOPIA.testing?
+		def self.application(root = Dir.pwd, locales: nil)
+			Utopia::Application.build(lambda {|request| Utopia::Response[404, {}, []]}) do
+				if ::UTOPIA.production?
+					# Handle exceptions in production with a error page and send an email notification:
+					use Utopia::Exceptions::Handler
+					use Utopia::Exceptions::Mailer
+				end
+				
+				# We serve static files from the project root:
+				use Utopia::Static, root: root
+				
+				use Utopia::Static, root: PUBLIC_ROOT
+				
+				use Utopia::Redirection::Rewrite, {
+					"/" => "/index"
+				}
+				
+				use Utopia::Redirection::DirectoryIndex
+				
+				use Utopia::Redirection::Errors, {
+					404 => "/errors/file-not-found"
+				}
+				
+				if locales
+					use Utopia::Localization,
+						default_locale: locales.first,
+						locales: locales
+				end
+				
+				use Utopia::Controller, root: PAGES_ROOT
+				
+				use Utopia::Content, root: PAGES_ROOT, namespaces: {
+					# 'gallery' => Utopia::Gallery::Tags.new
+				}
 			end
-			
-			# We serve static files from the project root:
-			builder.use Utopia::Static, root: root
-			
-			builder.use Utopia::Static, root: PUBLIC_ROOT
-			
-			builder.use Utopia::Redirection::Rewrite, {
-				"/" => "/index"
-			}
-			
-			builder.use Utopia::Redirection::DirectoryIndex
-			
-			builder.use Utopia::Redirection::Errors, {
-				404 => "/errors/file-not-found"
-			}
-			
-			if locales
-				builder.use Utopia::Localization,
-					default_locale: locales.first,
-					locales: locales
-			end
-			
-			builder.use Utopia::Controller, root: PAGES_ROOT
-			
-			cache_root = File.expand_path("_gallery", root)
-			
-			builder.use Utopia::Content, root: PAGES_ROOT, namespaces: {
-				# 'gallery' => Utopia::Gallery::Tags.new
-			}
-			
-			builder.run lambda {|env| [404, {}, []]}
 		end
 	end
 end

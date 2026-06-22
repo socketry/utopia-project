@@ -15,7 +15,7 @@
 		<link rel="icon" type="image/png" href="/_static/icon.png" />
 		<link rel="stylesheet" href="/_static/site.css" type="text/css" media="screen" />
 		
-		#{Utopia::Project::IMPORT_MAP.relative_to(request.env["REQUEST_PATH"]).to_html}
+			#{Utopia::Project::IMPORT_MAP.relative_to(request.attributes["REQUEST_PATH"]).to_html}
 		<script type="module" src="/_static/application.js"></script>
 	</head>
 	<body>

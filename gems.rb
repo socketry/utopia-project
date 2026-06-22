@@ -25,7 +25,5 @@ group :test do
 	gem "rubocop-md"
 	gem "rubocop-socketry"
 	
-	gem "rack-test"
-	
 	gem "bake-test"
 end
