@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
 	
 	spec.files = Dir.glob(["{bake,context,lib,pages,public,template}/**/*", "*.md"], File::FNM_DOTMATCH, base: __dir__)
 	
-	spec.required_ruby_version = ">= 3.2"
+	spec.required_ruby_version = ">= 3.3"
 	
 	spec.add_dependency "decode", "~> 0.26"
 	spec.add_dependency "falcon"
