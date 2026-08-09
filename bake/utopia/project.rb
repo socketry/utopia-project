@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2020-2025, by Samuel Williams.
+# Copyright, 2020-2026, by Samuel Williams.
 
 def initialize(context)
 	super
@@ -35,7 +35,7 @@ end
 # @parameter port [Integer] The port to bind to.
 # @parameter bind [String] The URL to bind to, e.g. `http://localhost:80`.
 def serve(port: nil, bind: nil)
-	config_path = File.expand_path("../../template/config.ru", __dir__)
+	config_path = File.expand_path("../../template/config/serve.rb", __dir__)
 	preload_path = File.expand_path("../../template/preload.rb", __dir__)
 	
 	options = []
@@ -55,22 +55,15 @@ end
 # @parameter output_path [String] The output path for the static site.
 # @parameter force [Boolean] Remove the output directory before generating the static content.
 def static(output_path: "docs", force: true)
-	require "rackula/command"
-	
-	config_path = File.expand_path("../../template/config.ru", __dir__)
+	application_path = File.expand_path("../../template/config/application.rb", __dir__)
 	public_path = File.expand_path("../../public", __dir__)
 	
-	arguments = []
-	
-	if force
-		arguments << "--force"
-	end
-	
-	Rackula::Command::Top["generate", *arguments,
-		"--config", config_path,
-		"--public", public_path,
-		"--output-path", output_path
-	].call
+	context["utopia:static:generate"].call(
+		output_path: output_path,
+		application_path: application_path,
+		public_path: public_path,
+		force: force,
+	)
 	
 	FileUtils.touch File.expand_path(".nojekyll", output_path)
 end
@@ -94,4 +87,3 @@ def description(root: context.root)
 		end
 	end
 end
-
