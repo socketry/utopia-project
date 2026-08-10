@@ -49,8 +49,8 @@ module Utopia
 			builder.use Utopia::Redirection do |redirects|
 				redirects.rewrite "/" => "/index"
 				redirects.directory_index
-				redirects.error 404, "/errors/file-not-found"
 			end
+			builder.use Utopia::Redirection::Errors, 404 => "/errors/file-not-found"
 			
 			if locales
 				builder.use Utopia::Localization,
