@@ -6,7 +6,7 @@
 			path = path + "index"
 		end
 		
-		if link = links(path.dirname, name: path.last, locale: localization.current_locale, indices: true).first
+		if link = links(path.dirname, name: path.last, locale: localization&.locale, indices: true).first
 			if replace = link[:replace]&.to_sym and base = controller[:base]
 				?> &rsaquo; #{link.to_href(content: base.public_send(replace))}<?r
 			else
@@ -30,7 +30,7 @@
 		?> &rsaquo; <a href="/guides/#{guide.name}/index">#{guide.title}</a> <?r
 	end
 
-	if localization.localized?
+	if localization&.localized?
 		?> &bull; (<?r
 		localization.all_locales.each.with_index do |locale, index|
 			?>#{index.zero? ? '' : ' '}<a href="#{localization.localized_path(page_path, locale)}">#{locale}</a><?r
