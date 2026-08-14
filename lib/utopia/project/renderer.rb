@@ -8,7 +8,10 @@ require "markly/renderer/html"
 
 module Utopia
 	module Project
+		# Renders project Markdown with support for Mermaid code blocks.
 		class Renderer < Markly::Renderer::HTML
+			# Render a fenced code block, including Mermaid diagrams.
+			# @parameter node [Markly::Node] The fenced code block node.
 			def code_block(node)
 				language, _ = node.fence_info.split(/\s+/, 2)
 				

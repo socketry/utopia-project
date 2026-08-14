@@ -38,10 +38,15 @@ module Utopia
 			# @attribute [Hash]
 			attr :metadata
 			
+			# The explicit display order of the guide.
+			# @returns [Integer | Nil]
 			def order
 				metadata[:order]
 			end
 			
+			# Compare guides by explicit order and then by name.
+			# @parameter other [Guide] The other guide to compare.
+			# @returns [Integer] The comparison result.
 			def <=> other
 				if order = self.order
 					if other_order = other.order

@@ -8,7 +8,13 @@ require "xrb"
 
 module Utopia
 	module Project
+		# Represents a Markdown document with optional source code cross-references.
 		class Document
+			# Initialize a document from Markdown text.
+			# @parameter text [String] The Markdown source text.
+			# @parameter base [Base | Nil] The project used to resolve source code references.
+			# @parameter definition [Decode::Definition | Nil] The definition that provides the lexical context.
+			# @parameter default_language [Decode::Language::Generic | Nil] The default language for source code references.
 			def initialize(text, base = nil, definition: nil, default_language: nil)
 				@text = text
 				@base = base
@@ -20,10 +26,14 @@ module Utopia
 				@root = nil
 			end
 			
+			# Parse and resolve the document root.
+			# @returns [Markly::Node] The root document node.
 			def root
 				@root ||= resolve(Markly.parse(@text, extensions: [:table]))
 			end
 			
+			# Extract the leading heading as the document title.
+			# @returns [String | Nil] The title, if the document starts with a heading.
 			def title
 				child = self.root.first_child
 				
@@ -32,10 +42,17 @@ module Utopia
 				end
 			end
 			
+			# Get the first node in the document.
+			# @returns [Markly::Node | Nil] The first child node.
 			def first_child
 				self.root.first_child
 			end
 			
+			# Remove a named section and yield its heading for replacement.
+			# @parameter name [String] A fragment of the heading text to match.
+			# @parameter children [Boolean] Whether to remove nested subsections too.
+			# @yields {|header| ...} The matched heading node.
+			# 	@parameter header [Markly::Node] The matched heading.
 			def replace_section(name, children: false)
 				child = self.first_child
 				
@@ -72,39 +89,62 @@ module Utopia
 				end
 			end
 			
+			# Render the document as Markdown.
+			# @returns [String] The rendered Markdown.
 			def to_markdown(**options)
 				self.root.to_markdown(**options)
 			end
 			
+			# Render a document node as HTML.
+			# @parameter node [Markly::Node] The node to render.
+			# @returns [XRB::MarkupString] The rendered HTML markup.
 			def to_html(node = self.root, **options)
 				renderer = Renderer.new(ids: true, flags: Markly::UNSAFE, **options)
 				XRB::Markup.raw(renderer.render(node))
 			end
 			
+			# Wrap a node in a paragraph.
+			# @parameter child [Markly::Node] The node to wrap.
+			# @returns [Markly::Node] The paragraph node.
 			def paragraph_node(child)
 				node = Markly::Node.new(:paragraph)
 				node.append_child(child)
 				return node
 			end
 			
+			# Build an HTML block node.
+			# @parameter content [String] The raw HTML content.
+			# @parameter type [Symbol] The node type retained for compatibility.
+			# @returns [Markly::Node] The HTML node.
 			def html_node(content, type = :html)
 				node = Markly::Node.new(:html)
 				node.string_content = content
 				return node
 			end
 			
+			# Build an inline HTML node.
+			# @parameter content [String] The raw HTML content.
+			# @returns [Markly::Node] The inline HTML node.
 			def inline_html_node(content)
 				node = Markly::Node.new(:inline_html)
 				node.string_content = content
 				return node
 			end
 			
+			# Build a text node.
+			# @parameter content [String] The text content.
+			# @returns [Markly::Node] The text node.
 			def text_node(content)
 				node = Markly::Node.new(:text)
 				node.string_content = content
 				return node
 			end
 			
+			# Build a link node around a child node.
+			# @parameter title [String | Nil] The link title.
+			# @parameter url [String | XRB::Reference] The link target.
+			# @parameter child [Markly::Node] The linked child node.
+			# @returns [Markly::Node] The link node.
 			def link_node(title, url, child)
 				node = Markly::Node.new(:link)
 				node.title = title
@@ -115,6 +155,10 @@ module Utopia
 				return node
 			end
 			
+			# Build an inline code node.
+			# @parameter content [String] The code content.
+			# @parameter language [String | Nil] The source language name.
+			# @returns [Markly::Node] The code node.
 			def code_node(content, language = nil)
 				if language
 					node = inline_html_node(

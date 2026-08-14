@@ -24,6 +24,8 @@ module Utopia
 		class Base
 			extend Thread::Local
 			
+			# Load the current project and index its Ruby source files.
+			# @returns [Base] The loaded project.
 			def self.local
 				instance = self.new
 				
@@ -100,6 +102,9 @@ module Utopia
 				end
 			end
 			
+			# Load the supplemental document associated with a definition.
+			# @parameter definition [Decode::Definition] The definition to load documentation for.
+			# @returns [Document | Nil] The supplemental document, if it exists.
 			def document_for(definition)
 				document_path = File.join("lib", definition.lexical_path.map{|_| _.to_s.downcase}) + ".md"
 				
@@ -114,6 +119,11 @@ module Utopia
 				end
 			end
 			
+			# Format source text with links to referenced definitions.
+			# @parameter text [String] The source text to format.
+			# @parameter definition [Decode::Definition] The definition that provides the lexical context.
+			# @parameter language [Decode::Language::Generic] The source language.
+			# @returns [String] The formatted source code markup.
 			def linkify(text, definition, language: definition&.language)
 				rewriter = Linkify.new(self, language, text)
 				
@@ -205,22 +215,30 @@ module Utopia
 				@guides ||= Guides.new(self, @links)
 			end
 			
+			# Load the project README document.
+			# @returns [Document | Nil] The README document, if one exists.
 			def readme_document
 				if path = self.path_for("readme.md") || self.path_for("README.md")
 					Document.new(File.read(path), self)
 				end
 			end
 			
+			# Get the project title from its README.
+			# @returns [String] The project title, or a generic fallback.
 			def project_title
 				readme_document&.title || "Project"
 			end
 			
+			# Load the project release notes document.
+			# @returns [ReleasesDocument | Nil] The release notes document, if one exists.
 			def releases_document
 				if path = self.path_for("releases.md")
 					ReleasesDocument.new(File.read(path), self)
 				end
 			end
 			
+			# Enumerate the project releases.
+			# @returns [Enumerator(ReleasesDocument::Release) | Nil] The releases, if release notes exist.
 			def releases
 				if releases_document = self.releases_document
 					releases_document.releases

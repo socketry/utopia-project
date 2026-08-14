@@ -18,7 +18,9 @@ require "utopia/static"
 require_relative "project/base"
 require_relative "project/import_map"
 
+# @namespace
 module Utopia
+	# Provides project documentation generation and rendering.
 	module Project
 		# The root directory of the web application files.
 		SITE_ROOT = File.expand_path("../..", __dir__)

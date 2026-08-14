@@ -12,6 +12,10 @@ module Utopia
 			
 			# Represents a sidebar navigation entry with title, level, and anchor.
 			class Entry
+				# Initialize a sidebar entry.
+				# @parameter title_html [XRB::Markup] The rendered heading title.
+				# @parameter level [Integer] The heading level.
+				# @parameter anchor [String] The heading anchor.
 				def initialize(title_html, level, anchor)
 					@title_html = title_html
 					@level = level
