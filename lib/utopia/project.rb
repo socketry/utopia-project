@@ -69,7 +69,6 @@ module Utopia
 				# 'gallery' => Utopia::Gallery::Tags.new
 			}
 			
-			builder.run Utopia::Response::NotFound
 		end
 	end
 end
