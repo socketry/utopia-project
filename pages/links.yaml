@@ -1,5 +1,11 @@
 index:
   title: Project
   replace: project_title
+guides:
+  title: Guides
+source:
+  title: Source Code
+releases:
+  title: Releases
 errors:
   display: false

@@ -1,43 +1,20 @@
+<?r
+	base = controller[:base]
+	section_links = links("/", directories: true, files: false, indices: false)
+	current_section = first.node.uri_path.components.find { |component| !component.empty? }
+?>
 <header>
-	<nav class="breadcrumbs"><?r
-	page_path = first.node.uri_path.dirname
-	
-	Utopia::Path[page_path].descend do |path|
-		unless path.last
-			path = path + "index"
+	<nav class="sections">
+		<a href="/" class="project-title">#{base.project_title}</a>
+		<?r section_links.each do |link|
+			active = link.name == current_section
+			?><a href="#{link.href}" class="#{active ? 'active' : nil}">#{link.title}</a><?r
 		end
 		
-		if link = links(path.dirname, name: path.last, locale: localization&.locale, indices: true).first
-			if replace = link[:replace]&.to_sym and base = controller[:base]
-				?> &rsaquo; #{link.to_href(content: base.public_send(replace))}<?r
-			else
-				?> &rsaquo; #{link.to_href}<?r
-			end
-		else
-			?> &rsaquo; <span>#{path.last}</span><?r
+		if github_url = base.source_code_uri
+		?><a href="#{github_url}" class="github" target="_blank" rel="noopener noreferrer">GitHub ↗</a><?r
 		end
-	end
-
-	if lexical_path = controller[:lexical_path]
-		current = []
-		lexical_path.each do |part|
-			current << part
-
-			?> &rsaquo; <a href="/source/#{current.join('/')}/index">#{part}</a> <?r
-		end
-	end
-
-	if guide = controller[:guide]
-		?> &rsaquo; <a href="/guides/#{guide.name}/index">#{guide.title}</a> <?r
-	end
-
-	if localization&.localized?
-		?> &bull; (<?r
-		localization.all_locales.each.with_index do |locale, index|
-			?>#{index.zero? ? '' : ' '}<a href="#{localization.localized_path(page_path, locale)}">#{locale}</a><?r
-		end
-		?>)<?r
-	end
-?></nav>
-	<pagefind-modal-trigger placeholder="Search" compact hidden></pagefind-modal-trigger>
+		?>
+		<pagefind-modal-trigger placeholder="Search" compact hidden></pagefind-modal-trigger>
+	</nav>
 </header>
