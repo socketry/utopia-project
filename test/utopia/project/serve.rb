@@ -19,12 +19,40 @@ describe Utopia::Project do
 		Protocol::HTTP::Middleware.load(configuration_path)
 	end
 	
-	it "has root page" do
+	it "redirects the root path to the index" do
+		response = client.get("/")
+		
+		expect(response.status).to be == 301
+		expect(response.headers["location"]).to be == "/index"
+	end
+	
+	it "redirects directory paths to their index" do
+		response = client.get("/guides/")
+		
+		expect(response.status).to be == 307
+		expect(response.headers["location"]).to be == "/guides/index"
+	end
+	
+	it "renders error documents with the original status" do
+		response = client.get("/missing")
+		
+		expect(response.status).to be == 404
+		expect(response.read).to be(:include?, "File Not Found")
+	end
+	
+	it "has index page" do
 		expect(client.get("/index").read).to be(:include?, "Project")
 	end
 	
 	it "has guide page" do
 		expect(client.get("/guides/getting-started/index").read).to be(:include?, "Getting Started")
+	end
+	
+	it "has guide navigation" do
+		body = client.get("/guides/documentation-guidelines/index").read
+		
+		expect(body).to be(:include?, 'href="/guides/getting-started/index" class="previous"')
+		expect(body).to be(:include?, 'href="/guides/mermaid-diagrams/index" class="next"')
 	end
 	
 	it "has source code index" do
