@@ -128,7 +128,7 @@ header .sections a {
 }
 
 header .sections a:hover {
-	background-color: var(--underlay-color);
+	background-color: var(--overlay-color);
 }
 
 header .sections a.active {
@@ -170,7 +170,7 @@ header .sections .github:hover {
 }
 
 .subnav a:hover {
-	background-color: var(--underlay-color);
+	background-color: var(--overlay-color);
 }
 
 .subnav a.active {
