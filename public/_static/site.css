@@ -243,7 +243,6 @@ main {
 	font-size: 0.9rem;
 	margin-bottom: 1rem;
 	padding-bottom: 0.5rem;
-	border-bottom: 1px solid var(--underlay-color);
 }
 
 .sidebar nav ul {
@@ -577,7 +576,6 @@ ul.pragmas li.asynchronous {
 	font-size: 0.9rem;
 	margin-bottom: 1rem;
 	padding-bottom: 0.5rem;
-	border-bottom: 1px solid var(--underlay-color);
 	display: block;
 	font-weight: 500;
 	color: var(--accent-color);
