@@ -33,6 +33,11 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
+### v0.41.0
+
+  - Don't render empty signature block when there are only examples.
+  - Use protocol HTTP middleware for serving and testing project documentation.
+
 ### v0.40.0
 
   - Fixed duplicate heading IDs when multiple sections have the same title. Permalinks and sidebar scroll tracking now work correctly when you have headings with identical text in different sections (e.g., multiple "Deployment" subsections under "Kubernetes" and "Systemd").
@@ -70,10 +75,6 @@ Please see the [project releases](https://socketry.github.io/utopia-project/rele
 ### v0.31.0
 
   - Support brief release notes in `releases.md` document.
-
-### v0.30.0
-
-  - [Rename `changes.md` to `releases.md`](https://socketry.github.io/utopia-project/releases/index#rename-changes.md-to-releases.md)
 
 ## See Also
 

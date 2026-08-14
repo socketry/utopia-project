@@ -1,6 +1,6 @@
 # Changes
 
-## Unreleased
+## v0.41.0
 
   - Don't render empty signature block when there are only examples.
   - Use protocol HTTP middleware for serving and testing project documentation.
