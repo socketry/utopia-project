@@ -46,10 +46,14 @@ module Utopia
 			
 			builder.use Utopia::Static, root: PUBLIC_ROOT
 			
-			builder.use Utopia::Redirection::Rewrite, "/" => "/index"
+			builder.use Utopia::Redirection::Rewrite, {
+				"/" => "/index"
+			}
 			builder.use Utopia::Redirection::DirectoryIndex
 			
-			builder.use Utopia::Redirection::Errors, 404 => "/errors/file-not-found"
+			builder.use Utopia::Redirection::Errors, {
+				404 => "/errors/file-not-found"
+			}
 			
 			if locales
 				builder.use Utopia::Localization,
