@@ -58,8 +58,10 @@ describe Utopia::Project do
 	it "has guide navigation" do
 		body = client.get("/guides/documentation-guidelines/index").read
 		
-		expect(body).to be(:include?, 'href="/guides/getting-started/index" class="previous"')
-		expect(body).to be(:include?, 'href="/guides/mermaid-diagrams/index" class="next"')
+		expect(body).to be(:include?, 'href="/guides/getting-started/index"')
+		expect(body).to be(:include?, 'href="/guides/mermaid-diagrams/index"')
+		expect(body).not.to be(:include?, 'class="previous"')
+		expect(body).not.to be(:include?, 'class="next"')
 	end
 	
 	it "has source code index" do
