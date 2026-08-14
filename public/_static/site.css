@@ -87,10 +87,36 @@ body {
 }
 
 header {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
 	padding: 0.5rem;
 	
 	background-color: var(--header-color);
 	border-bottom: 0.2rem solid var(--accent-color);
+}
+
+header .breadcrumbs {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+pagefind-modal-trigger,
+pagefind-modal {
+	--pf-text: var(--main-color);
+	--pf-text-secondary: var(--main-color);
+	--pf-text-muted: var(--main-color);
+	--pf-background: var(--main-background-color);
+	--pf-border: var(--underlay-color);
+	--pf-border-focus: var(--accent-color);
+	--pf-hover: var(--header-color);
+	--pf-mark: var(--accent-color);
+	--pf-outline-focus: var(--accent-color);
+	--pf-font: inherit;
+}
+
+header pagefind-modal-trigger {
+	flex: 0 0 auto;
 }
 
 main {

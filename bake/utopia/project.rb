@@ -66,6 +66,8 @@ def static(output_path: "docs", force: true)
 	)
 	
 	FileUtils.touch File.expand_path(".nojekyll", output_path)
+	
+	context["utopia:project:search:build"].call(output_path: output_path)
 end
 
 # Extract a description for the project.

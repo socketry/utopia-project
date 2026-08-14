@@ -1,7 +1,7 @@
 <?r if document = self[:document] ?>
 	<content:page class="with-sidebar">
 		<?r navigation = document.navigation ?>
-		<aside class="sidebar">
+		<aside class="sidebar" data-pagefind-ignore="all">
 			#{navigation.to_html(sidebar: true, title: "Releases")}
 		</aside>
 		<div class="content">
