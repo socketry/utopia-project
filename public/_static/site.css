@@ -151,6 +151,22 @@ header .sections .github:hover {
 	opacity: 1;
 }
 
+.site-navigation {
+	background-color: var(--main-background-color);
+}
+
+@media (min-width: 64em) {
+	html {
+		scroll-padding-top: 5rem;
+	}
+	
+	.site-navigation {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+	}
+}
+
 .subnav {
 	display: flex;
 	align-items: center;
