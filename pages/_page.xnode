@@ -20,7 +20,7 @@
 		<script type="module" src="/_static/application.js"></script>
 	</head>
 	<body>
-		<utopia:node name="_navigation" />
+		<relative:navigation />
 		<pagefind-modal hidden></pagefind-modal>
 		
 		<main class="#{attributes[:class]}" data-pagefind-body>
