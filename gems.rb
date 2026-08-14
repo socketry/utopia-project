@@ -18,14 +18,13 @@ end
 
 group :test do
 	gem "sus"
+	gem "sus-fixtures-protocol-http", "~> 0.1"
 	gem "covered"
 	gem "decode"
 	
 	gem "rubocop"
 	gem "rubocop-md"
 	gem "rubocop-socketry"
-	
-	gem "rack-test"
 	
 	gem "bake-test"
 end

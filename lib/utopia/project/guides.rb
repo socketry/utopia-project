@@ -45,14 +45,14 @@ module Utopia
 			# @parameter name [String] The guide name.
 			# @returns [Guide | Nil]
 			def [](name)
-				to_a.find { |guide| guide.name == name }
+				to_a.find{|guide| guide.name == name}
 			end
 			
 			# Get the related guides (previous and next) for the given guide.
 			# @parameter guide [Guide] The current guide.
 			# @returns [Array(Guide | Nil, Guide | Nil)] A two-element array containing the previous and next guides.
 			def related(guide)
-				index = to_a.index { |g| g.name == guide.name }
+				index = to_a.index{|g| g.name == guide.name}
 				return [nil, nil] unless index
 				
 				previous_guide = index > 0 ? to_a[index - 1] : nil
@@ -63,4 +63,3 @@ module Utopia
 		end
 	end
 end
-

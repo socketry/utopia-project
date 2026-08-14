@@ -3,6 +3,7 @@
 ## Unreleased
 
   - Don't render empty signature block when there are only examples.
+  - Use protocol HTTP middleware for serving and testing project documentation.
 
 ## v0.40.0
 
