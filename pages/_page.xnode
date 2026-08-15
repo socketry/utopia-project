@@ -21,7 +21,7 @@
 	</head>
 	<body>
 		<content:header />
-		<pagefind-modal></pagefind-modal>
+		<pagefind-modal hidden></pagefind-modal>
 		
 		<main class="#{attributes[:class]}" data-pagefind-body>
 			<utopia:content/>

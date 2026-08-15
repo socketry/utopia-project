@@ -39,5 +39,5 @@
 		?>)<?r
 	end
 ?></nav>
-	<pagefind-modal-trigger placeholder="Search" compact></pagefind-modal-trigger>
+	<pagefind-modal-trigger placeholder="Search" compact hidden></pagefind-modal-trigger>
 </header>
