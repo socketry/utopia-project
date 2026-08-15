@@ -1,6 +1,16 @@
 {
   "dependencies": {
     "@socketry/syntax": "^0.5.0",
-    "mermaid": "^11.4.1"
+    "mermaid": "^11.16.1"
+  },
+  "utopia": {
+    "components": {
+      "mermaid": {
+        "include": [
+          "mermaid.esm.min.mjs",
+          "chunks/mermaid.esm.min/**/*.mjs"
+        ]
+      }
+    }
   }
 }
