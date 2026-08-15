@@ -36,13 +36,11 @@ jobs:
       run: bundle exec bake utopia:project:static --force no
     
     - name: Upload documentation artifact
-      if: github.event_name == 'push'
       uses: actions/upload-pages-artifact@v5
       with:
         path: docs
   
   deploy:
-    if: github.event_name == 'push'
     runs-on: ubuntu-latest
 
     permissions:
@@ -50,7 +48,7 @@ jobs:
       id-token: write
     
     environment:
-      name: github-pages
+      name: ${{ github.event_name == 'pull_request' && 'github-pages-preview' || 'github-pages' }}
       url: ${{steps.deployment.outputs.page_url}}
     
     needs: generate
@@ -58,3 +56,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          preview: ${{ github.event_name == 'pull_request' }}
