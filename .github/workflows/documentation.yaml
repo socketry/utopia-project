@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: "documentation-${{ github.ref }}"
+  group: "pages"
   cancel-in-progress: true
 
 env:
@@ -36,13 +36,11 @@ jobs:
       run: bundle exec bake utopia:project:static --force no
     
     - name: Upload documentation artifact
-      if: github.event_name == 'push'
       uses: actions/upload-pages-artifact@v5
       with:
         path: docs
   
   deploy:
-    if: github.event_name == 'push'
     runs-on: ubuntu-latest
 
     permissions:
