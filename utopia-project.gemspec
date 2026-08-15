@@ -29,5 +29,5 @@ Gem::Specification.new do |spec|
 	spec.add_dependency "falcon"
 	spec.add_dependency "markly", "~> 0.15"
 	spec.add_dependency "thread-local"
-	spec.add_dependency "utopia", "~> 3.0"
+	spec.add_dependency "utopia", "~> 3.0.4"
 end
