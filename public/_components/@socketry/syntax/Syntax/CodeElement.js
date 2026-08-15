@@ -18,11 +18,20 @@ export class CodeElement extends HTMLElement {
 
 	#syntax = null;
 	#shadow;
+	#slot = null;
+	#rendered = null;
 	#adoptedHrefs = new Set();
 	#highlighted = false;
 
 	constructor() {
 		super();
+		
+		/**
+		 * A promise that resolves when the current highlighting attempt completes.
+		 * Check `highlighted` before using line measurement APIs.
+		 * @type {Promise<void>}
+		 */
+		this.ready = Promise.resolve();
 	}
 
 	get syntax() {
@@ -33,7 +42,7 @@ export class CodeElement extends HTMLElement {
 		this.#syntax = value;
 		// Re-render with new syntax instance if already connected:
 		if (this.isConnected && !this.#highlighted) {
-			this.#render();
+			this.ready = this.#render();
 		}
 	}
 
@@ -76,6 +85,44 @@ export class CodeElement extends HTMLElement {
 		}
 	}
 
+	/**
+	 * Get the bounding client rect of a specific line (1-based).
+	 * @param {number} lineNumber - The 1-based line number.
+	 * @returns {DOMRect|null} The bounding rect, or null if not found.
+	 */
+	getLineBoundingClientRect(lineNumber) {
+		if (!this.#shadow) return null;
+		
+		const code = this.#shadow.querySelector('code');
+		if (!code) return null;
+		
+		const lines = code.children;
+		if (lineNumber < 1 || lineNumber > lines.length) return null;
+		
+		return lines[lineNumber - 1].getBoundingClientRect();
+	}
+	
+	/**
+	 * Get the total number of rendered lines.
+	 * @returns {number} The line count, or 0 if not yet rendered.
+	 */
+	get lineCount() {
+		if (!this.#shadow) return 0;
+		
+		const code = this.#shadow.querySelector('code');
+		if (!code) return 0;
+		
+		return code.children.length;
+	}
+
+	/**
+	 * Whether the current highlighting attempt has completed successfully.
+	 * @returns {boolean}
+	 */
+	get highlighted() {
+		return this.#highlighted;
+	}
+	
 	connectedCallback() {
 		// Detect if we're inside a <pre> element and set wrap attribute
 		if (this.parentElement?.tagName === 'PRE') {
@@ -89,9 +136,11 @@ export class CodeElement extends HTMLElement {
 
 		if (!this.#shadow) {
 			this.#shadow = this.attachShadow({mode: 'open'});
+			this.#slot = document.createElement('slot');
+			this.#shadow.appendChild(this.#slot);
 		}
 
-		this.#render();
+		this.ready = this.#render();
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
@@ -104,10 +153,10 @@ export class CodeElement extends HTMLElement {
 			this.isConnected &&
 			this.#shadow
 		) {
-			// Reset highlighted flag to allow re-rendering
+			// Reset highlighted state and track the new render attempt:
 			this.#highlighted = false;
 			this.#adoptedHrefs.clear();
-			this.#render();
+			this.ready = this.#render();
 		}
 	}
 
@@ -200,6 +249,7 @@ export class CodeElement extends HTMLElement {
 	async #render() {
 		try {
 			const languageName = this.language;
+			const code = this.#getCodeContent();
 
 			if (!languageName) {
 				console.warn('<syntax-code>: No language specified');
@@ -219,17 +269,24 @@ export class CodeElement extends HTMLElement {
 			// Load theme CSS into shadow root using the language's canonical name
 			await this.#loadStylesheets(language.name);
 
-			const code = this.#getCodeContent();
-
-			// Clear shadow DOM before rendering (must happen before appendChild to remove old content, but after loadStylesheets since fallback path may have appended <style> elements):
-			this.#shadow.innerHTML = '';
-
-			// Highlight and append - language.process() returns a <code> element:
+			// Highlight off-DOM so the original source remains visible while all
+			// asynchronous work is in progress:
 			const highlighted = await language.process(this.syntax, code);
-			this.#shadow.appendChild(highlighted);
 
-			// Clear light DOM only after successful render to avoid losing content on errors:
-			this.textContent = '';
+			// Swap the completed rendering in synchronously. On the first render,
+			// the slot keeps the light-DOM source visible. On subsequent renders,
+			// keep the previous highlighted content visible until its replacement
+			// is ready.
+			if (this.#rendered) {
+				this.#rendered.replaceWith(highlighted);
+			} else if (this.#slot) {
+				this.#slot.replaceWith(highlighted);
+				this.#slot = null;
+			} else {
+				this.#shadow.appendChild(highlighted);
+			}
+
+			this.#rendered = highlighted;
 
 			this.#highlighted = true;
 		} catch (error) {

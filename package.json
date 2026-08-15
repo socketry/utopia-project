@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@socketry/syntax": "^0.3.0",
+    "@socketry/syntax": "^0.5.0",
     "mermaid": "^11.4.1"
   }
 }
