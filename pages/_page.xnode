@@ -20,7 +20,9 @@
 		<script type="module" src="/_static/application.js"></script>
 	</head>
 	<body>
-		<content:header />
+		<div class="site-navigation">
+			<relative:navigation />
+		</div>
 		<pagefind-modal hidden></pagefind-modal>
 		
 		<main class="#{attributes[:class]}" data-pagefind-body>

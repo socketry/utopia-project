@@ -258,6 +258,13 @@ module Utopia
 					@gemspec ||= ::Gem::Specification.load(File.join(@root, gemspec_path))
 				end
 			end
+			
+			# Return the source code URI for this project, if available.
+			# Prefers `metadata["source_code_uri"]` over `homepage`.
+			# @returns [String | nil]
+			def source_code_uri
+				gemspec&.metadata&.dig("source_code_uri") || gemspec&.homepage
+			end
 		end
 	end
 end
