@@ -1,7 +1,7 @@
 <content:header />
 <?r if lexical_path = controller[:lexical_path]
 	current = []
-?><nav class="subnav breadcrumb"><?r
+?><nav class="subnav breadcrumb" aria-label="Source breadcrumb"><?r
 	lexical_path.each do |part|
 		current << part
 ?><a href="/source/#{current.join("/")}/index">#{part}</a><?r

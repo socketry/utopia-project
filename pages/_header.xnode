@@ -4,17 +4,19 @@
 	current_section = first.node.uri_path.components.find { |component| !component.empty? }
 ?>
 <header>
-	<nav class="sections">
-		<a href="/" class="project-title">#{base.project_title}</a>
-		<?r section_links.each do |link|
-			active = link.name == current_section
-			?><a href="#{link.href}" class="#{active ? 'active' : nil}">#{link.title}</a><?r
-		end
-		
-		if github_url = base.source_code_uri
-		?><a href="#{github_url}" class="github" target="_blank" rel="noopener noreferrer">GitHub ↗</a><?r
-		end
-		?>
-		<pagefind-modal-trigger placeholder="Search" compact hidden></pagefind-modal-trigger>
+	<nav class="sections" aria-label="Project">
+		<a href="/" class="project-title#{current_section ? nil : ' active'}" aria-current="#{current_section ? 'false' : 'page'}">#{base.project_title}</a>
+		<div class="section-links">
+			<?r section_links.each do |link|
+				active = link.name == current_section
+				?><a href="#{link.href}" class="#{active ? 'active' : nil}" aria-current="#{active ? 'page' : 'false'}">#{link.title}</a><?r
+			end ?>
+		</div>
+		<div class="header-actions">
+			<pagefind-modal-trigger placeholder="Search" compact hidden></pagefind-modal-trigger>
+			<?r if github_url = base.source_code_uri ?>
+				<a href="#{github_url}" class="github" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub">GitHub <span aria-hidden="true">↗</span></a>
+			<?r end ?>
+		</div>
 	</nav>
 </header>

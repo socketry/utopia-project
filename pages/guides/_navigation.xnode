@@ -2,9 +2,9 @@
 <?r
 	base = controller[:base]
 	current_guide = controller[:guide]
-?><nav class="subnav"><?r
+?><nav class="subnav" aria-label="Guides"><?r
 	base.guides.each do |guide|
 		active = guide.name == current_guide&.name
-?><a href="#{guide.href}" class="#{active ? 'active' : nil}">#{guide.title}</a><?r
+?><a href="#{guide.href}" class="#{active ? 'active' : nil}" aria-current="#{active ? 'page' : 'false'}">#{guide.title}</a><?r
 	end
 ?></nav>

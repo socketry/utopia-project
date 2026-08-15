@@ -112,11 +112,34 @@ header pagefind-modal-trigger {
 }
 
 header .sections {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.375rem 0.5rem;
+}
+
+header .section-links,
+header .header-actions {
 	display: flex;
 	align-items: center;
-	flex-wrap: wrap;
 	gap: 0.125rem;
-	padding: 0.375rem 0.5rem;
+}
+
+header .section-links {
+	min-width: 0;
+	overflow-x: auto;
+	overscroll-behavior-inline: contain;
+	scrollbar-width: none;
+}
+
+header .section-links::-webkit-scrollbar,
+.subnav::-webkit-scrollbar {
+	display: none;
+}
+
+header .header-actions {
+	justify-self: end;
 }
 
 header .sections a {
@@ -137,18 +160,52 @@ header .sections a.active {
 }
 
 header .sections .project-title {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	font-weight: bold;
-	margin-right: 0.25rem;
 }
 
 header .sections .github {
-	margin-left: auto;
 	font-size: 0.85em;
 	opacity: 0.7;
 }
 
 header .sections .github:hover {
 	opacity: 1;
+}
+
+header .sections a:focus-visible,
+.subnav a:focus-visible {
+	outline: 2px solid var(--accent-color);
+	outline-offset: 2px;
+}
+
+@media (max-width: 39.99em) {
+	header .sections {
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 0.25rem;
+		padding-bottom: 0;
+	}
+	
+	header .section-links {
+		grid-column: 1 / -1;
+		grid-row: 2;
+		padding: 0.25rem 0 0.375rem;
+	}
+
+	header .header-actions {
+		grid-column: 2;
+		grid-row: 1;
+	}
+	
+	header .sections .github {
+		font-size: 0;
+	}
+	
+	header .sections .github span {
+		font-size: 0.85rem;
+	}
 }
 
 .site-navigation {
@@ -170,11 +227,14 @@ header .sections .github:hover {
 .subnav {
 	display: flex;
 	align-items: center;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	gap: 0.125rem;
 	padding: 0.25rem 0.5rem;
 	border-bottom: 1px solid var(--underlay-color);
 	font-size: 0.9em;
+	overflow-x: auto;
+	overscroll-behavior-inline: contain;
+	scrollbar-width: none;
 }
 
 .subnav a {
