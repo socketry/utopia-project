@@ -4,16 +4,13 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages:
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
-# Allow one concurrent deployment:
 concurrency:
-  group: "pages"
+  group: "documentation-${{ github.ref }}"
   cancel-in-progress: true
 
 env:
@@ -39,12 +36,18 @@ jobs:
       run: bundle exec bake utopia:project:static --force no
     
     - name: Upload documentation artifact
+      if: github.event_name == 'push'
       uses: actions/upload-pages-artifact@v5
       with:
         path: docs
   
   deploy:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
     
     environment:
       name: github-pages
