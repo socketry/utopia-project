@@ -10,6 +10,24 @@ module Utopia
 	module Project
 		# Renders project Markdown with support for Mermaid code blocks.
 		class Renderer < Markly::Renderer::HTML
+			# Render a heading and expose its title to Pagefind for sub-results.
+			# @parameter node [Markly::Node] The heading node.
+			def header(node)
+				block do
+					if @headings
+						out("</section>") if @section
+						@section = true
+						out(
+							"<section#{id_for(node)} data-pagefind-title=\"",
+							escape_html(node.to_plaintext.chomp),
+							"\">"
+						)
+					end
+					
+					out("<h", node.header_level, "#{source_position(node)}>", :children, "</h", node.header_level, ">")
+				end
+			end
+			
 			# Render a fenced code block, including Mermaid diagrams.
 			# @parameter node [Markly::Node] The fenced code block node.
 			def code_block(node)

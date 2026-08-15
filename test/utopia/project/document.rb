@@ -12,7 +12,14 @@ describe Utopia::Project::Document do
 	let(:html) {document.to_html}
 	
 	it "generates title" do
-		expect(html).to be(:include?, "<section id=\"utopia::project\"><h1>Utopia::Project</h1>")
+		expect(html).to be(:include?, "<section id=\"utopia::project\" data-pagefind-title=\"Utopia::Project\"><h1>Utopia::Project</h1>")
+	end
+	
+	it "exposes heading titles to Pagefind" do
+		document = subject.new("## Installation & Usage")
+		html = document.to_html.to_s
+		
+		expect(html).to be(:include?, '<section id="installation-&amp;-usage" data-pagefind-title="Installation &amp; Usage">')
 	end
 	
 	it "can replace usage" do
@@ -42,10 +49,10 @@ describe Utopia::Project::Document do
 		html = doc.to_html.to_s
 		
 		# First "Deployment" should have id="deployment"
-		expect(html).to be(:include?, '<section id="deployment">')
+		expect(html).to be(:include?, '<section id="deployment" data-pagefind-title="Deployment">')
 		
 		# Second "Deployment" should have id="deployment-2"
-		expect(html).to be(:include?, '<section id="deployment-2">')
+		expect(html).to be(:include?, '<section id="deployment-2" data-pagefind-title="Deployment">')
 	end
 	
 	it "generates matching IDs in sidebar and document" do

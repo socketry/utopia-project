@@ -4,20 +4,18 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages:
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
-# Allow one concurrent deployment:
 concurrency:
-  group: "pages"
+  group: "documentation-${{ github.ref }}"
   cancel-in-progress: true
 
 env:
   BUNDLE_WITH: maintenance
+  PAGEFIND_REVISION: 8d6285085b079ebbe75bd1ac497a273a41a340d1
 
 jobs:
   generate:
@@ -26,6 +24,37 @@ jobs:
     steps:
     - uses: actions/checkout@v7
 
+    - name: Checkout Pagefind fork
+      uses: actions/checkout@v7
+      with:
+        repository: samuel-williams-shopify/pagefind
+        ref: ${{ env.PAGEFIND_REVISION }}
+        path: .pagefind
+        persist-credentials: false
+
+    - uses: actions/setup-node@v7
+      with:
+        node-version: 24
+
+    - name: Cache Pagefind build
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.cargo/git
+          ~/.cargo/registry
+          .pagefind/target
+        key: pagefind-${{ runner.os }}-${{ env.PAGEFIND_REVISION }}
+
+    - name: Install Pagefind Rust toolchain
+      run: |
+        rustup toolchain install nightly --component rust-src
+        rustup target add wasm32-unknown-unknown --toolchain nightly
+
+    - name: Install wasm-pack
+      uses: jetli/wasm-pack-action@v0.4.0
+      with:
+        version: v0.14.0
+
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ruby
@@ -33,9 +62,15 @@ jobs:
     
     - name: Installing packages
       run: sudo apt-get install wget
-    
+
+    - name: Build Pagefind fork
+      timeout-minutes: 30
+      run: bundle exec bake utopia:project:pagefind
+
     - name: Generate documentation
-      timeout-minutes: 5
+      timeout-minutes: 10
+      env:
+        PAGEFIND_BINARY_PATH: ${{ github.workspace }}/.pagefind/target/release/pagefind
       run: bundle exec bake utopia:project:static --force no
     
     - name: Upload documentation artifact
@@ -45,9 +80,13 @@ jobs:
   
   deploy:
     runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
     
     environment:
-      name: github-pages
+      name: ${{ github.event_name == 'pull_request' && 'github-pages-preview' || 'github-pages' }}
       url: ${{steps.deployment.outputs.page_url}}
     
     needs: generate
@@ -55,3 +94,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          preview: ${{ github.event_name == 'pull_request' }}

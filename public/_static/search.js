@@ -1,21 +1,23 @@
 const trigger = document.querySelector('pagefind-modal-trigger');
 const modal = document.querySelector('pagefind-modal');
+const site = new URL('../', import.meta.url);
+const pagefind = new URL('pagefind/', site);
 
-const localDevelopment = window.location.protocol === 'https:' &&
-	['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
+const config = document.createElement('pagefind-config');
+config.setAttribute('bundle-path', pagefind);
+config.setAttribute('base-url', site.pathname);
+document.head.append(config);
 
-if (!localDevelopment) {
-	const stylesheet = document.createElement('link');
-	stylesheet.rel = 'stylesheet';
-	stylesheet.href = '/pagefind/pagefind-component-ui.css';
-	document.head.append(stylesheet);
+const stylesheet = document.createElement('link');
+stylesheet.rel = 'stylesheet';
+stylesheet.href = new URL('pagefind-component-ui.css', pagefind);
+document.head.append(stylesheet);
 
-	try {
-		await import('/pagefind/pagefind-component-ui.js');
-		if (trigger) trigger.hidden = false;
-		if (modal) modal.hidden = false;
-	} catch (error) {
-		stylesheet.remove();
-		console.warn('Documentation search is unavailable.', error);
-	}
+try {
+	await import(new URL('pagefind-component-ui.js', pagefind));
+	if (trigger) trigger.hidden = false;
+	if (modal) modal.hidden = false;
+} catch (error) {
+	stylesheet.remove();
+	console.warn('Documentation search is unavailable.', error);
 }
