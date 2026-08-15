@@ -214,7 +214,8 @@ header .sections a:focus-visible,
 
 @media (min-width: 64em) {
 	html {
-		scroll-padding-top: 5rem;
+		--site-navigation-height: 5.2rem;
+		scroll-padding-top: calc(var(--site-navigation-height) + 1rem);
 	}
 	
 	.site-navigation {
@@ -273,7 +274,7 @@ main {
 @media (min-width: 64em) {
 	main.with-sidebar {
 		display: grid;
-		grid-template-columns: 16rem 1fr;
+		grid-template-columns: 16rem minmax(0, 1fr);
 		gap: 1rem;
 		align-items: start;
 
@@ -282,6 +283,7 @@ main {
 	}
 	
 	main.with-sidebar .content {
+		min-width: 0;
 		max-width: 48rem;
 	}
 }
@@ -294,8 +296,9 @@ main {
 	.sidebar {
 		display: block;
 		position: sticky;
-		top: 5rem;
-		max-height: calc(100vh - 4rem);
+		top: var(--site-navigation-height);
+		max-height: calc(100vh - var(--site-navigation-height));
+		max-height: calc(100dvh - var(--site-navigation-height));
 		overflow-y: auto;
 		
 		/* Custom scrollbar styling */
@@ -359,7 +362,7 @@ main {
 	text-decoration: none;
 	display: block;
 	border-radius: 0.25rem;
-	transition: all 0.2s ease;
+	transition: background-color 0.15s, border-color 0.15s, color 0.15s;
 }
 
 .sidebar nav a:hover {
@@ -446,11 +449,19 @@ a {
 }
 
 a.self {
-	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.15s;
 }
 
-*:hover > a.self {
-	visibility: visible;
+*:hover > a.self,
+*:focus-within > a.self {
+	opacity: 1;
+}
+
+@media (hover: none) {
+	a.self {
+		opacity: 0.5;
+	}
 }
 
 a:hover {
@@ -627,7 +638,7 @@ ul.pragmas li.asynchronous {
 	display: block;
 	padding: 0.25rem 0.5rem;
 	border-radius: 0.25rem;
-	transition: all 0.2s ease;
+	transition: background-color 0.15s, border-color 0.15s, color 0.15s;
 }
 
 .inline-nav nav a:hover {
@@ -738,7 +749,7 @@ ul.pragmas li.asynchronous {
 }
 
 /* Subtle focus indicator for keyboard navigation */
-.sidebar nav a:focus {
+.sidebar nav a:focus-visible {
 	outline: 2px solid var(--accent-color);
 	outline-offset: 2px;
 	border-radius: 0.25rem;
@@ -748,16 +759,14 @@ ul.pragmas li.asynchronous {
 .sidebar nav a:active {
 	background-color: var(--accent-hover-color);
 	color: white;
-	transform: scale(0.98);
-	transition: transform 0.1s ease;
 }
 
 /* Active section highlighting (set by JavaScript) */
 .sidebar nav a.active {
-	background-color: var(--accent-color);
-	color: white;
+	background-color: var(--header-color);
+	color: var(--accent-color);
 	border-left-color: var(--accent-color);
-	font-weight: 500;
+	font-weight: bold;
 }
 
 /* Guide navigation (previous/next) */
