@@ -109,6 +109,8 @@ pagefind-modal {
 	--pf-background: var(--main-background-color);
 	--pf-border: var(--underlay-color);
 	--pf-border-focus: var(--accent-color);
+	--pf-skeleton: var(--header-color);
+	--pf-skeleton-shine: color-mix(in srgb, var(--header-color), white 10%);
 	--pf-hover: var(--header-color);
 	--pf-mark: var(--accent-color);
 	--pf-outline-focus: var(--accent-color);
