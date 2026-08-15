@@ -1,4 +1,5 @@
-<header><?r
+<header>
+	<nav class="breadcrumbs"><?r
 	page_path = first.node.uri_path.dirname
 	
 	Utopia::Path[page_path].descend do |path|
@@ -37,4 +38,6 @@
 		end
 		?>)<?r
 	end
-?></header>
+?></nav>
+	<pagefind-modal-trigger placeholder="Search" compact hidden></pagefind-modal-trigger>
+</header>

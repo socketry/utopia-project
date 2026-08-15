@@ -5,7 +5,7 @@
 		navigation = guide.navigation
 	?>
 	
-	<aside class="sidebar">
+	<aside class="sidebar" data-pagefind-ignore="all">
 		#{navigation.to_html}
 	</aside>
 	<div class="content">

@@ -44,6 +44,13 @@ describe Utopia::Project do
 		expect(client.get("/index").read).to be(:include?, "Project")
 	end
 	
+	it "generates URL-like import map values" do
+		body = client.get("/index").read
+		
+		expect(body).to be(:include?, '"mermaid":"./_components/mermaid/mermaid.esm.min.mjs"')
+		expect(body).to be(:include?, '"@socketry/syntax":"./_components/@socketry/syntax/Syntax.js"')
+	end
+	
 	it "has guide page" do
 		expect(client.get("/guides/getting-started/index").read).to be(:include?, "Getting Started")
 	end

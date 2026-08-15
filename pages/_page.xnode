@@ -14,14 +14,16 @@
 		
 		<link rel="icon" type="image/png" href="/_static/icon.png" />
 		<link rel="stylesheet" href="/_static/site.css" type="text/css" media="screen" />
+		<script type="module" src="/_static/search.js"></script>
 		
 		#{Utopia::Project::IMPORT_MAP.relative_to(request.request_path).to_html}
 		<script type="module" src="/_static/application.js"></script>
 	</head>
 	<body>
 		<content:header />
+		<pagefind-modal hidden></pagefind-modal>
 		
-		<main class="#{attributes[:class]}">
+		<main class="#{attributes[:class]}" data-pagefind-body>
 			<utopia:content/>
 		</main>
 	</body>
