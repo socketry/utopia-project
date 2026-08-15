@@ -1,0 +1,30 @@
+<?r
+base = self[:base]
+symbol = self[:symbol]
+link = self[:link]
+
+if symbol.respond_to?(:super_class)
+	super_class = symbol.super_class
+end
+
+if super_class
+	reference = symbol.language.reference_for(super_class)
+	super_symbol = base.index.lookup(reference, relative_to: symbol)
+end
+?>
+<code class="language-#{symbol.language.name}"><?r
+	if link
+		?><a href="#{base.link_for(symbol)}">#{symbol.short_form}</a><?r
+	else
+		?>#{symbol.short_form}<?r
+	end
+
+	if super_class
+		?> &lt; <?r
+		if super_symbol
+			?><a href="#{base.link_for(super_symbol)}" title="#{super_symbol.qualified_name}">#{super_class}</a><?r
+		else
+			?>#{super_class}<?r
+		end
+	end
+?></code>
