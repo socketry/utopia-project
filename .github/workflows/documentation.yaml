@@ -65,7 +65,7 @@ jobs:
 
     - name: Build Pagefind fork
       timeout-minutes: 30
-      run: bundle exec bake --bakefile .github/pagefind.rb build
+      run: bundle exec bake utopia:project:pagefind
 
     - name: Generate documentation
       timeout-minutes: 10
