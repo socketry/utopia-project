@@ -9,6 +9,7 @@
 	<h1>
 		#{partial 'content:declaration', symbol: symbol}
 	</h1>
+	#{partial 'content:relationships', symbol: symbol}
 	
 	<?r
 	if document = base.document_for(symbol)
@@ -19,7 +20,6 @@
 	?>
 	#{partial 'content:examples', symbol: symbol}
 	#{partial 'content:signature', symbol: symbol}
-	#{partial 'content:relationships', symbol: symbol}
 	<?r
 	nested = node.children.map do |name, child|
 		base.best(child.values)
