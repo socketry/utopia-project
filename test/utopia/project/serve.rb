@@ -80,10 +80,10 @@ describe Utopia::Project do
 		
 		expect(body).to be(:include?, "def release_names")
 		expect(body).to be(:include?, 'class ReleasesDocument &lt; <a href="/reference/Utopia/Project/Document/index" title="Utopia::Project::Document">Document</a>')
-		expect(body).to be(:include?, '<dl class="relationships">')
+		expect(body).to be(:include?, '<dl class="relationships" data-pagefind-ignore>')
 		expect(body).to be(:include?, "<dt>Inherits from</dt>")
 		
-		relationships = body[/<dl class="relationships">.*?<\/dl>/m]
+		relationships = body[/<dl class="relationships" data-pagefind-ignore>.*?<\/dl>/m]
 		expect(relationships).to be(:include?, "/reference/Utopia/Project/Document/index#Utopia%3A%3AProject%3A%3ADocument%23root")
 		expect(relationships).to be(:include?, ": <code><a href=")
 		expect(body).not.to be(:include?, "<h2>Inherited Methods</h2>")
