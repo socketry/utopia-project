@@ -170,10 +170,6 @@ header .sections .github {
 	opacity: 0.7;
 }
 
-header .sections .github span {
-	font-size: 0.85em;
-}
-
 header .sections .github:hover {
 	opacity: 1;
 }
