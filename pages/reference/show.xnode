@@ -30,13 +30,21 @@
 	if nested.any?
 	?>
 	<section>
-		<h2>Nested</h2>
+		<h2>Classes and Modules</h2>
 		
-		<ul>
-			<?r nested.each do |symbol| ?>
-			<li><a href="#{base.link_for(symbol)}"><code class="language-#{symbol.language.name}">#{symbol.nested_name}</code></a></li>
+		<dl class="nested-definitions">
+			<?r nested.each do |symbol|
+				documentation = symbol.documentation
+				if text = documentation&.text
+					description = text.take_while{|line| !line.empty?}.join("\n")
+				end
+			?>
+			<div>
+				<dt>#{partial 'content:declaration', symbol: symbol, link: true}</dt>
+				<dd><?r unless description&.empty? ?>#{base.format(description, symbol)}<?r end ?></dd>
+			</div>
 			<?r end ?>
-		</ul>
+		</dl>
 	</section>
 	<?r
 	end

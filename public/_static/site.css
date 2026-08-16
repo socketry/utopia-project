@@ -437,6 +437,37 @@ dl.relationships dt, dl.relationships dd {
 	margin: 0;
 }
 
+dl.nested-definitions {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+	gap: 1.5rem 2rem;
+}
+
+dl.nested-definitions > div {
+	min-width: 0;
+}
+
+dl.nested-definitions dt, dl.nested-definitions dd,
+dl.nested-definitions dd p {
+	margin: 0;
+}
+
+dl.nested-definitions dt {
+	font-size: 1.05em;
+}
+
+dl.nested-definitions dt code,
+dl.nested-definitions dt syntax-code {
+	display: block;
+	max-width: 100%;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+
+dl.nested-definitions dd {
+	margin-top: 0.25rem;
+}
+
 ul.index {
 	padding: 0;
 	list-style: none;

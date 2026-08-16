@@ -84,4 +84,13 @@ describe Utopia::Project do
 		expect(body).to be(:include?, "<dt>Inherits from</dt>")
 		expect(body).to be(:include?, "/reference/Utopia/Project/Document/index#Utopia%3A%3AProject%3A%3ADocument%23root")
 	end
+	
+	it "summarizes nested definitions" do
+		body = client.get("/reference/Utopia/Project/index").read
+		
+		expect(body).to be(:include?, "Classes and Modules")
+		expect(body).to be(:include?, '<dl class="nested-definitions">')
+		expect(body).to be(:include?, '<a href="/reference/Utopia/Project/Document/index">class Document</a>')
+		expect(body).to be(:include?, "Represents a Markdown document with optional source code cross-references.")
+	end
 end
