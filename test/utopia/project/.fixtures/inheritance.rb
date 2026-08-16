@@ -32,7 +32,21 @@ module Example
 		end
 	end
 	
-	class Parent
+	module ParentIncluded
+		# A method included by the parent.
+		def parent_included_method
+		end
+	end
+	
+	class Grandparent
+		# An inherited grandparent method.
+		def grandparent_method
+		end
+	end
+	
+	class Parent < Grandparent
+		include ParentIncluded
+		
 		# Initialize the parent.
 		def initialize
 		end

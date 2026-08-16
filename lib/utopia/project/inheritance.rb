@@ -13,8 +13,8 @@ module Utopia
 			# A method inherited from another definition.
 			Method = Struct.new(:name, :definition)
 			
-			# A group of inherited methods with the same origin.
-			Group = Struct.new(:definition, :methods)
+			# Methods inherited through a direct relationship.
+			Group = Struct.new(:kind, :definition, :methods)
 			
 			# Initialize inheritance resolution for the given definition.
 			# @parameter index [Decode::Index] The index used to resolve relationships.
@@ -55,10 +55,10 @@ module Utopia
 			end
 			
 			# Enumerate documented public and protected methods inherited by the definition.
-			# @returns [Array(Group)] Methods grouped by the definition which provides them.
+			# @returns [Array(Group)] Methods grouped by the direct relationship which provides them.
 			def inherited_methods
 				@groups = []
-				@groups_by_definition = {}
+				@groups_by_relationship = {}
 				
 				collect_instance_methods(@definition, false, {}, {})
 				collect_class_methods(@definition, false, {}, {})
@@ -113,46 +113,46 @@ module Utopia
 				end
 			end
 			
-			def collect_instance_methods(definition, include_own, seen, visited, display_prefix = "#")
+			def collect_instance_methods(definition, include_own, seen, visited, display_prefix: "#", kind: nil, provider: nil)
 				key = [definition.qualified_name, display_prefix]
 				return if visited[key]
 				visited[key] = true
 				
 				relationship_definitions(definition, :prepends).reverse_each do |relationship|
-					collect_instance_methods(relationship, true, seen, visited, display_prefix)
+					collect_instance_methods(relationship, true, seen, visited, display_prefix: display_prefix, kind: kind || :prepend, provider: provider || relationship)
 				end
 				
-				collect_methods(definition, "#", display_prefix, include_own, seen)
+				collect_methods(definition, "#", display_prefix, include_own, seen, kind: kind, provider: provider)
 				
 				relationship_definitions(definition, :includes).reverse_each do |relationship|
-					collect_instance_methods(relationship, true, seen, visited, display_prefix)
+					collect_instance_methods(relationship, true, seen, visited, display_prefix: display_prefix, kind: kind || :include, provider: provider || relationship)
 				end
 				
 				if display_prefix == "#" && (super_class = super_class_for(definition))
-					collect_instance_methods(super_class, true, seen, visited, display_prefix)
+					collect_instance_methods(super_class, true, seen, visited, display_prefix: display_prefix, kind: kind || :super_class, provider: provider || super_class)
 				end
 			end
 			
-			def collect_class_methods(definition, include_own, seen, visited)
+			def collect_class_methods(definition, include_own, seen, visited, kind: nil, provider: nil)
 				key = definition.qualified_name
 				return if visited[key]
 				visited[key] = true
 				
-				collect_methods(definition, ".", ".", include_own, seen)
+				collect_methods(definition, ".", ".", include_own, seen, kind: kind, provider: provider)
 				if singleton = singleton_for(definition)
-					collect_methods(singleton, "#", ".", include_own, seen, definition)
+					collect_methods(singleton, "#", ".", include_own, seen, kind: kind, provider: provider)
 				end
 				
 				relationship_definitions(definition, :extends).reverse_each do |relationship|
-					collect_instance_methods(relationship, true, seen, {}, ".")
+					collect_instance_methods(relationship, true, seen, {}, display_prefix: ".", kind: kind || :extend, provider: provider || relationship)
 				end
 				
 				if super_class = super_class_for(definition)
-					collect_class_methods(super_class, true, seen, visited)
+					collect_class_methods(super_class, true, seen, visited, kind: kind || :super_class, provider: provider || super_class)
 				end
 			end
 			
-			def collect_methods(definition, source_prefix, display_prefix, include_own, seen, origin = definition)
+			def collect_methods(definition, source_prefix, display_prefix, include_own, seen, kind:, provider:)
 				methods_for(definition, source_prefix).each do |method|
 					name = "#{display_prefix}#{method.name}"
 					next if seen[name]
@@ -168,13 +168,14 @@ module Utopia
 					next unless method.documented?
 					next if method.respond_to?(:private?) && method.private?
 					
-					add_method(origin, name, method)
+					add_method(kind, provider, name, method)
 				end
 			end
 			
-			def add_method(definition, name, method)
-				group = @groups_by_definition[definition.qualified_name] ||= begin
-					group = Group.new(definition, [])
+			def add_method(kind, provider, name, method)
+				key = [kind, provider.qualified_name]
+				group = @groups_by_relationship[key] ||= begin
+					group = Group.new(kind, provider, [])
 					@groups << group
 					group
 				end

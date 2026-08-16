@@ -5,6 +5,9 @@ inheritance = base.inheritance_for(symbol)
 
 relationships = inheritance.relationships
 inherited_methods = inheritance.inherited_methods
+inherited_methods_by_relationship = inherited_methods.to_h do |group|
+	[[group.kind, group.definition.qualified_name], group.methods]
+end
 
 relationship_labels = {
 	super_class: "Inherits from",
@@ -14,32 +17,35 @@ relationship_labels = {
 }
 ?>
 <?r if relationships.any? ?>
-	<dl class="relationships"><?r
+	<dl class="relationships" data-pagefind-ignore><?r
 		relationships.group_by(&:kind).each do |kind, entries|
 			?><dt>#{relationship_labels.fetch(kind)}</dt>
 			<dd><?r
 				entries.each_with_index do |relationship, index|
 					if index > 0
-						?>, <?r
+						?>; <?r
 					end
 					
 					?>#{base.linkify(relationship.name, symbol)}<?r
+					
+					methods = if relationship.definition
+						key = [kind, relationship.definition.qualified_name]
+						inherited_methods_by_relationship[key]
+					end
+					
+					if methods&.any?
+						?><code>: <?r
+						methods.each_with_index do |method, method_index|
+							if method_index > 0
+								?>, <?r
+							end
+							
+							?><a href="#{base.link_for(method.definition)}">#{method.name}</a><?r
+						end
+						?></code><?r
+					end
 				end
 			?></dd><?r
 		end
 	?></dl>
-<?r end ?>
-
-<?r if inherited_methods.any? ?>
-	<section>
-		<h2>Inherited Methods</h2><?r
-		inherited_methods.each do |group|
-			?><p>From <a href="#{base.link_for(group.definition)}"><code>#{group.definition.qualified_name}</code></a>:</p>
-			<ul class="index"><?r
-				group.methods.each do |method|
-					?><li><a href="#{base.link_for(method.definition)}"><code>#{method.name}</code></a></li><?r
-				end
-			?></ul><?r
-		end
-	?></section>
 <?r end ?>
