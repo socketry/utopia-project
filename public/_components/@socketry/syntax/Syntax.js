@@ -237,12 +237,12 @@ export class Syntax {
 		} catch (error) {
 			throw new LanguageLoadError(name, path, {cause: error});
 		}
-		
+
 		// If the module exports a register function, call it with this instance
 		if (typeof module.default === 'function') {
 			module.default(this);
 		}
-		
+
 		// After calling register, aliases have been registered. Re-resolve the name:
 		let resolvedName = this.#aliases[name] || name;
 		return loader.get(resolvedName);

@@ -7,7 +7,7 @@
 	?>
 
 	<h1>
-		<code class="language-#{symbol.language.name}">#{symbol.short_form}</code>
+		#{partial 'content:declaration', symbol: symbol}
 	</h1>
 	
 	<?r

@@ -3,6 +3,7 @@
 	--syntax-base-hue: 270;
 	--syntax-base-saturation: 60%;
 	--syntax-base-lightness: 50%;
+	--syntax-link-hover-brightness: 1.25;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,6 +28,16 @@
 
 code.syntax {
 	tab-size: 2;
+}
+
+code.syntax a {
+	color: inherit;
+	text-decoration: none;
+}
+
+code.syntax a:hover,
+code.syntax a:focus-visible {
+	filter: brightness(var(--syntax-link-hover-brightness));
 }
 
 :host([wrap]) code.syntax .indent {

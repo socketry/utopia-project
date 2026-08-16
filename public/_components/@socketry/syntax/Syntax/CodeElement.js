@@ -1,8 +1,66 @@
 import Syntax from '../Syntax.js';
+import {Match} from './Match.js';
 
 const supportsAdopted =
 	typeof CSSStyleSheet !== 'undefined' &&
 	'adoptedStyleSheets' in Document.prototype;
+
+// These values are defined by the DOM standard. Keep them local so this code
+// does not depend on a global `Node`, which may be unavailable in non-browser
+// DOM implementations.
+const ELEMENT_NODE = 1;
+const TEXT_NODE = 3;
+const CDATA_SECTION_NODE = 4;
+
+/**
+ * Extract the source text and existing markup as source-aligned matches.
+ *
+ * The highlighting pipeline can then insert these matches into the syntax
+ * tree, preserving elements such as links while allowing their contents to
+ * receive syntax highlighting.
+ */
+function extractCode(root) {
+	let text = '';
+	const matches = [];
+
+	function extract(node) {
+		if (node.nodeType === TEXT_NODE || node.nodeType === CDATA_SECTION_NODE) {
+			text += node.nodeValue.replace(/\r/g, '');
+			return;
+		}
+
+		if (node.nodeType !== ELEMENT_NODE) {
+			return;
+		}
+
+		if (node.tagName === 'BR') {
+			text += '\n';
+			return;
+		}
+
+		const offset = text.length;
+		let match = null;
+
+		if (node !== root) {
+			match = new Match(offset, 0, {element: node, force: true, allow: '*'}, '');
+			matches.push(match);
+		}
+
+		for (const child of node.childNodes) {
+			extract(child);
+		}
+
+		if (match) {
+			match.length = text.length - offset;
+			match.endOffset = text.length;
+			match.value = text.slice(offset);
+		}
+	}
+
+	extract(root);
+
+	return {text, matches: matches.filter(match => match.length > 0)};
+}
 
 /**
  * CodeElement - Web Component for syntax highlighting with isolated styles
@@ -25,7 +83,7 @@ export class CodeElement extends HTMLElement {
 
 	constructor() {
 		super();
-		
+
 		/**
 		 * A promise that resolves when the current highlighting attempt completes.
 		 * Check `highlighted` before using line measurement APIs.
@@ -92,26 +150,26 @@ export class CodeElement extends HTMLElement {
 	 */
 	getLineBoundingClientRect(lineNumber) {
 		if (!this.#shadow) return null;
-		
+
 		const code = this.#shadow.querySelector('code');
 		if (!code) return null;
-		
+
 		const lines = code.children;
 		if (lineNumber < 1 || lineNumber > lines.length) return null;
-		
+
 		return lines[lineNumber - 1].getBoundingClientRect();
 	}
-	
+
 	/**
 	 * Get the total number of rendered lines.
 	 * @returns {number} The line count, or 0 if not yet rendered.
 	 */
 	get lineCount() {
 		if (!this.#shadow) return 0;
-		
+
 		const code = this.#shadow.querySelector('code');
 		if (!code) return 0;
-		
+
 		return code.children.length;
 	}
 
@@ -122,7 +180,7 @@ export class CodeElement extends HTMLElement {
 	get highlighted() {
 		return this.#highlighted;
 	}
-	
+
 	connectedCallback() {
 		// Detect if we're inside a <pre> element and set wrap attribute
 		if (this.parentElement?.tagName === 'PRE') {
@@ -178,16 +236,16 @@ export class CodeElement extends HTMLElement {
 	}
 
 	/**
-	 * Get the code content to highlight
+	 * Get the source text and existing markup to highlight.
 	 */
 	#getCodeContent() {
 		// Check if there's a <code> child element
 		const codeElement = this.querySelector('code');
 		if (codeElement) {
-			return codeElement.textContent;
+			return extractCode(codeElement);
 		}
 
-		return this.textContent;
+		return extractCode(this);
 	}
 
 	/**
@@ -249,7 +307,7 @@ export class CodeElement extends HTMLElement {
 	async #render() {
 		try {
 			const languageName = this.language;
-			const code = this.#getCodeContent();
+			const {text: code, matches} = this.#getCodeContent();
 
 			if (!languageName) {
 				console.warn('<syntax-code>: No language specified');
@@ -271,7 +329,12 @@ export class CodeElement extends HTMLElement {
 
 			// Highlight off-DOM so the original source remains visible while all
 			// asynchronous work is in progress:
-			const highlighted = await language.process(this.syntax, code);
+			const highlighted = await language.process(
+				this.syntax,
+				code,
+				undefined,
+				matches
+			);
 
 			// Swap the completed rendering in synchronously. On the first render,
 			// the slot keeps the light-DOM source visible. On subsequent renders,
@@ -337,8 +400,11 @@ export function upgradeAll(selector, syntax = null) {
 			wrapper.setAttribute('language', language);
 		}
 
-		// Copy the code content into the wrapper
-		wrapper.textContent = element.textContent;
+		// Move the source content into the wrapper so existing markup remains
+		// available for extraction and re-rendering.
+		while (element.firstChild) {
+			wrapper.appendChild(element.firstChild);
+		}
 
 		// Replace <code> with <syntax-code>, leaving <pre> parent in place
 		const parent = element.parentElement;

@@ -239,9 +239,12 @@ export class Language {
 
 	/**
 	 * Build a syntax tree and process it into HTML.
+	 *
+	 * Additional matches can preserve source annotations, such as links, by
+	 * inserting them into the syntax tree before it is reduced to HTML.
 	 */
-	async process(syntax, text, options) {
-		const top = await this.buildTree(syntax, text, 0);
+	async process(syntax, text, options, additionalMatches) {
+		const top = await this.buildTree(syntax, text, 0, additionalMatches);
 
 		const lines = top.splitLines();
 

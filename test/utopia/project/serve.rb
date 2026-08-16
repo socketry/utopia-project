@@ -65,10 +65,17 @@ describe Utopia::Project do
 	end
 	
 	it "has source code index" do
-		expect(client.get("/source/index").read).to be(:include?, "module Utopia")
+		body = client.get("/source/index").read
+		
+		expect(body).to be(:include?, "module Utopia")
+		expect(body).to be(:include?, '<a href="/source/Utopia/Project/ReleasesDocument/index">class ReleasesDocument</a> &lt; <a href="/source/Utopia/Project/Document/index" title="Utopia::Project::Document">Document</a>')
+		expect(body).to be(:include?, '<a href="/source/Utopia/Project/Linkify/index">class Linkify</a> &lt; Decode::Syntax::Rewriter')
 	end
 	
 	it "has source code file" do
-		expect(client.get("/source/Utopia/Project/Base/index").read).to be(:include?, "def initialize")
+		body = client.get("/source/Utopia/Project/ReleasesDocument/index").read
+		
+		expect(body).to be(:include?, "def release_names")
+		expect(body).to be(:include?, 'class ReleasesDocument &lt; <a href="/source/Utopia/Project/Document/index" title="Utopia::Project::Document">Document</a>')
 	end
 end

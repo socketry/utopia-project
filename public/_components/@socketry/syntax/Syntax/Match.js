@@ -108,6 +108,7 @@ export class Match {
 
 		for (const child of this.children) {
 			const end = child.offset;
+			child.parent = this;
 
 			if (child.offset < this.offset) {
 				console.warn(
@@ -284,8 +285,13 @@ export class Match {
 		if (parts[1]) {
 			match.children = [];
 
-			// Update the match's expression based on the current position in the tree:
-			if (this.expression && this.expression.owner) {
+			// Element-backed matches describe authored markup and must retain their
+			// original expression so reduction can recreate that element.
+			if (
+				this.expression &&
+				this.expression.owner &&
+				!match.expression.element
+			) {
 				match.expression =
 					this.expression.owner.getRuleForType(match.expression.type) ||
 					match.expression;
