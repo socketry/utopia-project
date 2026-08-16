@@ -1,4 +1,4 @@
-<p>Please browse the <a href="source/">source code index</a> or refer to the guides below.</p>
+<p>Please browse the <a href="reference/">reference index</a> or refer to the guides below.</p>
 
 <?r
 	base = self[:base]

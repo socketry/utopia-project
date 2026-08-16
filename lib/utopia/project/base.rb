@@ -43,7 +43,7 @@ module Utopia
 			def initialize(root = Dir.pwd)
 				@root = root
 				
-				@source_path = Utopia::Path["/source"]
+				@reference_path = Utopia::Path["/reference"]
 				
 				@index = Decode::Index.new
 				
@@ -191,15 +191,15 @@ module Utopia
 			# @example Link to a definition
 			# 	base = Utopia::Project::Base.local
 			# 	_, definition = base.lookup(%i[Utopia Project Base])
-			# 	base.link_for(definition).to_s # => "/source/utopia/project/index#Utopia::Project::Base"
+			# 	base.link_for(definition).to_s # => "/reference/utopia/project/index#Utopia::Project::Base"
 			def link_for(definition)
 				path = definition.lexical_path.map{|entry| entry.to_s}
 				
 				if definition.container?
-					return XRB::Reference.new(@source_path + path + "index")
+					return XRB::Reference.new(@reference_path + path + "index")
 				else
 					name = path.pop
-					return XRB::Reference.new(@source_path + path + "index", fragment: id_for(definition))
+					return XRB::Reference.new(@reference_path + path + "index", fragment: id_for(definition))
 				end
 			end
 			

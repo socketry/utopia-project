@@ -1,10 +1,10 @@
 <content:header />
 <?r if lexical_path = controller[:lexical_path]
 	current = []
-?><nav class="subnav breadcrumb" aria-label="Source breadcrumb"><?r
+?><nav class="subnav breadcrumb" aria-label="Reference breadcrumb"><?r
 	lexical_path.each do |part|
 		current << part
-?><a href="/source/#{current.join("/")}/index">#{part}</a><?r
+?><a href="/reference/#{current.join("/")}/index">#{part}</a><?r
 	end
 ?></nav><?r
 end ?>
