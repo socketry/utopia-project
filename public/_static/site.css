@@ -167,8 +167,11 @@ header .sections .project-title {
 }
 
 header .sections .github {
-	font-size: 0.85em;
 	opacity: 0.7;
+}
+
+header .sections .github span {
+	font-size: 0.85em;
 }
 
 header .sections .github:hover {
@@ -197,14 +200,6 @@ header .sections a:focus-visible,
 	header .header-actions {
 		grid-column: 2;
 		grid-row: 1;
-	}
-	
-	header .sections .github {
-		font-size: 0;
-	}
-	
-	header .sections .github span {
-		font-size: 0.85rem;
 	}
 }
 
