@@ -2,6 +2,8 @@
 
 A modern, framework-agnostic syntax highlighter using Web Components. This is a reimplementation of [jQuery.Syntax](https://github.com/ioquatix/jquery-syntax) without jQuery dependencies.
 
+[Browse the examples](https://socketry.github.io/syntax-js/examples/).
+
 ## Features
 
 - 🎨 **Modern Web Components** - Uses autonomous custom elements

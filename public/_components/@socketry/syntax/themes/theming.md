@@ -123,6 +123,17 @@ Override dark mode values for specific themes:
 }
 ```
 
+### Link Interaction
+
+Links preserve the surrounding syntax colors and become brighter when hovered
+or focused. You can adjust the brightness multiplier from the host page:
+
+```css
+syntax-code {
+	--syntax-link-hover-brightness: 1.4;
+}
+```
+
 ## Token Types
 
 All token types automatically get colors derived from the base. You can override individual ones if needed:
