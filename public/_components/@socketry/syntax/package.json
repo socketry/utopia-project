@@ -1,6 +1,6 @@
 {
 	"name": "@socketry/syntax",
-	"version": "0.5.0",
+	"version": "0.6.0",
 	"description": "A modern, framework-agnostic syntax highlighter using Web Components",
 	"type": "module",
 	"main": "Syntax.js",
@@ -20,8 +20,8 @@
 	],
 	"scripts": {
 		"test": "node --test 'test/**/*.js'",
-		"format": "prettier --write '**/*.{js,json,md}'",
-		"format:check": "prettier --check '**/*.{js,json,md}'"
+		"format": "eslint . --fix",
+		"format:check": "eslint ."
 	},
 	"keywords": [
 		"syntax",
@@ -37,7 +37,8 @@
 		"url": "https://github.com/socketry/syntax-js.git"
 	},
 	"devDependencies": {
-		"jsdom": "^25.0.0",
-		"prettier": "^3.6.2"
+		"@stylistic/eslint-plugin": "^5.10.0",
+		"eslint": "^10.8.1",
+		"jsdom": "^25.0.0"
 	}
 }
