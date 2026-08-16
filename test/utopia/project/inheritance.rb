@@ -26,16 +26,21 @@ describe Utopia::Project::Inheritance do
 		}
 	end
 	
-	it "groups inherited methods by their origin" do
-		methods = inheritance.inherited_methods.to_h do |group|
-			[group.definition.qualified_name, group.methods.map(&:name)]
+	it "groups inherited methods by their direct relationship" do
+		groups = inheritance.inherited_methods
+		methods = groups.to_h do |group|
+			[[group.kind, group.definition.qualified_name], group.methods.map(&:name)]
 		end
 		
 		expect(methods).to be == {
-			"Example::Prepended" => ["#prepended_method"],
-			"Example::Included" => ["#included_method"],
-			"Example::Parent" => ["#parent_method", ".parent_class_method", ".singleton_class_method"],
-			"Example::Extended" => [".extended_method"],
+			[:prepend, "Example::Prepended"] => ["#prepended_method"],
+			[:include, "Example::Included"] => ["#included_method"],
+			[:super_class, "Example::Parent"] => ["#parent_method", "#parent_included_method", "#grandparent_method", ".parent_class_method", ".singleton_class_method"],
+			[:extend, "Example::Extended"] => [".extended_method"],
 		}
+		
+		parent = groups.find{|group| group.definition.qualified_name == "Example::Parent"}
+		parent_included_method = parent.methods.find{|method| method.name == "#parent_included_method"}
+		expect(parent_included_method.definition.qualified_name).to be == "Example::ParentIncluded#parent_included_method"
 	end
 end
