@@ -34,14 +34,15 @@ relationship_labels = {
 					end
 					
 					if methods&.any?
-						?>: <?r
+						?>: <code><?r
 						methods.each_with_index do |method, method_index|
 							if method_index > 0
 								?>, <?r
 							end
 							
-							?><a href="#{base.link_for(method.definition)}"><code>#{method.name}</code></a><?r
+							?><a href="#{base.link_for(method.definition)}">#{method.name}</a><?r
 						end
+						?></code><?r
 					end
 				end
 			?></dd><?r
