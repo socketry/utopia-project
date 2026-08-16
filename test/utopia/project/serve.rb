@@ -45,6 +45,8 @@ describe Utopia::Project do
 		
 		expect(body).to be(:include?, "Project")
 		expect(body).to be(:include?, '<a href="/reference/index" class="" aria-current="false">Reference</a>')
+		expect(body).to be(:include?, 'aria-label="View source on GitHub">GitHub</a>')
+		expect(body).not.to be(:include?, "↗")
 	end
 	
 	it "generates URL-like import map values" do
@@ -92,9 +94,13 @@ describe Utopia::Project do
 	it "summarizes nested definitions" do
 		body = client.get("/reference/Utopia/Project/index").read
 		
-		expect(body).to be(:include?, "Classes and Modules")
+		expect(body).to be(:include?, "Nested Classes and Modules")
 		expect(body).to be(:include?, '<dl class="nested-definitions">')
-		expect(body).to be(:include?, '<a href="/reference/Utopia/Project/Document/index">class Document</a>')
+		
+		nested_definitions = body[/<dl class="nested-definitions">.*?<\/dl>/m]
+		expect(nested_definitions).to be(:include?, '<a href="/reference/Utopia/Project/Document/index">class Document</a>')
+		expect(nested_definitions).to be(:include?, '<a href="/reference/Utopia/Project/ReleasesDocument/index">class ReleasesDocument</a>')
+		expect(nested_definitions).not.to be(:include?, " &lt; ")
 		expect(body).to be(:include?, "Represents a Markdown document with optional source code cross-references.")
 	end
 end

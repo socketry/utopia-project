@@ -12,7 +12,7 @@
 				?><a href="#{link.href}" class="#{active ? 'active' : nil}" aria-current="#{active ? 'page' : 'false'}">#{link.title}</a><?r
 			end ?>
 			<?r if github_url = base.source_code_uri ?>
-				<a href="#{github_url}" class="github" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub">GitHub <span aria-hidden="true">↗</span></a>
+				<a href="#{github_url}" class="github" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub">GitHub</a>
 			<?r end ?>
 		</div>
 		<div class="header-actions">

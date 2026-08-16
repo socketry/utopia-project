@@ -2,8 +2,9 @@
 base = self[:base]
 symbol = self[:symbol]
 link = self[:link]
+inheritance = self[:inheritance] != false
 
-if symbol.respond_to?(:super_class)
+if inheritance && symbol.respond_to?(:super_class)
 	super_class = symbol.super_class
 end
 

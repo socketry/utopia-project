@@ -30,7 +30,7 @@
 	if nested.any?
 	?>
 	<section>
-		<h2>Classes and Modules</h2>
+		<h2>Nested Classes and Modules</h2>
 		
 		<dl class="nested-definitions">
 			<?r nested.each do |symbol|
@@ -40,7 +40,7 @@
 				end
 			?>
 			<div>
-				<dt>#{partial 'content:declaration', symbol: symbol, link: true}</dt>
+				<dt>#{partial 'content:declaration', symbol: symbol, link: true, inheritance: false}</dt>
 				<dd><?r unless description&.empty? ?>#{base.format(description, symbol)}<?r end ?></dd>
 			</div>
 			<?r end ?>
