@@ -16,6 +16,7 @@ require_relative "document"
 require_relative "releases_document"
 
 require_relative "guides"
+require_relative "inheritance"
 require_relative "linkify"
 
 module Utopia
@@ -201,6 +202,13 @@ module Utopia
 					name = path.pop
 					return XRB::Reference.new(@reference_path + path + "index", fragment: id_for(definition))
 				end
+			end
+			
+			# Resolve inheritance information for the given definition.
+			# @parameter definition [Decode::Definition] The definition to inspect.
+			# @returns [Inheritance] The inheritance information.
+			def inheritance_for(definition)
+				Inheritance.new(@index, definition)
 			end
 			
 			# Get the guides collection for this project.
