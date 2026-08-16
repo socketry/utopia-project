@@ -13,12 +13,14 @@ Gem::Specification.new do |spec|
 	spec.cert_chain  = ["release.cert"]
 	spec.signing_key = File.expand_path("~/.gem/release.pem")
 	
-	spec.homepage = "https://socketry.github.io/utopia-project"
+	spec.homepage = "https://github.com/socketry/utopia-project"
 	
 	spec.metadata = {
+		"bug_tracker_uri" => "https://github.com/socketry/utopia-project/issues",
+		"changelog_uri" => "https://github.com/socketry/utopia-project/blob/main/releases.md",
 		"documentation_uri" => "https://socketry.github.io/utopia-project/",
 		"funding_uri" => "https://github.com/sponsors/ioquatix/",
-		"source_code_uri" => "https://github.com/socketry/utopia-project/",
+		"source_code_uri" => "https://github.com/socketry/utopia-project.git",
 	}
 	
 	spec.files = Dir.glob(["{bake,context,lib,pages,public,template}/**/*", "*.md"], File::FNM_DOTMATCH, base: __dir__)
