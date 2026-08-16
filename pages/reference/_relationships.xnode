@@ -34,7 +34,7 @@ relationship_labels = {
 					end
 					
 					if methods&.any?
-						?>: <code><?r
+						?><code>: <?r
 						methods.each_with_index do |method, method_index|
 							if method_index > 0
 								?>, <?r
