@@ -80,7 +80,7 @@ describe Utopia::Project do
 		
 		expect(body).to be(:include?, "def release_names")
 		expect(body).to be(:include?, 'class ReleasesDocument &lt; <a href="/reference/Utopia/Project/Document/index" title="Utopia::Project::Document">Document</a>')
-		expect(body).to be(:include?, "<h2>Relationships</h2>")
+		expect(body).to be(:include?, '<dl class="relationships">')
 		expect(body).to be(:include?, "<dt>Inherits from</dt>")
 		expect(body).to be(:include?, "/reference/Utopia/Project/Document/index#Utopia%3A%3AProject%3A%3ADocument%23root")
 	end
