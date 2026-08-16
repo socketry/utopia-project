@@ -3,8 +3,8 @@ index:
   replace: project_title
 guides:
   title: Guides
-source:
-  title: Source Code
+reference:
+  title: Reference
 releases:
   title: Releases
 errors:
