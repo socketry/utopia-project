@@ -9,6 +9,7 @@
 	<h1>
 		#{partial 'content:declaration', symbol: symbol}
 	</h1>
+	#{partial 'content:relationships', symbol: symbol}
 	
 	<?r
 	if document = base.document_for(symbol)

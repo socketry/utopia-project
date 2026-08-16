@@ -429,6 +429,18 @@ details dt, details dd {
 	margin: 1rem 0;
 }
 
+dl.relationships {
+	display: grid;
+	grid-template-columns: max-content minmax(0, 1fr);
+	align-items: baseline;
+	gap: 0.25rem 1rem;
+	margin-top: 0.5rem;
+}
+
+dl.relationships dt, dl.relationships dd {
+	margin: 0;
+}
+
 ul.index {
 	padding: 0;
 	list-style: none;
