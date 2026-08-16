@@ -108,20 +108,17 @@ class SidebarNavigation {
 	}
 	
 	findCurrentSection() {
-		let smallestValidBottom = Infinity;
 		let currentSectionElement = null;
+		const scrollPaddingTop = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+		const activationOffset = scrollPaddingTop + 1;
 		
-		// Find which section the user is currently viewing
+		// Select the last section which has crossed the same boundary used by
+		// fragment navigation. Allow one pixel for fractional layout positions
+		// being rounded to integral scroll offsets.
 		this.allSections.forEach(({element}) => {
 			const rect = element.getBoundingClientRect();
-			const sectionBottom = rect.bottom;
 			
-			// Get the actual bottom padding for this section
-			const bottomPadding = parseFloat(getComputedStyle(element).paddingBottom);
-			
-			// We want the section whose bottom is closest to the top but still visible
-			if (sectionBottom > bottomPadding && sectionBottom < smallestValidBottom) {
-				smallestValidBottom = sectionBottom;
+			if (rect.top <= activationOffset) {
 				currentSectionElement = element;
 			}
 		});
@@ -134,8 +131,9 @@ class SidebarNavigation {
 			}
 		}
 		
-		// If no section found, fall back to the last section
-		return this.sections.length > 0 ? this.sections[this.sections.length - 1] : null;
+		// Before the first section reaches the activation boundary, use it as the
+		// active section.
+		return this.sections.length > 0 ? this.sections[0] : null;
 	}
 	
 	setActiveSection(activeSectionData) {
