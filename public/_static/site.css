@@ -251,8 +251,9 @@ header .sections a:focus-visible,
 }
 
 .subnav.breadcrumb a + a::before {
-	content: "›";
-	margin-right: 0.25rem;
+	content: "::";
+	margin-left: -0.5rem;
+	margin-right: 0.5rem;
 	opacity: 0.4;
 }
 
