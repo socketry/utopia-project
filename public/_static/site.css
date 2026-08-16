@@ -198,14 +198,6 @@ header .sections a:focus-visible,
 		grid-column: 2;
 		grid-row: 1;
 	}
-	
-	header .sections .github {
-		font-size: 0;
-	}
-	
-	header .sections .github span {
-		font-size: 0.85rem;
-	}
 }
 
 .site-navigation {

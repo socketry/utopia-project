@@ -11,12 +11,12 @@
 				active = link.name == current_section
 				?><a href="#{link.href}" class="#{active ? 'active' : nil}" aria-current="#{active ? 'page' : 'false'}">#{link.title}</a><?r
 			end ?>
-		</div>
-		<div class="header-actions">
-			<pagefind-modal-trigger placeholder="Search" compact hidden></pagefind-modal-trigger>
 			<?r if github_url = base.source_code_uri ?>
 				<a href="#{github_url}" class="github" target="_blank" rel="noopener noreferrer" aria-label="View source on GitHub">GitHub <span aria-hidden="true">↗</span></a>
 			<?r end ?>
+		</div>
+		<div class="header-actions">
+			<pagefind-modal-trigger placeholder="Search" compact hidden></pagefind-modal-trigger>
 		</div>
 	</nav>
 </header>
