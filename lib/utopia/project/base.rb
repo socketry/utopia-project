@@ -136,12 +136,12 @@ module Utopia
 			end
 			
 			# Format the given text in the context of the given definition and language.
-			# See {document} for details.
+			# See ruby:`document` for details.
 			# @returns [XRB::MarkupString]
 			#
 			# @example Format text with code links
 			# 	base = Utopia::Project::Base.new
-			# 	base.format("See {Utopia::Project::Base#guides}.") # => XRB::MarkupString
+			# 	base.format("See ruby:`Utopia::Project::Base#guides`.") # => XRB::MarkupString
 			def format(text, definition = nil, language: definition&.language, **options)
 				if document = self.document(text, definition, language: language)
 					return XRB::Markup.raw(
@@ -152,7 +152,7 @@ module Utopia
 			
 			# Convert the given markdown text into HTML.
 			#
-			# Updates source code references (`{language identifier}`) into links.
+			# Updates language-prefixed inline code (e.g. `ruby:` followed by inline code) into links.
 			#
 			# @returns [Document]
 			#

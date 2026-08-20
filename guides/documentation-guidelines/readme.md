@@ -16,7 +16,7 @@ Source code documentation is included adjacent to the code it describes, using s
 However, in short:
 
 - Documentation is expected to be in markdown format.
-- You may embed links to definitions using `{MyClass}` or `{my_method}`.
+- You may embed links to definitions using ruby:`MyClass` or ruby:`my_method`.
 - You can use tags:
   - `@parameters name [Type] Description.`
   - `@yields {|argument| ...} If a block is given.`
@@ -173,7 +173,7 @@ $ bundle add $project
 
 `$project` has several core concepts:
 
-- A {ruby MyProject::MyClass} which represents the main entry point for using the project.
+- A ruby:`MyProject::MyClass` which represents the main entry point for using the project.
 
 ## Usage
 
@@ -284,7 +284,7 @@ Following `utopia-project` guidelines, each guide should:
 2. **Provide user context**: Explain why users would need this feature
 3. **Include practical examples**: Working code samples that demonstrate real scenarios
 4. **Follow consistent structure**: Problem → Use Cases → Implementation → Best Practices
-5. **Cross-reference appropriately**: Use `{ruby ClassName}` for internal references
+5. **Cross-reference appropriately**: Use ruby:`ClassName` for internal references
 6. **Include error handling**: Show how to handle common failure scenarios
 7. **Provide troubleshooting**: Common issues and solutions
 8. **Maintain currency**: Keep examples updated with latest best practices

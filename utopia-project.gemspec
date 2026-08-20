@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
 	
 	spec.add_dependency "decode", "~> 0.30"
 	spec.add_dependency "falcon"
-	spec.add_dependency "markly", "~> 0.15"
+	spec.add_dependency "markly", "~> 0.17"
 	spec.add_dependency "thread-local"
 	spec.add_dependency "utopia", "~> 3.0.4"
 end
