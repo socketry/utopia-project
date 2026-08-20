@@ -179,9 +179,13 @@ module Utopia
 			# @parameter language [String | Nil] The explicit source language.
 			# @returns [Markly::Node] The resolved link or code node.
 			def reference_node(content, language: nil)
-				reference_content = language ? "#{language} #{content}" : content
+				reference = if language
+					@index.languages.reference_for(language, content)
+				else
+					@index.languages.parse_reference(content, default_language: @default_language)
+				end
 				
-				if reference = @index.languages.parse_reference(reference_content, default_language: @default_language)
+				if reference
 					definition = @index.lookup(reference, relative_to: @definition)
 				end
 				
