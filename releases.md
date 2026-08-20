@@ -1,6 +1,6 @@
 # Changes
 
-## Unreleased
+## v0.44.0
 
   - Add support for language-prefixed inline code references such as ruby:`Object.new`.
 

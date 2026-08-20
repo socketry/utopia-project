@@ -33,6 +33,10 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
+### v0.44.0
+
+  - Add support for language-prefixed inline code references such as ruby:`Object.new`.
+
 ### v0.41.0
 
   - Don't render empty signature block when there are only examples.
@@ -71,10 +75,6 @@ Please see the [project releases](https://socketry.github.io/utopia-project/rele
 ### v0.33.0
 
   - Fix presentation of release notes on releases page.
-
-### v0.31.0
-
-  - Support brief release notes in `releases.md` document.
 
 ## See Also
 
