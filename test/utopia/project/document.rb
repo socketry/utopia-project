@@ -33,6 +33,15 @@ describe Utopia::Project::Document do
 		expect(document.to_markdown).to be == "Use ruby:`Object.new` to create an object.\n"
 	end
 	
+	it "escapes language-prefixed inline code" do
+		root = File.expand_path("../../..", __dir__)
+		base = Utopia::Project::Base.new(root)
+		document = subject.new("Compare ruby:`foo < bar`.", base)
+		html = document.to_html.to_s
+		
+		expect(html).to be(:include?, '<code class="language-ruby">foo &lt; bar</code>')
+	end
+	
 	it "resolves language-prefixed inline code references" do
 		root = File.expand_path("../../..", __dir__)
 		base = Utopia::Project::Base.new(root)
@@ -41,8 +50,8 @@ describe Utopia::Project::Document do
 		document = subject.new("See ruby:`Utopia::Project::Document#root`.", base)
 		html = document.to_html.to_s
 		
-		expect(html).to be(:include?, '<a href="/reference/Utopia/Project/Document/index#Utopia%3A%3AProject%3A%3ADocument%23root"')
-		expect(html).to be(:include?, '<code class="language-ruby">Utopia::Project::Document#root</code>')
+		expect(html).to be(:include?, '<code class="language-ruby"><a href="/reference/Utopia/Project/Document/index#Utopia%3A%3AProject%3A%3ADocument%23root"')
+		expect(html).to be(:include?, ">Utopia::Project::Document#root</a></code>")
 	end
 	
 	it "continues to resolve legacy brace references" do
@@ -53,7 +62,8 @@ describe Utopia::Project::Document do
 		document = subject.new("See {ruby Utopia::Project::Document#root}.", base)
 		html = document.to_html.to_s
 		
-		expect(html).to be(:include?, '<a href="/reference/Utopia/Project/Document/index#Utopia%3A%3AProject%3A%3ADocument%23root"')
+		expect(html).to be(:include?, '<code class="language-ruby"><a href="/reference/Utopia/Project/Document/index#Utopia%3A%3AProject%3A%3ADocument%23root"')
+		expect(html.scan("<a ").size).to be == 1
 	end
 	
 	it "can replace usage" do

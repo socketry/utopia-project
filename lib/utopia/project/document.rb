@@ -174,30 +174,53 @@ module Utopia
 			
 			private
 			
-			# Replace source code references in the given text with HTML anchors.
+			# Resolve a source code reference to HTML.
 			# @parameter content [String] The source code reference.
 			# @parameter language [String | Nil] The explicit source language.
-			# @returns [Markly::Node] The resolved link or code node.
+			# @returns [Markly::Node] The inline HTML node.
 			def reference_node(content, language: nil)
+				reference, definition = resolve_reference(content, language: language)
+				
+				if definition
+					content = definition.qualified_form
+					language = reference.language.name
+				elsif reference
+					content = reference.identifier
+					language = reference.language.name
+				end
+				
+				attributes = {}
+				attributes[:class] = "language-#{language}" if language
+				
+				markup = XRB::Builder.fragment do |builder|
+					builder.inline("code", attributes) do
+						if definition
+							builder.inline("a", href: @base.link_for(definition), title: reference.identifier) do
+								builder.text(content)
+							end
+						else
+							builder.text(content)
+						end
+					end
+				end
+				
+				return inline_html_node(markup.to_s)
+			end
+			
+			# Resolve source code reference metadata and its indexed definition.
+			# @parameter content [String] The source code reference.
+			# @parameter language [String | Nil] The explicit source language.
+			# @returns [Array] The parsed reference and resolved definition.
+			def resolve_reference(content, language: nil)
 				reference = if language
 					@index.languages.reference_for(language, content)
 				else
 					@index.languages.parse_reference(content, default_language: @default_language)
 				end
 				
-				if reference
-					definition = @index.lookup(reference, relative_to: @definition)
-				end
+				definition = @index.lookup(reference, relative_to: @definition) if reference
 				
-				if definition
-					link_node(reference.identifier, @base.link_for(definition),
-						code_node(definition.qualified_form, reference.language.name)
-					)
-				elsif reference
-					code_node(reference.identifier, reference.language.name)
-				else
-					code_node(content, language)
-				end
+				return reference, definition
 			end
 			
 			def resolve(root)
