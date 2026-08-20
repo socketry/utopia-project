@@ -29,7 +29,7 @@ module Utopia
 			# Parse and resolve the document root.
 			# @returns [Markly::Node] The root document node.
 			def root
-				@root ||= resolve(Markly.parse(@text, extensions: [:table]))
+				@root ||= resolve(Markly.parse(@text, flags: Markly::INLINE_CODE_INFO, extensions: [:table]))
 			end
 			
 			# Extract the leading heading as the document title.
@@ -99,7 +99,12 @@ module Utopia
 			# @parameter node [Markly::Node] The node to render.
 			# @returns [XRB::MarkupString] The rendered HTML markup.
 			def to_html(node = self.root, **options)
-				renderer = Renderer.new(ids: true, flags: Markly::UNSAFE, **options)
+				renderer = Renderer.new(
+					inline_code_resolver: (@index ? method(:reference_node) : nil),
+					ids: true,
+					flags: Markly::UNSAFE,
+					**options
+				)
 				XRB::Markup.raw(renderer.render(node))
 			end
 			
@@ -160,15 +165,9 @@ module Utopia
 			# @parameter language [String | Nil] The source language name.
 			# @returns [Markly::Node] The code node.
 			def code_node(content, language = nil)
-				if language
-					node = inline_html_node(
-						"<code class=\"language-#{language}\">#{XRB::Strings.to_html(content)}</code>"
-					)
-				else
-					node = Markly::Node.new(:code)
-					node.string_content = content
-					return node
-				end
+				node = Markly::Node.new(:code)
+				node.string_content = content
+				node.code_info = language if language
 				
 				return node
 			end
@@ -176,9 +175,17 @@ module Utopia
 			private
 			
 			# Replace source code references in the given text with HTML anchors.
-			#
-			def reference_node(content)
-				if reference = @index.languages.parse_reference(content, default_language: @default_language)
+			# @parameter content [String] The source code reference.
+			# @parameter language [String | Nil] The explicit source language.
+			# @returns [Markly::Node] The resolved link or code node.
+			def reference_node(content, language: nil)
+				reference = if language
+					@index.languages.reference_for(language, content)
+				else
+					@index.languages.parse_reference(content, default_language: @default_language)
+				end
+				
+				if reference
 					definition = @index.lookup(reference, relative_to: @definition)
 				end
 				
@@ -189,7 +196,7 @@ module Utopia
 				elsif reference
 					code_node(reference.identifier, reference.language.name)
 				else
-					code_node(content)
+					code_node(content, language)
 				end
 			end
 			

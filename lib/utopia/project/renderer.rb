@@ -10,6 +10,15 @@ module Utopia
 	module Project
 		# Renders project Markdown with support for Mermaid code blocks.
 		class Renderer < Markly::Renderer::HTML
+			# Initialize the project renderer.
+			# @parameter inline_code_resolver [Proc | Nil] Resolves language-prefixed inline code into a replacement node.
+			def initialize(inline_code_resolver: nil, **options)
+				@inline_code_resolver = inline_code_resolver
+				@resolving_inline_code = false
+				
+				super(**options)
+			end
+			
 			# Render a heading and expose its title to Pagefind for sub-results.
 			# @parameter node [Markly::Node] The heading node.
 			def header(node)
@@ -40,6 +49,21 @@ module Utopia
 							escape_html(node.string_content),
 							"</div>"
 						)
+					end
+				else
+					super
+				end
+			end
+			
+			# Render inline code, resolving language-prefixed references when possible.
+			# @parameter node [Markly::Node] The inline code node.
+			def code(node)
+				if @inline_code_resolver && !@resolving_inline_code && (language = node.code_language)
+					begin
+						@resolving_inline_code = true
+						out(@inline_code_resolver.call(node.string_content, language: language))
+					ensure
+						@resolving_inline_code = false
 					end
 				else
 					super

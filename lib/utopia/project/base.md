@@ -4,4 +4,4 @@ Provides structured access to a project directory which contains source code and
 
 ## Usage
 
-To get an instance for the current project, use {Base#instance}.
+To get an instance for the current project, use ruby:`Base#instance`.

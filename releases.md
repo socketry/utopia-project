@@ -1,5 +1,9 @@
 # Changes
 
+## Unreleased
+
+  - Add support for language-prefixed inline code references such as ruby:`Object.new`.
+
 ## v0.41.0
 
   - Don't render empty signature block when there are only examples.

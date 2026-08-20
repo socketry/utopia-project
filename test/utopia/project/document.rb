@@ -22,6 +22,40 @@ describe Utopia::Project::Document do
 		expect(html).to be(:include?, '<section id="installation-&amp;-usage" data-pagefind-title="Installation &amp; Usage">')
 	end
 	
+	it "renders language-prefixed inline code" do
+		root = File.expand_path("../../..", __dir__)
+		base = Utopia::Project::Base.new(root)
+		document = subject.new("Use ruby:`Object.new` to create an object.", base)
+		html = document.to_html.to_s
+		
+		expect(html).to be(:include?, '<code class="language-ruby">Object.new</code>')
+		expect(html).not.to be(:include?, "<a ")
+		expect(document.to_markdown).to be == "Use ruby:`Object.new` to create an object.\n"
+	end
+	
+	it "resolves language-prefixed inline code references" do
+		root = File.expand_path("../../..", __dir__)
+		base = Utopia::Project::Base.new(root)
+		base.update([File.join(root, "lib/utopia/project/document.rb")])
+		
+		document = subject.new("See ruby:`Utopia::Project::Document#root`.", base)
+		html = document.to_html.to_s
+		
+		expect(html).to be(:include?, '<a href="/reference/Utopia/Project/Document/index#Utopia%3A%3AProject%3A%3ADocument%23root"')
+		expect(html).to be(:include?, '<code class="language-ruby">Utopia::Project::Document#root</code>')
+	end
+	
+	it "continues to resolve legacy brace references" do
+		root = File.expand_path("../../..", __dir__)
+		base = Utopia::Project::Base.new(root)
+		base.update([File.join(root, "lib/utopia/project/document.rb")])
+		
+		document = subject.new("See {ruby Utopia::Project::Document#root}.", base)
+		html = document.to_html.to_s
+		
+		expect(html).to be(:include?, '<a href="/reference/Utopia/Project/Document/index#Utopia%3A%3AProject%3A%3ADocument%23root"')
+	end
+	
 	it "can replace usage" do
 		document.replace_section("Usage") do |header|
 			header.insert_after(document.html_node("<content:usage/>"))
