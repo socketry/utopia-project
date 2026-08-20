@@ -33,6 +33,10 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
+### v0.44.1
+
+  - Render resolved inline code references with links inside their code elements so hover and keyboard focus affect the complete reference.
+
 ### v0.44.0
 
   - Add support for language-prefixed inline code references such as ruby:`Object.new`.
@@ -71,10 +75,6 @@ Please see the [project releases](https://socketry.github.io/utopia-project/rele
 ### v0.33.2
 
   - Fixed handling of segmented code guides when rendered into a `readme.md` file.
-
-### v0.33.0
-
-  - Fix presentation of release notes on releases page.
 
 ## See Also
 
