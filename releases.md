@@ -1,5 +1,9 @@
 # Changes
 
+## Unreleased
+
+  - Render resolved inline code references with links inside their code elements so hover and keyboard focus affect the complete reference.
+
 ## v0.44.0
 
   - Add support for language-prefixed inline code references such as ruby:`Object.new`.
