@@ -4,7 +4,7 @@
 # Copyright, 2020-2026, by Samuel Williams.
 
 require "utopia/path"
-require "xrb/reference"
+require "xrb/strings"
 require "decode"
 
 require_relative "sidebar"
