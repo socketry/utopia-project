@@ -7,7 +7,7 @@
 require "utopia/path"
 require "utopia/content/links"
 
-require "xrb/reference"
+require "protocol/url/reference"
 require "decode"
 
 require "thread/local"
@@ -187,7 +187,7 @@ module Utopia
 			end
 			
 			# Compute a link href to the given definition for use within the HTML output.
-			# @returns [XRB::Reference]
+			# @returns [Protocol::URL::Reference]
 			#
 			# @example Link to a definition
 			# 	base = Utopia::Project::Base.local
@@ -195,13 +195,15 @@ module Utopia
 			# 	base.link_for(definition).to_s # => "/reference/utopia/project/index#Utopia::Project::Base"
 			def link_for(definition)
 				path = definition.lexical_path.map{|entry| entry.to_s}
+				fragment = nil
 				
-				if definition.container?
-					return XRB::Reference.new(@reference_path + path + "index")
-				else
-					name = path.pop
-					return XRB::Reference.new(@reference_path + path + "index", fragment: id_for(definition))
+				unless definition.container?
+					path.pop
+					fragment = id_for(definition)
 				end
+				
+				path = (@reference_path + path + "index").to_url_path
+				return Protocol::URL::Reference.new(path, nil, fragment)
 			end
 			
 			# Resolve inheritance information for the given definition.

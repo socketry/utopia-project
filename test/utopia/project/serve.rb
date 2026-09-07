@@ -86,7 +86,7 @@ describe Utopia::Project do
 		expect(body).to be(:include?, "<dt>Inherits from</dt>")
 		
 		relationships = body[/<dl class="relationships" data-pagefind-ignore>.*?<\/dl>/m]
-		expect(relationships).to be(:include?, "/reference/Utopia/Project/Document/index#Utopia%3A%3AProject%3A%3ADocument%23root")
+		expect(relationships).to be(:include?, "/reference/Utopia/Project/Document/index#Utopia::Project::Document%23root")
 		expect(relationships).to be(:include?, "<code>: <a href=")
 		expect(body).not.to be(:include?, "<h2>Inherited Methods</h2>")
 	end

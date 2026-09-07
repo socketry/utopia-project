@@ -46,11 +46,14 @@ describe Utopia::Project::Document do
 		root = File.expand_path("../../..", __dir__)
 		base = Utopia::Project::Base.new(root)
 		base.update([File.join(root, "lib/utopia/project/document.rb")])
+		definition = base.index.definitions.fetch("Utopia::Project::Document#root")
+		
+		expect(base.link_for(definition)).to be_a(Protocol::URL::Reference)
 		
 		document = subject.new("See ruby:`Utopia::Project::Document#root`.", base)
 		html = document.to_html.to_s
 		
-		expect(html).to be(:include?, '<code class="language-ruby"><a href="/reference/Utopia/Project/Document/index#Utopia%3A%3AProject%3A%3ADocument%23root"')
+		expect(html).to be(:include?, '<code class="language-ruby"><a href="/reference/Utopia/Project/Document/index#Utopia::Project::Document%23root"')
 		expect(html).to be(:include?, ">Utopia::Project::Document#root</a></code>")
 	end
 	
@@ -62,7 +65,7 @@ describe Utopia::Project::Document do
 		document = subject.new("See {ruby Utopia::Project::Document#root}.", base)
 		html = document.to_html.to_s
 		
-		expect(html).to be(:include?, '<code class="language-ruby"><a href="/reference/Utopia/Project/Document/index#Utopia%3A%3AProject%3A%3ADocument%23root"')
+		expect(html).to be(:include?, '<code class="language-ruby"><a href="/reference/Utopia/Project/Document/index#Utopia::Project::Document%23root"')
 		expect(html.scan("<a ").size).to be == 1
 	end
 	

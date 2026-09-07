@@ -147,7 +147,7 @@ module Utopia
 			
 			# Build a link node around a child node.
 			# @parameter title [String | Nil] The link title.
-			# @parameter url [String | XRB::Reference] The link target.
+			# @parameter url [String | Protocol::URL::Reference] The link target.
 			# @parameter child [Markly::Node] The linked child node.
 			# @returns [Markly::Node] The link node.
 			def link_node(title, url, child)
