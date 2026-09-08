@@ -1,6 +1,6 @@
 {
 	"name": "@socketry/syntax",
-	"version": "0.6.1",
+	"version": "0.6.2",
 	"description": "A modern, framework-agnostic syntax highlighter using Web Components",
 	"type": "module",
 	"main": "Syntax.js",

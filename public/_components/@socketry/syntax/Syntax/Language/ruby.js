@@ -4,11 +4,15 @@ import {Match} from '../Match.js';
 
 const language = new Language('ruby');
 
-// Ruby-style function definitions and method calls (def foo, .bar)
-// Method names can end with ? or !
+// Ruby-style function definitions and method calls (def foo, .bar).
+// Predicate and bang methods are also unambiguous without a receiver or arguments.
 const rubyStyleFunction = {
-	pattern: /(?:def\s+|\.)([a-z_][a-z0-9_]*[?!]?)/i,
-	matches: Rule.extractMatches({type: 'function'})
+	pattern:
+		/(?:def\s+|\.)([a-z_][a-z0-9_]*[?!]?)|(^|[^\w.:])([a-z_][a-z0-9_]*[?!])(?!:)/i,
+	matches: Rule.extractMatches(
+		{index: 1, type: 'function'},
+		{index: 3, type: 'function'}
+	)
 };
 
 // Emulate negative lookbehind to avoid matching ::symbol (only match :symbol not ::symbol)

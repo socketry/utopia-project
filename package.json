@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@socketry/syntax": "^0.6.1",
+    "@socketry/syntax": "^0.6.2",
     "mermaid": "^11.16.1"
   },
   "web-packages": {
