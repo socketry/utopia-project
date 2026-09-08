@@ -7,9 +7,8 @@ require "utopia/import_map"
 
 module Utopia
 	module Project
-		IMPORT_MAP = Utopia::ImportMap.build(base: "/_components/") do |map|
-			map.import("mermaid", "./mermaid/mermaid.esm.min.mjs")
-			map.import("@socketry/syntax", "./@socketry/syntax/Syntax.js")
-		end
+		IMPORT_MAP = Utopia::ImportMap.load_manifest(
+			File.expand_path("../../../public/_components", __dir__)
+		)
 	end
 end
