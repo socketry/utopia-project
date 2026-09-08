@@ -7,7 +7,7 @@
   },
   "packages": {
     "@socketry/syntax": {
-      "version": "0.6.1",
+      "version": "0.6.2",
       "source": ".",
       "files": {
         "Syntax.js": "54303c31cc89c7e0c0c7e4aab677496c651eae22d1130f154cc065f78639c65f",
@@ -48,7 +48,7 @@
         "Syntax/Language/plain.js": "fad239eb2993f89b5948aefbbd38383830a156b7f4e67dc8f848f9a57f6b099b",
         "Syntax/Language/protobuf.js": "fef37118f90f4073004a3b29fb65f36c3d257371203089b9fbcccda1965cf62b",
         "Syntax/Language/python.js": "1043eafaa52e19bf2959a53952ab083dc1c6dd57263824a903cb4b0f47f7f7f5",
-        "Syntax/Language/ruby.js": "9188b7fad5a3a3ee2e9315c96d88ef6790c5e288b5be88c08d5d86c240340817",
+        "Syntax/Language/ruby.js": "5aaa67f804944987a2da53c99b4b4a9550392f7d9bad806cfdf62f07f6790e9e",
         "Syntax/Language/scala.js": "7cad17b50f51f63217a3b009fbd4f873c928e567e1a27170784dc4d11796d003",
         "Syntax/Language/smalltalk.js": "033dd1bfa9f9546a8bfb52a30fd830fdbcfa6f503e3c19e73104447627a22752",
         "Syntax/Language/sql.js": "e78508fad5281539fc332873b4485c6a695ea5f01c0f4f06b4698fc169b865fd",
@@ -61,7 +61,7 @@
         "Syntax/Match.js": "1e1f1b409af439c63ecc2818017039bdd2446ed7e60ed733b326001bc7826253",
         "Syntax/Rule.js": "7504ce7bfa1e0619910f8798d37adea79168cec99a5cadf7dbb3c27ce805037a",
         "license.md": "0e9cd91597ba8a5b11fe18ecfb38ed6b275450e07ca0ed85ed111725393e6c98",
-        "package.json": "d978ec9223c91eb5f47a9ba23e9332f92d2db88447e358e5c17d919071ae4826",
+        "package.json": "475169e000cb69bbfae762a73a95ccf229dc958cb035560c3fd04fc07769112b",
         "readme.md": "c5b3fead9196989000a3ab5f509b9d7d35b479e875b2bfd21e6700e0cea92f9f",
         "themes/base/apache.css": "8a261eabf17d57cfc34fa2f757dc5e707a4ec1920613d636eda2bc52027de5d9",
         "themes/base/applescript.css": "12c998dc887880897b2bbc10a890c2704c1728824ed329f4cadc23414226e90b",
@@ -216,5 +216,5 @@
       }
     }
   },
-  "digest": "9276fa4fc8a9ef3e0b330bb66c2744299fbf4e0d1d5e67f48e2e3f0a979dd620"
+  "digest": "eee4320ec48551c39c7efc26b491b9d654b70b6271f8af5d6902af8412fb9dc0"
 }
