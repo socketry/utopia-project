@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
 	
 	spec.required_ruby_version = ">= 3.3"
 	
-	spec.add_dependency "bake-node"
+	spec.add_dependency "web-packages", "~> 0.2"
 	spec.add_dependency "decode", "~> 0.30"
 	spec.add_dependency "falcon"
 	spec.add_dependency "markly", "~> 0.17"

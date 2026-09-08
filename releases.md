@@ -2,9 +2,9 @@
 
 ## Unreleased
 
-### JavaScript Packages
+### Web Packages
 
-Utopia Project now uses Bake Node to install and project its browser packages. The generated manifest is the source of truth for the import map, and package projections are checked independently in CI.
+Utopia Project now uses `web-packages` to install and project its browser packages. The generated manifest is the source of truth for the import map, and package projections are checked independently in CI.
 
 ## v0.44.1
 
