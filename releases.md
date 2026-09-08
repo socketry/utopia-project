@@ -1,5 +1,11 @@
 # Changes
 
+## Unreleased
+
+### JavaScript Packages
+
+Utopia Project now uses Bake Node to install and project its browser packages. The generated manifest is the source of truth for the import map, and package projections are checked independently in CI.
+
 ## v0.44.1
 
   - Render resolved inline code references with links inside their code elements so hover and keyboard focus affect the complete reference.

@@ -3,13 +3,21 @@
     "@socketry/syntax": "^0.6.1",
     "mermaid": "^11.16.1"
   },
-  "utopia": {
-    "components": {
+  "bake-node": {
+    "packages": {
+      "@socketry/syntax": {
+        "imports": {
+          "@socketry/syntax": "Syntax.js"
+        }
+      },
       "mermaid": {
         "include": [
           "mermaid.esm.min.mjs",
           "chunks/mermaid.esm.min/**/*.mjs"
-        ]
+        ],
+        "imports": {
+          "mermaid": "mermaid.esm.min.mjs"
+        }
       }
     }
   }
