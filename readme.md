@@ -96,7 +96,7 @@ We welcome contributions to this project.
 To run the test suite:
 
 ``` bash
-bundle exec sus
+$ bundle exec sus
 ```
 
 ### Making Releases
@@ -104,7 +104,7 @@ bundle exec sus
 To make a new release:
 
 ``` bash
-bundle exec bake gem:release:patch # or minor or major
+$ bundle exec bake gem:release:patch # or minor or major
 ```
 
 ### Developer Certificate of Origin
