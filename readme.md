@@ -33,6 +33,10 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
+### v0.45.0
+
+  - [Web Packages](https://socketry.github.io/utopia-project/releases/index#web-packages)
+
 ### v0.44.1
 
   - Render resolved inline code references with links inside their code elements so hover and keyboard focus affect the complete reference.
@@ -71,10 +75,6 @@ Please see the [project releases](https://socketry.github.io/utopia-project/rele
 ### v0.34.0
 
   - Introduce `bake utopia:project:agent:context:update` command to update the agent context from the guides in the project.
-
-### v0.33.2
-
-  - Fixed handling of segmented code guides when rendered into a `readme.md` file.
 
 ## See Also
 

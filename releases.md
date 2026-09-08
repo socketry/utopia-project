@@ -1,6 +1,6 @@
 # Changes
 
-## Unreleased
+## v0.45.0
 
 ### Web Packages
 
