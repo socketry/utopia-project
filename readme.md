@@ -33,6 +33,17 @@ Please see the [project documentation](https://socketry.github.io/utopia-project
 
 Please see the [project releases](https://socketry.github.io/utopia-project/releases/index) for all releases.
 
+### Unreleased
+
+  - Manage releases through GitHub pull requests and publish signed gems with RubyGems Trusted Publishing and attestations.
+  - Sort guides by order (defaulting to zero), then name.
+  - Fix supplemental documentation paths and missing guide/reference responses.
+  - Handle empty READMEs and guides without descriptions when rendering pages and generating agent context.
+  - Treat empty Markdown headings as missing titles and preserve the following content when rendering pages or updating documentation.
+  - Cover all Ruby, task, and rendered template lines, and exercise the generated site in Chromium at mobile and desktop widths in light and dark mode.
+  - Add padding to documentation table cells and allow tables to scroll whenever they exceed the available width.
+  - Scale table, inline code, badge, navigation link, and disclosure spacing with the local font size.
+
 ### v0.45.0
 
   - [Web Packages](https://socketry.github.io/utopia-project/releases/index#web-packages)
@@ -72,10 +83,6 @@ Please see the [project releases](https://socketry.github.io/utopia-project/rele
 
   - Fix schema for `index.yaml` context file.
 
-### v0.34.0
-
-  - Introduce `bake utopia:project:agent:context:update` command to update the agent context from the guides in the project.
-
 ## See Also
 
   - [Utopia](https://github.com/socketry/utopia) — The website framework which powers this web application.
@@ -101,11 +108,13 @@ $ bundle exec sus
 
 ### Making Releases
 
-To make a new release:
+To prepare a release pull request:
 
 ``` bash
-$ bundle exec bake gem:release:patch # or minor or major
+$ bundle exec bake gem:github:release:patch # or minor or major
 ```
+
+See [bake-gem-github](https://github.com/socketry/bake-gem-github) for setup and publishing details.
 
 ### Developer Certificate of Origin
 

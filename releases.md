@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+  - Manage releases through GitHub pull requests and publish signed gems with RubyGems Trusted Publishing and attestations.
   - Sort guides by order (defaulting to zero), then name.
   - Fix supplemental documentation paths and missing guide/reference responses.
   - Handle empty READMEs and guides without descriptions when rendering pages and generating agent context.
