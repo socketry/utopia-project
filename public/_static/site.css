@@ -564,6 +564,10 @@ table {
 	width: calc(100% - 2rem);
 }
 
+table th, table td {
+	padding: 0.5rem 0.75rem;
+}
+
 table thead {
 	background-color: var(--header-color);
 	border-bottom: 0.2rem solid var(--accent-color);
@@ -571,6 +575,13 @@ table thead {
 
 table tr:hover {
 	background-color: var(--header-color);
+}
+
+@media (max-width: 40em) {
+	table {
+		display: block;
+		overflow-x: auto;
+	}
 }
 
 ul.pragmas {

@@ -1,5 +1,9 @@
 # Changes
 
+## Unreleased
+
+  - Add padding to documentation table cells and allow wide tables to scroll on narrow screens.
+
 ## v0.45.0
 
 ### Web Packages
