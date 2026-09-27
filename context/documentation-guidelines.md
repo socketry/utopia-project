@@ -123,11 +123,8 @@ When documenting advanced features, follow this structure:
 2. **Use Case Examples**: Provide concrete scenarios:
    - Business logic examples (user accounts, inventory, etc.)
    - Technical scenarios (performance, reliability, etc.)
-   - Anti-patterns to avoid
 
 3. **Implementation**: Show practical code examples
-4. **Best Practices**: When to use vs when not to use
-5. **Common Pitfalls**: What to watch out for
 
 ####  Template
 
@@ -142,14 +139,6 @@ Use [feature] when you need:
 - **[Third use case]**: [Brief explanation]
 
 [Implementation examples with practical scenarios]
-
-### Best Practices
-
-[When to use this feature vs alternatives]
-
-### Common Pitfalls
-
-[What to avoid and why]
 ```
 
 #### "Getting Started" Guide
@@ -233,6 +222,22 @@ Help users understand when to choose between alternatives:
 
 ## Code Examples in Guides
 
+### Inline Code
+
+Use backticks for inline code. Markly supports a language prefix immediately before the opening backtick, with no space after the colon: `` ruby:`Object.new` ``.
+
+```markdown
+Use ruby:`Object.new` to create an object.
+```
+
+This renders as:
+
+Use ruby:`Object.new` to create an object.
+
+The language prefix enables syntax highlighting. When the code matches a definition in your project's documentation, `utopia-project` also links it to that definition. For example, `` ruby:`MyProject::MyClass` `` can link to the class documentation.
+
+Use plain backticks for text that does not need a language, such as file paths and command names: `config/serve.rb` or `bundle`.
+
 ### Contextual Examples
 
 Every code example should demonstrate a realistic scenario, not abstract operations:
@@ -283,7 +288,7 @@ Following `utopia-project` guidelines, each guide should:
 1. **Start with clear purpose**: "This guide explains how to use X to solve Y problem"
 2. **Provide user context**: Explain why users would need this feature
 3. **Include practical examples**: Working code samples that demonstrate real scenarios
-4. **Follow consistent structure**: Problem → Use Cases → Implementation → Best Practices
+4. **Follow consistent structure**: Problem → Use Cases → Implementation
 5. **Cross-reference appropriately**: Use ruby:`ClassName` for internal references
 6. **Include error handling**: Show how to handle common failure scenarios
 7. **Provide troubleshooting**: Common issues and solutions
@@ -296,5 +301,4 @@ Before publishing a guide section, verify:
 - [ ] Provides concrete use cases.
 - [ ] Shows realistic code examples.
 - [ ] Includes proper error handling.
-- [ ] Mentions when NOT to use the feature.
 - [ ] References related concepts appropriately.
