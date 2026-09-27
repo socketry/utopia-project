@@ -1,0 +1,19 @@
+---
+schema: 1
+repository: socketry/utopia-project
+branch: main
+checks:
+- 3.3 on ubuntu
+- 3.4 on ubuntu
+- 4.0 on ubuntu
+- check
+- ruby on ubuntu
+- ruby on macos
+- validate
+- Test Packages
+- generate
+- Release validation
+approvals: 2
+signing: true
+ruby: '3.4'
+environment: rubygems
