@@ -9,7 +9,8 @@ http.createServer(async (request, response) => {
 	try {
 		const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
 		if (!pathname.startsWith('/project/')) throw new Error('Outside project');
-		const filename = path.resolve(root, pathname.slice('/project/'.length) || 'index.html');
+		const relative = pathname.slice('/project/'.length);
+		const filename = path.resolve(root, pathname.endsWith('/') ? relative + 'index.html' : relative);
 		if (!filename.startsWith(root + path.sep)) throw new Error('Outside fixture');
 		const content = await fs.readFile(filename);
 		response.writeHead(200, {'content-type': types[path.extname(filename)] || 'application/octet-stream'});

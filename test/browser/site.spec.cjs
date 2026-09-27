@@ -78,7 +78,9 @@ test('opens example disclosures with the keyboard without shifting their summari
 
 test('hides unavailable search without breaking navigation', async ({page}) => {
 	await page.route('**/pagefind-component-ui.js', route => route.abort());
+	const unavailable = page.waitForEvent('console', message => message.text().includes('Documentation search is unavailable.'));
 	await page.goto(guide);
+	await unavailable;
 	await expect(page.locator('a.self')).not.toHaveCount(0);
 	await expect(page.locator('pagefind-modal-trigger')).toBeHidden();
 	await page.locator('.section-links a').filter({hasText: 'Reference'}).click();
@@ -100,7 +102,7 @@ test('searches the generated index and follows results under the project subpath
 	await expect(result).toBeVisible();
 	await expect(result).toHaveAttribute('href', /^\/project\/guides\/getting-started\//);
 	await result.click();
-	await expect(page).toHaveURL(/\/project\/guides\/getting-started\/index.html/);
+	await expect(page).toHaveURL(/\/project\/guides\/getting-started\/(?:index\.html)?(?:#.*)?$/);
 	await expect(page.locator('h1')).toHaveText('Getting Started');
 	await page.locator('pagefind-modal-trigger button').click();
 	await page.keyboard.press('Escape');
