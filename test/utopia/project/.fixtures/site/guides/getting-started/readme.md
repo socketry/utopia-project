@@ -2,6 +2,8 @@
 
 This guide explains how to preview the example project.
 
+<a name="overview"></a>
+
 ## Installation
 
 Install the project before running the examples.
@@ -33,3 +35,5 @@ Publish the generated documentation.
 ### Configuration
 
 Check links after deployment.
+
+Return to the [overview](#overview) or the [top of the page](#).

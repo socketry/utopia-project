@@ -2,6 +2,8 @@
 
 These tests use the exported fixture project in `test/utopia/project/.fixtures/site`. They exercise navigation, search, diagrams, syntax highlighting, keyboard disclosures, and table layout at mobile and desktop widths in light and dark mode. The static server mounts the site at `/project/` to check GitHub Pages subpath handling.
 
+The link check fetches each destination page once and verifies decoded fragments against element IDs and named anchors in the exported HTML. This includes duplicate headings and cross-page Ruby method references.
+
 Install the bundle with the maintenance group enabled, then install the browser dependencies:
 
 ``` sh

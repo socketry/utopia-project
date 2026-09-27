@@ -8,10 +8,28 @@ test('renders diagrams, highlighted code and local links under a project subpath
 	await expect(page.locator('.mermaid svg')).toBeVisible();
 	await expect(page.locator('syntax-code')).not.toHaveCount(0);
 	await expect(page.locator('#configuration-2')).toHaveCount(1);
-	const links = await page.locator('a[href]').evaluateAll(links => links.map(link => link.href).filter(href => href.startsWith(location.origin)));
+	const links = await page.locator('a[href]').evaluateAll(links => links.map(link => link.href).filter(href => new URL(href).origin === location.origin));
+	const targetsByPage = new Map();
 	for (const href of new Set(links)) {
-		expect(new URL(href).pathname).toMatch(/^\/project\//);
-		expect((await request.get(href)).ok(), href).toBeTruthy();
+		const url = new URL(href);
+		expect(url.pathname).toMatch(/^\/project\//);
+		const fragment = decodeURIComponent(url.hash.slice(1));
+		url.hash = '';
+		if (!targetsByPage.has(url.href)) {
+			const response = await request.get(url.href);
+			expect(response.ok(), url.href).toBeTruthy();
+			const targets = await page.evaluate(html => {
+				const document = new DOMParser().parseFromString(html, 'text/html');
+				return [
+					...Array.from(document.querySelectorAll('[id]'), element => element.id),
+					...Array.from(document.querySelectorAll('a[name]'), element => element.name),
+				];
+			}, await response.text());
+			targetsByPage.set(url.href, new Set(targets));
+		}
+		if (fragment) {
+			expect(targetsByPage.get(url.href).has(fragment), `Missing fragment target: ${href}`).toBeTruthy();
+		}
 	}
 	expect(errors).toEqual([]);
 });
