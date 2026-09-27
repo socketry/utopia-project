@@ -557,6 +557,9 @@ figure.youtube-wrapper iframe {
 }
 
 table {
+	display: block;
+	overflow-x: auto;
+	
 	width: 100%;
 	margin: 1rem;
 	
@@ -575,13 +578,6 @@ table thead {
 
 table tr:hover {
 	background-color: var(--header-color);
-}
-
-@media (max-width: 40em) {
-	table {
-		display: block;
-		overflow-x: auto;
-	}
 }
 
 ul.pragmas {

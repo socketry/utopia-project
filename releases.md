@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-  - Add padding to documentation table cells and allow wide tables to scroll on narrow screens.
+  - Add padding to documentation table cells and allow tables to scroll whenever they exceed the available width.
 
 ## v0.45.0
 
