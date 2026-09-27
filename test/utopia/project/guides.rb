@@ -8,16 +8,17 @@ require "utopia/project/site"
 describe Utopia::Project::Guides do
 	include Utopia::Project::SiteContext
 	
-	it "sorts explicit priorities before names, including ties and unspecified priorities" do
+	it "sorts by order and then name, treating unspecified orders as zero" do
 		guides = [
 			["alpha", {}], ["zebra", {order: 1}], ["beta", {order: 1}],
-			["gamma", {order: 2}], ["delta", {}]
+			["gamma", {order: 2}], ["delta", {}],
+			["omega", {order: -1}], ["charlie", {order: 0}]
 		].map do |name, metadata|
 			Utopia::Project::Guide.new(base, File.join(@root, "guides", name), metadata)
 		end
 		
-		expect(guides.sort.map(&:name)).to be == ["beta", "zebra", "gamma", "alpha", "delta"]
-		expect(guides.reverse.sort.map(&:name)).to be == ["beta", "zebra", "gamma", "alpha", "delta"]
+		expect(guides.sort.map(&:name)).to be == ["omega", "alpha", "charlie", "delta", "beta", "zebra", "gamma"]
+		expect(guides.reverse.sort.map(&:name)).to be == ["omega", "alpha", "charlie", "delta", "beta", "zebra", "gamma"]
 	end
 	
 	it "finds guides and handles navigation boundaries" do

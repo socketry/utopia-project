@@ -44,12 +44,11 @@ module Utopia
 				metadata[:order]
 			end
 			
-			# Compare guides by explicit order and then by name.
+			# Compare guides by order (defaulting to zero) and then by name.
 			# @parameter other [Guide] The other guide to compare.
 			# @returns [Integer] The comparison result.
 			def <=> other
-				[self.order ? 0 : 1, self.order || 0, self.name] <=>
-					[other.order ? 0 : 1, other.order || 0, other.name]
+				[self.order || 0, self.name] <=> [other.order || 0, other.name]
 			end
 			
 			README = "readme.md"
