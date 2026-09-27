@@ -567,7 +567,11 @@ table {
 }
 
 table th, table td {
-	padding: 0.5em 0.75em;
+	padding: 0.1em 0.4em;
+}
+
+table th:nth-child(even), table td:nth-child(even) {
+	background-color: color-mix(in srgb, var(--main-color) 2%, transparent);
 }
 
 table thead {
