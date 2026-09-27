@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-# Example project namespace.
+# Released under the MIT License.
+# Copyright, 2026, by Samuel Williams.
+
 module Example
 	# Adds instrumentation.
 	module Logging

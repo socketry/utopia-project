@@ -1,6 +1,6 @@
 # Changes
 
-## Unreleased
+## v0.46.0
 
   - Manage releases through GitHub pull requests and publish signed gems with RubyGems Trusted Publishing and attestations.
   - Sort guides by order (defaulting to zero), then name.
