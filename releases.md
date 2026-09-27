@@ -3,6 +3,7 @@
 ## Unreleased
 
   - Add padding to documentation table cells and allow tables to scroll whenever they exceed the available width.
+  - Scale table, inline code, badge, navigation link, and disclosure spacing with the local font size.
 
 ## v0.45.0
 
