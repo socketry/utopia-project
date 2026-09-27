@@ -8,7 +8,7 @@
 			child.delete
 			title = header.first_child
 			
-			case title.type
+			case title&.type
 			when :text
 				?><content:heading>#{title.string_content}</content:heading><?r
 			when :image

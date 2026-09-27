@@ -59,16 +59,18 @@ describe "Documentation tasks" do
 	end
 	
 	it "extracts the first sentence as the project description" do
-		write("readme.md", "# Example\n\nFirst sentence. Second sentence.\n")
 		previous = $stdout
 		output = StringIO.new
 		begin
 			$stdout = output
-			context["utopia:project:description"].call
+			["# Example", "#", "##"].each do |heading|
+				write("readme.md", "#{heading}\n\nFirst sentence. Second sentence.\n")
+				context["utopia:project:description"].call
+			end
 		ensure
 			$stdout = previous
 		end
-		expect(output.string).to be == "First sentence.\n"
+		expect(output.string).to be == "First sentence.\n" * 3
 	end
 	
 	it "passes custom binding options to Falcon" do

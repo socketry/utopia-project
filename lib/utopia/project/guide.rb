@@ -72,7 +72,7 @@ module Utopia
 						child = document.first_child
 						
 						if child&.type == :header
-							@title = child.first_child.string_content
+							@title = child.first_child&.string_content
 							
 							@description = child.next
 							child.delete

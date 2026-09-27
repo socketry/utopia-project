@@ -53,13 +53,34 @@ describe "Project pages" do
 		expect(body).to be(:include?, "This project does not have a")
 	end
 	
-	["Introductory paragraph.", "# *Formatted title*", ""].each do |markdown|
+	["Introductory paragraph.", "# *Formatted title*", "", "#", "##"].each do |markdown|
 		with "README #{markdown.inspect}" do
 			it "renders a fallback heading" do
 				write("readme.md", markdown)
 				response = client.get("/index")
 				expect(response.status).to be == 200
 				expect(response.read).to be(:include?, "<h1>Project</h1>")
+			end
+		end
+	end
+	
+	["#", "##"].each do |heading|
+		with "empty #{heading.inspect} heading followed by an introduction" do
+			it "renders fallback titles and preserves the introduction" do
+				markdown = "#{heading}\n\nIntroduction.\n"
+				write("readme.md", markdown)
+				write("guides/empty/readme.md", markdown)
+				guide = base.guides["empty"]
+				expect(guide.title).to be == "Empty"
+				expect(guide.description.to_plaintext).to be == "Introduction.\n"
+				
+				{"/index" => "Project", "/guides/empty/index" => "Empty"}.each do |path, title|
+					response = client.get(path)
+					body = response.read
+					expect(response.status).to be == 200
+					expect(body).to be(:include?, "<h1>#{title}</h1>")
+					expect(body).to be(:include?, "<p>Introduction.</p>")
+				end
 			end
 		end
 	end

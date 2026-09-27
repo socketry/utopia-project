@@ -121,8 +121,6 @@ def description(root: context.root)
 		child = document.first_child
 		
 		if child&.type == :header
-			title = child.first_child.string_content
-			
 			# First sentence
 			if introduction = child.next
 				$stdout.puts introduction.to_plaintext[/.*?\./]
