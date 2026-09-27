@@ -48,28 +48,8 @@ module Utopia
 			# @parameter other [Guide] The other guide to compare.
 			# @returns [Integer] The comparison result.
 			def <=> other
-				if order = self.order
-					if other_order = other.order
-						if order < other_order
-							return -1
-						elsif order > other_order
-							return 1
-						end
-					else
-						# If we have order, but the other doesn't, we come first:
-						return -1
-					end
-				end
-				
-				if name = self.name
-					if other_name = other.name
-						return name <=> other_name
-					else
-						return -1
-					end
-				end
-				
-				return 0
+				[self.order ? 0 : 1, self.order || 0, self.name] <=>
+					[other.order ? 0 : 1, other.order || 0, other.name]
 			end
 			
 			README = "readme.md"

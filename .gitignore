@@ -8,3 +8,7 @@
 
 /node_modules
 /.github/workflows/test-external.yaml
+
+/test/browser/.site
+/test-results
+/playwright-report

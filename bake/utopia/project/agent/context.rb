@@ -24,7 +24,7 @@ def update
 		files << {
 			"path" => guide.name + ".md",
 			"title" => guide.title,
-			"description" => guide.description.to_markdown.chomp,
+			"description" => guide.description&.to_markdown&.chomp || "",
 		}
 	end
 	

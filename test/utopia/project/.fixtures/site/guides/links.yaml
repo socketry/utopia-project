@@ -1,0 +1,6 @@
+getting-started:
+  order: 1
+source-example:
+  order: 2
+empty:
+  order: 3

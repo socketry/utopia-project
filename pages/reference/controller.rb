@@ -13,7 +13,7 @@ on "**/*/index" do |request, path|
 	@node, @symbol = @base.lookup(@lexical_path)
 	
 	unless @symbol
-		fail! :not_found
+		respond! Utopia::Response[404]
 	end
 	
 	path.components = ["show"]
