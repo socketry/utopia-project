@@ -3,12 +3,12 @@
 	if document = self[:document]
 		child = document.first_child
 		
-		if child.type == :header
+		if child&.type == :header
 			header = child
 			child.delete
 			title = header.first_child
 			
-			case title.type
+			case title&.type
 			when :text
 				?><content:heading>#{title.string_content}</content:heading><?r
 			when :image

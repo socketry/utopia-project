@@ -134,3 +134,53 @@ describe Utopia::Project::Document do
 		end
 	end
 end
+
+describe Utopia::Project::Document do
+	it "returns no title for empty headings without losing subsequent content" do
+		["#", "##"].each do |heading|
+			expect(subject.new("#{heading}\n").title).to be_nil
+			document = subject.new("#{heading}\n\nIntroduction.\n")
+			expect(document.title).to be_nil
+			expect(document.to_html).to be(:include?, "<p>Introduction.</p>")
+		end
+	end
+	
+	it "skips empty headings when finding a section to replace" do
+		document = subject.new("#\n\nIntroduction.\n\n##\n\nKeep this.\n\n## Usage\n\nOld content.\n")
+		document.replace_section("Usage") do |header|
+			header.insert_after(document.paragraph_node(document.text_node("New content.")))
+		end
+		expect(document.to_markdown).to be == "# \n\nIntroduction.\n\n## \n\nKeep this.\n\n## Usage\n\nNew content.\n"
+	end
+	
+	it "renders Mermaid source safely and keeps ordinary fenced code" do
+		document = subject.new("~~~ mermaid\nflowchart LR\n  A[\"<text>\"] --> B\n~~~\n\n~~~ ruby\nputs 42\n~~~\n")
+		html = document.to_html.to_s
+		expect(html).to be(:include?, 'class="mermaid"')
+		expect(html).to be(:include?, "&lt;text&gt;")
+		expect(html).to be(:include?, 'class="language-ruby"')
+	end
+	
+	it "builds escaped linked code inside a paragraph" do
+		document = subject.new("")
+		code = document.code_node("foo < bar", "ruby")
+		link = document.link_node("Example", "/example", code)
+		document.root.append_child(document.paragraph_node(link))
+		
+		expect(document.to_html.to_s).to be == '<p><a href="/example" title="Example"><code class="language-ruby">foo &lt; bar</code></a></p>' + "\n"
+	end
+	
+	it "resolves a reference that consumes the entire text node" do
+		base = Utopia::Project::Base.new
+		document = subject.new("{ruby Missing}", base)
+		expect(document.to_html.to_s).to be == '<p><code class="language-ruby">Missing</code></p>' + "\n"
+	end
+	
+	it "replaces nested sections without removing the following peer section" do
+		document = subject.new("## Usage\n\nOld content.\n\n### Example\n\nNested content.\n\n## License\n\nKeep this.\n")
+		document.replace_section("Usage", children: true) do |header|
+			header.insert_after(document.paragraph_node(document.text_node("New content.")))
+		end
+		expect(document.to_markdown).to be == "## Usage\n\nNew content.\n\n## License\n\nKeep this.\n"
+	end
+end

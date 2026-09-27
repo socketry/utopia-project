@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+  - Sort guides by order (defaulting to zero), then name.
+  - Fix supplemental documentation paths and missing guide/reference responses.
+  - Handle empty READMEs and guides without descriptions when rendering pages and generating agent context.
+  - Treat empty Markdown headings as missing titles and preserve the following content when rendering pages or updating documentation.
+  - Cover all Ruby, task, and rendered template lines, and exercise the generated site in Chromium at mobile and desktop widths in light and dark mode.
   - Add padding to documentation table cells and allow tables to scroll whenever they exceed the available width.
   - Scale table, inline code, badge, navigation link, and disclosure spacing with the local font size.
 

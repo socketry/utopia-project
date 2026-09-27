@@ -33,12 +33,12 @@ module Utopia
 			end
 			
 			# Extract the leading heading as the document title.
-			# @returns [String | Nil] The title, if the document starts with a heading.
+			# @returns [String | Nil] The title, if the document starts with a non-empty heading.
 			def title
 				child = self.root.first_child
 				
 				if child && child.type == :header
-					return child.first_child.to_plaintext
+					return child.first_child&.to_plaintext
 				end
 			end
 			
@@ -61,7 +61,7 @@ module Utopia
 						header = child
 						
 						# We found the matched header:
-						if header.first_child.to_plaintext.include?(name)
+						if header.first_child&.to_plaintext&.include?(name)
 							# Now subsequent children:
 							current = header.next
 							

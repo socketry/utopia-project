@@ -12,5 +12,7 @@ on "**/*/index" do |request, path|
 		guide.name == name
 	end
 	
+	respond! Utopia::Response[404] unless @guide
+	
 	path.components = ["show"]
 end

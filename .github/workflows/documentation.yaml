@@ -41,9 +41,9 @@ jobs:
         key: pagefind-binary-v1-${{ runner.os }}-${{ runner.arch }}-${{ env.PAGEFIND_REVISION }}
 
     - uses: actions/setup-node@v7
-      if: steps.pagefind-cache.outputs.cache-hit != 'true'
       with:
         node-version: 24
+        cache: npm
 
     - name: Install Pagefind Rust toolchain
       if: steps.pagefind-cache.outputs.cache-hit != 'true'
@@ -63,7 +63,6 @@ jobs:
         bundler-cache: true
     
     - name: Installing packages
-      if: steps.pagefind-cache.outputs.cache-hit != 'true'
       run: sudo apt-get install wget
 
     - name: Build Pagefind fork
@@ -76,6 +75,29 @@ jobs:
       env:
         PAGEFIND_BINARY_PATH: ${{ github.workspace }}/.pagefind/target/release/pagefind
       run: bundle exec bake utopia:project:static --force no
+
+    - name: Install browser test dependencies
+      run: |
+        npm ci
+        npx playwright install --with-deps chromium
+
+    - name: Build browser fixture
+      timeout-minutes: 5
+      env:
+        PAGEFIND_BINARY_PATH: ${{ github.workspace }}/.pagefind/target/release/pagefind
+      run: bundle exec ruby fixtures/utopia/project/build_site.rb
+
+    - name: Test generated documentation in Chromium
+      timeout-minutes: 5
+      run: npm run test:browser
+
+    - name: Upload browser failure diagnostics
+      if: failure()
+      uses: actions/upload-artifact@v7
+      with:
+        name: browser-test-results
+        path: test-results
+        if-no-files-found: ignore
     
     - name: Upload documentation artifact
       uses: actions/upload-pages-artifact@v5
