@@ -1,12 +1,12 @@
 /agents.md
 /.agents/
 /.bundle
+/vendor/bundle
 /pkg
 /gems.locked
 /.covered.db
 /external
 
-/vendor/
 /node_modules
 /.github/workflows/test-external.yaml
 
