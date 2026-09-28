@@ -811,7 +811,6 @@ ul.pragmas li.asynchronous {
 	background-color: var(--header-color);
 	color: var(--accent-color);
 	border-left-color: var(--accent-color);
-	font-weight: bold;
 }
 
 /* Guide navigation (previous/next) */
